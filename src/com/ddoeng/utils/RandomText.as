@@ -1,0 +1,222 @@
+package com.ddoeng.utils
+{
+	import flash.events.Event;
+	import flash.events.EventDispatcher;
+	import flash.events.TimerEvent;
+	import flash.text.TextField;
+	import flash.text.TextFieldAutoSize;
+	import flash.text.TextFormat;
+	import flash.utils.Timer;
+	
+	/**
+	 *
+	 * @author : Cho Yun Gi (ddoeng@naver.com)
+	 * @version : 1.0
+	 * @since : Nov 17, 2010
+	 * 
+	 * 1. 클래스 설명
+	 *		랜덤한 텍스트를 반환하여 텍스트 완성
+	 * 2. 메소드
+	 * - 리스너
+	 * 		onTimer()		::: 문자를 바꿔줄 타임 리스너
+	 * 		onEnter1()		::: 타입1 에따른 엔터프레임 리스너
+	 * 		onEnter2()		::: 타입2,3 에따른 엔터프레임 리스너
+	 *		onEnter4()		::: 타입4 에따른 엔터프레임 리스너
+	 * - 내부메소드
+	 * 		randomArray()	:::	문자배열을 섞는 메소드
+	 * - 외부메소드
+	 * 
+	 * - 확장메소드
+	 *		
+	 */
+	
+	public class RandomText extends EventDispatcher
+	{
+		private var _fid:TextField;
+		private var _str:String;
+		
+		private var _tempTextArr:Array = [];
+		private var _tempNumberArr:Array = [];
+		private var _textLength:int;
+		private var _checkLength:int = 0;
+		private var _startNum:int = 0;
+		private var _changeTime:int;
+		private var _minCodeNumber:int;
+		private var _maxCodeNumber:int;
+		private var _completeStr:String = "";
+		private var _type:int;
+		private var _code:Number;
+		
+		/**
+		 * 	_type = 1 문자가 하나하나 완성됨, _type = 2 전체문자크기대로 랜덤하게 찍어놓고 순서대로 일치시킴
+		 * 	_type = 3 전체문자크기대로 랜덤하게 찍어놓고 랜덤하게 일치시킴, _type = 4 문자가 하나하나 완성됨
+		 * 
+		 * @param $fid		:::	적용할 텍스트필드
+		 * @param $str		:::	완성된 문자열
+		 * @param $min		:::	최소 문자코드 넘버
+		 * @param $max		:::	최고 문자코드 넘버
+		 * @param $speed	:::	속도
+		 * @param $delay	:::	딜레이
+		 * @param $type		::: 타입 1~4
+		 */		
+		public function RandomText($fid:TextField, $str:String, $min:int, $max:int, $speed:int = 30, $delay:int = 0, $type:int = 1)
+		{
+			_fid 			= $fid;
+			_str 			= $str;
+			_minCodeNumber 	= $min;
+			_maxCodeNumber 	= $max;
+			_changeTime 	= $speed;
+			_type 			= $type;
+			_code 			= _minCodeNumber;
+			
+			_fid.text = "";
+			_fid.restrict = "A-Z 0-9";
+			_fid.autoSize = TextFieldAutoSize.LEFT;
+			
+			_textLength = _str.length;
+			
+			for(var i:int = 0 ; i<_textLength; ++i){
+				_tempTextArr.push(String.fromCharCode(Math.floor(Math.random() * (_maxCodeNumber-_minCodeNumber+1)) + _minCodeNumber ));
+				_tempNumberArr.push(i);
+			}
+			
+			//trace("_tempTextArr : "+_tempTextArr); //임시 텍스트
+			//trace("_tempNumberArr : "+_tempNumberArr); //텍스트 순서
+			
+			var timer:Timer = new Timer($delay, 1);
+			timer.start();
+			timer.addEventListener(TimerEvent.TIMER, onTimer);
+		}
+		
+		////////////////////////////////////////////////////////////////////////////////////////////////////
+		//리스너/////////////////////////////////////////////////////////////////////////////////////////////
+		////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		private function onTimer(e:TimerEvent):void
+		{
+			if(_type == 1){
+				_fid.addEventListener(Event.ENTER_FRAME, onEnter1);
+			}else if(_type == 2){
+				_fid.addEventListener(Event.ENTER_FRAME, onEnter2);
+			}else if(_type == 3){
+				_tempNumberArr = randomArray(_tempNumberArr); //순서랜덤
+				_fid.addEventListener(Event.ENTER_FRAME, onEnter2);
+			}else if(_type == 4){
+				_fid.addEventListener(Event.ENTER_FRAME, onEnter4);
+			}else{
+				
+			}
+		}
+
+		private function onEnter1(e:Event):void
+		{
+			if(_startNum == _changeTime){
+				//trace("시간되었다.");
+				_startNum = 0;
+				//시간되면 강제 삽입
+				_tempTextArr[_completeStr.length] = _str.charAt(_completeStr.length);
+			}else{
+				_startNum++;
+			}
+		
+			if(_tempTextArr[_completeStr.length] != _str.charAt(_completeStr.length)){
+				_tempTextArr[_completeStr.length] = String.fromCharCode(Math.floor(Math.random() * (_maxCodeNumber-_minCodeNumber+1)) + _minCodeNumber );
+				//랜덤하게 문자를 넣는다
+			}else{ // 문자가 같아지면
+				//trace("문자가 일치하였다.");
+				//해당 문자를 배열에 넣는다
+				if(_completeStr.length < _str.length - 1){	
+					_completeStr += _tempTextArr[_completeStr.length];
+					_startNum = 0;
+				}else{
+					_fid.removeEventListener(Event.ENTER_FRAME, onEnter1);
+					var evt:Event = new Event("randomTextComple");
+					this.dispatchEvent(evt);
+				}
+			}
+			
+			_fid.text = _completeStr + _tempTextArr[_completeStr.length];
+		}
+		
+		private function onEnter2(e:Event):void
+		{
+			for(var i:Number = 0 ; i<_textLength ; ++i){
+				if(_tempTextArr[i] != _str.charAt(i)){
+					_tempTextArr[i] = String.fromCharCode(Math.floor(Math.random() * (_maxCodeNumber-_minCodeNumber+1)) + _minCodeNumber );
+					//랜덤하게 문자를 넣는다
+				}else{ // 문자가 같아지면
+					_tempTextArr[i] = _str.charAt(i);
+					//해당 문자를 배열에 넣는다
+				}
+			}
+			
+			if(_startNum == _changeTime){ //1 2 3 4 ~..  10 이되면..
+				_tempTextArr[ _tempNumberArr[ _checkLength ] ] = _str.charAt( _tempNumberArr[ _checkLength ] );
+				//_tempNumberArr 를 참조한 이유는 랜덤하게 완성되기위함 (현제는 순서대로);
+				_checkLength++; // changeTime만큼 딜레이 후 +1
+				if(_checkLength == _textLength){
+					_fid.removeEventListener(Event.ENTER_FRAME, onEnter2);
+					var evt:Event = new Event("randomTextComple");
+					this.dispatchEvent(evt);
+				}
+			}else{
+				_startNum++;
+			}
+			
+			_fid.text = _tempTextArr.join("");
+		}
+		
+		private function onEnter4(e:Event):void
+		{
+			if(_code == _maxCodeNumber){
+				//마지막 코드까지가면 강제 삽입
+				_tempTextArr[_completeStr.length] = _str.charAt(_completeStr.length);
+			}
+			
+			if(_startNum == _changeTime){
+				//trace("시간되었다.");
+				_startNum = 0;
+				//시간되면 강제 삽입
+				_tempTextArr[_completeStr.length] = _str.charAt(_completeStr.length);
+			}else{
+				_startNum++;
+			}
+		
+			if(_tempTextArr[_completeStr.length] != _str.charAt(_completeStr.length)){
+				_tempTextArr[_completeStr.length] = String.fromCharCode(_code);
+				_code++;
+				//랜덤하게 문자를 넣는다
+			}else{ // 문자가 같아지면
+				//trace("문자가 일치하였다.");
+				//해당 문자를 배열에 넣는다
+				if(_completeStr.length < _str.length - 1){	
+					_completeStr += _tempTextArr[_completeStr.length];
+					_code = _minCodeNumber;
+					_startNum = 0;
+				}else{
+					_fid.removeEventListener(Event.ENTER_FRAME, onEnter1);
+					var evt:Event = new Event("randomTextComple");
+					this.dispatchEvent(evt);
+				}
+			}
+			
+			_fid.text = _completeStr + _tempTextArr[_completeStr.length];
+		}
+		
+		////////////////////////////////////////////////////////////////////////////////////////////////////
+		//내부메소드//////////////////////////////////////////////////////////////////////////////////////////
+		////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		private function randomArray(array:Array):Array{
+			var return_array:Array = new Array();
+			var lengthNum:Number = array.length;
+			for(var i:Number = 0 ; i<lengthNum ; ++i){
+				var index:Number = Math.floor( Math.random() * array.length );
+				
+				return_array.push( array[index] ); //번호추출해 새로운곳에 넣고
+				array.splice(index,1); //추출한번호 삭제
+			}
+			return return_array;
+		}
+	}
+}

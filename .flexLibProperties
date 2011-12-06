@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<flexLibProperties includeAllClasses="false" useMultiPlatformConfig="false" version="1">
+  <includeClasses>
+    <classEntry path="com.ddoeng.display.BitmapControl"/>
+    <classEntry path="com.ddoeng.display.ColorControl"/>
+    <classEntry path="com.ddoeng.display.DuplicationImage"/>
+    <classEntry path="com.ddoeng.display.FLVPlayer"/>
+    <classEntry path="com.ddoeng.display.ScrollVertical"/>
+    <classEntry path="com.ddoeng.display.SmartScrollHorizontal"/>
+    <classEntry path="com.ddoeng.events.FONTLoaderEvent"/>
+    <classEntry path="com.ddoeng.events.FONTLoaderProgressEvent"/>
+    <classEntry path="com.ddoeng.events.FrameButtonsEvent"/>
+    <classEntry path="com.ddoeng.navigation.FrameButtons"/>
+    <classEntry path="com.ddoeng.navigation.Menu"/>
+    <classEntry path="com.ddoeng.navigation.XMLLinkLoader"/>
+    <classEntry path="com.ddoeng.net.FONTLoader"/>
+    <classEntry path="com.ddoeng.net.SWFLoader"/>
+    <classEntry path="com.ddoeng.net.XMLLoader"/>
+    <classEntry path="com.ddoeng.utils.ArrayUtil"/>
+    <classEntry path="com.ddoeng.utils.Common"/>
+    <classEntry path="com.ddoeng.utils.LocationUtil"/>
+    <classEntry path="com.ddoeng.utils.NetUtil"/>
+    <classEntry path="net.hires.debug.Stats"/>
+  </includeClasses>
+  <includeResources/>
+  <namespaceManifests/>
+</flexLibProperties>
