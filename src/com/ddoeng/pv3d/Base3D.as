@@ -2,7 +2,7 @@ package com.ddoeng.pv3d
 {
 	import flash.display.Sprite;
 	import flash.events.Event;
-	
+
 	import org.papervision3d.cameras.Camera3D;
 	import org.papervision3d.render.BasicRenderEngine;
 	import org.papervision3d.scenes.Scene3D;
