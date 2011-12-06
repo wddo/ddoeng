@@ -4,8 +4,6 @@ package com.ddoeng.navigation
 	import com.ddoeng.net.FONTLoader;
 	import com.ddoeng.text.TextFieldSet;
 	import com.ddoeng.text.TextFormatSet;
-	import com.greensock.TweenMax;
-	import com.greensock.easing.Linear;
 	
 	import flash.accessibility.AccessibilityProperties;
 	import flash.display.MovieClip;

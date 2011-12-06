@@ -1,7 +1,5 @@
 package com.ddoeng.display
 {
-	import com.greensock.TweenMax;
-	
 	import flash.display.DisplayObject;
 	import flash.filters.ColorMatrixFilter;
 	
@@ -86,9 +84,11 @@ package com.ddoeng.display
 		 * @param $speed	::: 변환되는 속도(기본 0.01)
 		 * 
 		 */		
+		/*
 		public function setContrast($child:DisplayObject, $value:Number = 1, $speed:Number = 0.01):void
 		{
 			TweenMax.to($child, $speed, {colorMatrixFilter:{contrast:(($value*100) * 0.05)+1, saturation:0}});
 		}
+		*/
 	}
 }

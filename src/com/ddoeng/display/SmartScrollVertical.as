@@ -4,7 +4,6 @@ package com.ddoeng.display
 	import com.ddoeng.net.SWFLoader;
 	import com.ddoeng.utils.Calculation;
 	import com.ddoeng.utils.Common;
-	import com.greensock.TweenMax;
 	
 	import flash.display.DisplayObject;
 	import flash.display.GradientType;

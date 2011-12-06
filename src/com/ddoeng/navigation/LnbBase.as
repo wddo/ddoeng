@@ -1,8 +1,5 @@
 package com.ddoeng.navigation
 {
-	import com.greensock.TweenMax;
-	import com.greensock.easing.Quint;
-	
 	import flash.accessibility.AccessibilityProperties;
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
