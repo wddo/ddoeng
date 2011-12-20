@@ -52,10 +52,10 @@ package com.ddoeng.utils
 		 * @param $url		::: 링크주소
 		 * @param $window	::: 타겟
 		 */		
-		public static function getURL($url:String, $window:String = "_blank"):void
+		public static function getURL($url:String, $target:String = "_blank"):void
 		{
 			if($url.indexOf("javascript:") != 0){
-				if(SystemUtil.isBrowser()) navigateToURL(new URLRequest($url), $url);
+				if(SystemUtil.isBrowser()) navigateToURL(new URLRequest($url), $target);
 				else trace(" getURL html : " + $url);
 			}else{
 				if(SystemUtil.isBrowser()) navigateToURL(new URLRequest($url), "_self");
