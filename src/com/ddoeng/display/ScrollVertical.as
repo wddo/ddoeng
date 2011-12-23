@@ -299,7 +299,11 @@ package com.ddoeng.display
 			var spreadMethod:String = SpreadMethod.PAD;
 			
 			var sp:Sprite = new Sprite();			
-			sp.graphics.beginGradientFill(fillType, colors, alphas, ratios, matr, spreadMethod);       
+			if(fadeSize != 0){
+				sp.graphics.beginGradientFill(fillType, colors, alphas, ratios, matr, spreadMethod); 
+			}else{
+				sp.graphics.beginFill(colors[0]);
+			}
 			sp.graphics.drawRect(0, 0, width, height);
 	
 			return sp;
