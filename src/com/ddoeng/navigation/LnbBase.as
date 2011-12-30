@@ -250,8 +250,8 @@ package com.ddoeng.navigation
 				if(time >= 60){ //btnMove가 위치를 잡을때 까지 대기하기 위함
 					entDel();
 					
-					if(!isNaN(active) && active < _menuTotalNum)menuArr[over].dispatchEvent(new MouseEvent(MouseEvent.MOUSE_OVER));
-					if(!isNaN(active) && active < _menuTotalNum)subMenuArr[over][subOver].dispatchEvent(new MouseEvent(MouseEvent.MOUSE_OVER));						
+					if(!isNaN(active) && menuArr[over] != undefined)menuArr[over].dispatchEvent(new MouseEvent(MouseEvent.MOUSE_OVER));
+					if(!isNaN(active) && subMenuArr[over][subOver] != undefined)subMenuArr[over][subOver].dispatchEvent(new MouseEvent(MouseEvent.MOUSE_OVER));						
 					
 					exPageMemory();
 					

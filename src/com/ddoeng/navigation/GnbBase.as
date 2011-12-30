@@ -244,8 +244,8 @@ package com.ddoeng.navigation
 						over = active;
 						subOver = subActive;
 						
-						menuArr[over].dispatchEvent(new MouseEvent(MouseEvent.MOUSE_OVER));
-						subMenuArr[over][subOver].dispatchEvent(new MouseEvent(MouseEvent.MOUSE_OVER));
+						if(!isNaN(active) && menuArr[over] != undefined)menuArr[over].dispatchEvent(new MouseEvent(MouseEvent.MOUSE_OVER));
+						if(!isNaN(active) && subMenuArr[over][subOver] != undefined)subMenuArr[over][subOver].dispatchEvent(new MouseEvent(MouseEvent.MOUSE_OVER));
 					}else{ //페이지기억 없을때
 						if(subGroupArr[over] != undefined)subGroupArr[over].visible = false;
 					}
