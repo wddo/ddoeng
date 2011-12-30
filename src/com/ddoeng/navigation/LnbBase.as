@@ -240,7 +240,7 @@ package com.ddoeng.navigation
 				time++;
 				if(time == 40){
 					//현제 오버한것이 페이지기억이 아닐때 버튼사라짐
-					if(over != active)menuArr[over].off();
+					if(over != active && over < _menuTotalNum)menuArr[over].off();
 					
 					//값을 변경해줌으로써 btnMove적용
 					over = active;
@@ -250,8 +250,8 @@ package com.ddoeng.navigation
 				if(time >= 60){ //btnMove가 위치를 잡을때 까지 대기하기 위함
 					entDel();
 					
-					if(!isNaN(active))menuArr[over].dispatchEvent(new MouseEvent(MouseEvent.MOUSE_OVER));
-					if(!isNaN(active))subMenuArr[over][subOver].dispatchEvent(new MouseEvent(MouseEvent.MOUSE_OVER));						
+					if(!isNaN(active) && active < _menuTotalNum)menuArr[over].dispatchEvent(new MouseEvent(MouseEvent.MOUSE_OVER));
+					if(!isNaN(active) && active < _menuTotalNum)subMenuArr[over][subOver].dispatchEvent(new MouseEvent(MouseEvent.MOUSE_OVER));						
 					
 					exPageMemory();
 					

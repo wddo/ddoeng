@@ -238,16 +238,16 @@ package com.ddoeng.navigation
 					entDel();
 					
 					//현제 오버한것이 페이지기억이 아닐때 버튼사라짐
-					if(over != active)menuArr[over].off();
+					if(over != active && over < _menuTotalNum)menuArr[over].off();
 					
-					if(!isNaN(active)){ //페이지기억이 있을때
+					if(!isNaN(active) && active < _menuTotalNum){ //페이지기억이 있을때
 						over = active;
 						subOver = subActive;
 						
 						menuArr[over].dispatchEvent(new MouseEvent(MouseEvent.MOUSE_OVER));
 						subMenuArr[over][subOver].dispatchEvent(new MouseEvent(MouseEvent.MOUSE_OVER));
 					}else{ //페이지기억 없을때
-						subGroupArr[over].visible = false;
+						if(subGroupArr[over] != undefined)subGroupArr[over].visible = false;
 					}
 					
 					exPageMemory();
