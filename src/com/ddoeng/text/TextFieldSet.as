@@ -10,27 +10,18 @@ package com.ddoeng.text
 	
 	/**
 	 *
-	 * @author : Cho Yun Gi
+	 * 텍스트 필드 셋 클래스
+	 * 
+	 * @author : Jo Yun Ki (naver ID - ddoeng)
 	 * @version : 1.0
 	 * @since : Nov 17, 2010
-	 * 
-	 * 1. 클래스 설명
-	 *		텍스트 필드 셋 클래스
-	 * 2. 메소드
-	 * - 리스너
-	 * 
-	 * - 내부메소드
-	 * 		onEmbed					:::	이엠베드 적용하기
-	 * - 외부메소드
-	 * 		set runtimeEmbed()		::: 폰트로드가 완료되면 해당 필드를 이엠베드 필요시 fontloader를 인자값으로 받는다.
-	 * - 확장메소드
 	 * 
 	 */
 	
 	public class TextFieldSet extends TextField
 	{
-		private var replace:TextUtil = new TextUtil();	//문자열 변경
-		private var fontName:String = "";				//폰트이름
+		private var _textUtil:TextUtil = new TextUtil();	//문자열 변경
+		private var _fontName:String = "";				//폰트이름
 		
 		/**
 		 * 텍스트 필드 셋
@@ -52,15 +43,15 @@ package com.ddoeng.text
 			
 			this.setTextFormat($txtformat);
 			
-			fontName = $txtformat.font;
+			_fontName = $txtformat.font;
 			
-			fontName = replace.setReplace(fontName, " ", "");
-			fontName = replace.setReplace(fontName, "-", "");
-			fontName = replace.setReplace(fontName, "_", "");
+			_fontName = _textUtil.setReplace(_fontName, " ", "");
+			_fontName = _textUtil.setReplace(_fontName, "-", "");
+			_fontName = _textUtil.setReplace(_fontName, "_", "");
 			
 			if($embed){
 				//이미 폰트가 로드되어있다면
-				if(ApplicationDomain.currentDomain.hasDefinition(fontName)){
+				if(ApplicationDomain.currentDomain.hasDefinition(_fontName)){
 					onEmbed();
 				}
 			}
@@ -83,9 +74,9 @@ package com.ddoeng.text
 		 * 폰트로드가 완료되면 해당 필드를 이엠베드 필요시 fontloader를 인자값으로 받는다.
 		 * @param $fontloader	:::	런타임 이엠베드 적용할 폰트로더
 		 */
-		public function set runtimeEmbed($fontloader:FONTLoader):void
+		public function setRuntimeEmbed($fontloader:FONTLoader):void
 		{
-			if(!ApplicationDomain.currentDomain.hasDefinition(fontName)){
+			if(!ApplicationDomain.currentDomain.hasDefinition(_fontName)){
 				$fontloader.addEventListener(FONTLoaderEvent.FONTLOAD_COMPLETE, onEmbed);
 			}
 		}

@@ -33,7 +33,6 @@
     <classEntry path="com.ddoeng.net.IMGLoader"/>
     <classEntry path="com.ddoeng.net.SWFLoader"/>
     <classEntry path="com.ddoeng.net.XMLLoader"/>
-    <classEntry path="com.ddoeng.pv3d.Base3D"/>
     <classEntry path="com.ddoeng.text.TextFieldSet"/>
     <classEntry path="com.ddoeng.text.TextFormatSet"/>
     <classEntry path="com.ddoeng.utils.ArrayUtil"/>

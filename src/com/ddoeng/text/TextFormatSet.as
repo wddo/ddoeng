@@ -4,21 +4,12 @@ package com.ddoeng.text
 	
 	/**
 	 *
-	 * @author : Cho Yun Gi
+	 * 텍스트 포맷 셋 클래스
+	 * 
+	 * @author : Jo Yun Ki (naver ID - ddoeng)
 	 * @version : 1.0
 	 * @since : Nov 17, 2010
-	 * 
-	 * 1. 클래스 설명
-	 *		텍스트 포맷 셋 클래스
-	 * 2. 메소드
-	 * - 리스너
-	 * 
-	 * - 내부메소드
-	 * 		
-	 * - 외부메소드
-	 * 		
-	 * - 확장메소드
-	 * 
+	 * 	
 	 */
 	
 	public class TextFormatSet extends TextFormat
