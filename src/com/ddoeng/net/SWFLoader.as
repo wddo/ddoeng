@@ -73,7 +73,7 @@ package com.ddoeng.net
 		{
 			//타겟 모두비움
 			if(_clear){
-				Common.targetClear(_target);
+				Common.setTargetClear(_target);
 			}
 			
 			//로더add

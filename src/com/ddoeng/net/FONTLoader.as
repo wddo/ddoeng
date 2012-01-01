@@ -2,7 +2,6 @@ package com.ddoeng.net
 {
 	import com.ddoeng.events.FONTLoaderEvent;
 	import com.ddoeng.events.FONTLoaderProgressEvent;
-	import com.ddoeng.utils.Replace;
 	
 	import flash.display.Loader;
 	import flash.events.Event;

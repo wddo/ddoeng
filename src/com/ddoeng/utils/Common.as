@@ -31,14 +31,11 @@ package com.ddoeng.utils
 			
 		}
 		
-		////////////////////////////////////////////////////////////////////////////////////////////////////
-		//외부메소드//////////////////////////////////////////////////////////////////////////////////////////
-		////////////////////////////////////////////////////////////////////////////////////////////////////
 		/**
 		 * 타겟 비우기 
 		 * @param $source	::: 비울 타겟
 		 */		
-		public static function targetClear($source:DisplayObjectContainer):void
+		public static function setTargetClear($source:DisplayObjectContainer):void
 		{
 			try{
 				while(true){
@@ -54,15 +51,15 @@ package com.ddoeng.utils
 		
 		/**
 		 * 다중 이벤트리스너 (공통의 반응적용시 유용)
-		 * @param objects	::: 이벤트를 걸 오브젝트 배열
-		 * @param type		::: 이벤트 타입
-		 * @param func		::: 이벤트에 따른 함수
+		 * @param $objects	::: 이벤트를 걸 오브젝트 배열
+		 * @param $type		::: 이벤트 타입
+		 * @param $func		::: 이벤트에 따른 함수
 		 * 
 		 */		
-		public static function addListeners(objects:Array, type:String, func:Function):void {
-			var i:int = objects.length;
+		public static function setListeners($objects:Array, $type:String, $func:Function):void {
+			var i:int = $objects.length;
 			while (i--) {
-				objects[i].addEventListener(type, func);
+				$objects[i].addEventListener($type, $func);
 			}
 		}
 	}

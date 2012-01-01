@@ -2,7 +2,6 @@ package com.ddoeng.utils
 {
 	import flash.display.MovieClip;
 	import flash.events.Event;
-	import flash.events.EventDispatcher;
 	
 	/**
 	 *
@@ -10,36 +9,18 @@ package com.ddoeng.utils
 	 * @version : 1.0
 	 * @since : Nov 17, 2010
 	 * 
-	 * 1. 클래스 설명
-	 *		프레임 조절 클래스
-	 * 2. 메소드
-	 * - 리스너
-	 * 		onEnter()	::: 상태에 따른 nextFrame, prevFrame 을 실행하는 엔터프레임
-	 * - 내부메소드
-	 * 
-	 * - 외부메소드
-	 * 		pf()		::: 프레임 전진
-	 * 		bf()		::: 프레임 후진 
-	 * 		bf2()		::: 빠른 프레임 후진 
-	 * 		del()		::: 엔터프레임 강제종료
-	 * 		motion()	::: 버튼 오버와 아웃을 전체프레임에 중간을 기점으로 자동 설정하여 모션
-	 * - 확장메소드
-	 *		
+	 * 프레임 조절 클래스	
 	 */
 	
-	public class Frame extends EventDispatcher
+	public class Frame
 	{
-		private var cal:Calculation = new Calculation();
+		private var _cal:Calculation = new Calculation();
 		
 		public function Frame()
 		{
 			
 		}
-		
-		////////////////////////////////////////////////////////////////////////////////////////////////////
-		//리스너/////////////////////////////////////////////////////////////////////////////////////////////
-		////////////////////////////////////////////////////////////////////////////////////////////////////
-		
+
 		private function onEnter(e:Event):void
 		{
 			var mc:MovieClip = e.currentTarget as MovieClip;
@@ -66,15 +47,11 @@ package com.ddoeng.utils
 			}
 		}
 		
-		////////////////////////////////////////////////////////////////////////////////////////////////////
-		//외부메소드//////////////////////////////////////////////////////////////////////////////////////////
-		////////////////////////////////////////////////////////////////////////////////////////////////////
-		
 		/**
 		 * 프레임 전진
 		 * @param $mc	::: 프레임이동할 무비클립
 		 */		
-		public function pf($mc:MovieClip):void
+		public function setPf($mc:MovieClip):void
 		{
 			var mc:MovieClip = $mc;
 			
@@ -88,7 +65,7 @@ package com.ddoeng.utils
 		 * 프레임 후진 
 		 * @param $mc	::: 프레임이동할 무비클립
 		 */		
-		public function bf($mc:MovieClip):void
+		public function setBf($mc:MovieClip):void
 		{
 			var mc:MovieClip = $mc;
 			
@@ -102,7 +79,7 @@ package com.ddoeng.utils
 		 * 빠른 프레임 후진 
 		 * @param $mc	::: 프레임이동할 무비클립
 		 */	
-		public function bf2($mc:MovieClip):void
+		public function setBf2($mc:MovieClip):void
 		{
 			var mc:MovieClip = $mc;
 			
@@ -116,7 +93,7 @@ package com.ddoeng.utils
 		 * 엔터프레임 강제종료
 		 * @param $mc 	::: 엔터프레임 종료하고자 하는 무비클립 
 		 */		
-		public function del($mc:MovieClip):void
+		public function setDel($mc:MovieClip):void
 		{
 			var mc:MovieClip = $mc;
 			
@@ -131,7 +108,7 @@ package com.ddoeng.utils
 		 * @param $state			::: 상태 ( over & out )
 		 * @param $completeFrame	::: 완료되었을때의 프레임 넘버
 		 */		
-		public function motion($source:MovieClip, $state:String, $completeFrame:int):void
+		public function setMotion($source:MovieClip, $state:String, $completeFrame:int):void
 		{
 			var mc:MovieClip = $source;
 			var current:int = mc.currentFrame;
@@ -147,14 +124,14 @@ package com.ddoeng.utils
 						
 				}
 				if($state == "out"){
-					frame = Math.floor(cal.linearFunction(1, $completeFrame, total, $completeFrame, current));
+					frame = Math.floor(_cal.getLinearFunction(1, $completeFrame, total, $completeFrame, current));
 					if($completeFrame >= frame)frame = $completeFrame + 1; //completeFrame stop error catch
 					mc.gotoAndPlay( (frame < 2)?2:frame );
 				}
 			}else{
 				//out area
 				if($state == "over"){
-					frame = Math.floor(cal.linearFunction(total, $completeFrame, 1, $completeFrame, current));
+					frame = Math.floor(_cal.getLinearFunction(total, $completeFrame, 1, $completeFrame, current));
 					mc.gotoAndPlay( (frame < 2)?2:frame );
 				}
 				if($completeFrame >= current)current = $completeFrame + 1; //completeFrame stop error catch

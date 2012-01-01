@@ -108,8 +108,8 @@ package com.ddoeng.net
 				var bitmap:Bitmap = e.currentTarget.content;
 				
 				var cal:Calculation = new Calculation();
-				var xs:Number = cal.linearFunction(0, bitmap.width, 0, 1, _width);
-				var ys:Number = cal.linearFunction(0, bitmap.height, 0, 1, _height);
+				var xs:Number = cal.getLinearFunction(0, bitmap.width, 0, 1, _width);
+				var ys:Number = cal.getLinearFunction(0, bitmap.height, 0, 1, _height);
 				
 				var matrix:Matrix = new Matrix();
 				matrix.scale(xs, ys);
@@ -120,7 +120,7 @@ package com.ddoeng.net
 			
 			//타겟 모두비움
 			if(_clear){
-				Common.targetClear(_target[id]);		
+				Common.setTargetClear(_target[id]);		
 			}
 			
 			//로더add

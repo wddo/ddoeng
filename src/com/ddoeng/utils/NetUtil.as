@@ -13,40 +13,11 @@ package com.ddoeng.utils
 	 * @version : 1.0
 	 * @since : Mar 7, 2011
 	 * 
-	 * 1. 클래스 설명
-	 *		통신에 대한 클래스
-	 * 2. 메소드
-	 * - 리스너
-	 * 
-	 * - 내부메소드
-	 * 
-	 * - 외부메소드
-	 * 		getURL()			::: 스크립트나 링크 호출
-	 * 		call()				::: 자바스크립트 호출
-	 * 		callBack()			::: 외부에서 플래시로 호출한것 받기
-	 * 		alert()				::: 경고창 호출
-	 * 		isURL()				::: 경로를 나타내는 것인가
-	 * 		killCache()			::: 캐시가 겹치지 않는 경로로 변경
-	 * 		getParameters()		::: flashVars 파라미터값 받기
-	 * 		tracking()			::: 트레킹
-	 * - 확장메소드
-	 *		
+	 * 통신에 대한 클래스	
 	 */
 	
 	public class NetUtil
 	{	
-		////////////////////////////////////////////////////////////////////////////////////////////////////
-		//리스너/////////////////////////////////////////////////////////////////////////////////////////////
-		////////////////////////////////////////////////////////////////////////////////////////////////////
-		
-		////////////////////////////////////////////////////////////////////////////////////////////////////
-		//내부메소드//////////////////////////////////////////////////////////////////////////////////////////
-		////////////////////////////////////////////////////////////////////////////////////////////////////
-		
-		////////////////////////////////////////////////////////////////////////////////////////////////////
-		//외부메소드//////////////////////////////////////////////////////////////////////////////////////////
-		////////////////////////////////////////////////////////////////////////////////////////////////////
-		
 		/**
 		 * 스크립트나 링크 호출 
 		 * @param $url		::: 링크주소
@@ -94,7 +65,7 @@ package com.ddoeng.utils
 		 * 경고창 호출 
 		 * @param $str	:::	경고메세지
 		 */		
-		public static function alert($str:String):void {
+		public static function setAlert($str:String):void {
 			if(SystemUtil.isBrowser()) ExternalInterface.call( "alert", $str );
 			else trace($str);
 		}
@@ -115,7 +86,7 @@ package com.ddoeng.utils
 		 * @param $isNeed	::: 반드시 실행
 		 * @return 			::: 변경된 경로
 		 */		
-		public static function killCache($value:String, $isNeed:Boolean = false):String
+		public static function setCache($value:String, $isNeed:Boolean = false):String
 		{
 			var result:String = "";
 			
@@ -163,7 +134,7 @@ package com.ddoeng.utils
 		 * @param $str	::: 트레킹 url
 		 * 
 		 */
-		public static function tracking($str:String):void
+		public static function setTracking($str:String):void
 		{
 			if(SystemUtil.isWeb()){
 				var loader:URLLoader = new URLLoader();

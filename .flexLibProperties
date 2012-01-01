@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<flexLibProperties includeAllClasses="true" useMultiPlatformConfig="false" version="1">
+<flexLibProperties includeAllClasses="false" useMultiPlatformConfig="false" version="1">
   <includeClasses>
     <classEntry path="com.adqua.ui.AdquaContext"/>
-    <classEntry path="com.ddoeng.as3.Base"/>
     <classEntry path="com.ddoeng.display.BitmapControl"/>
     <classEntry path="com.ddoeng.display.ColorControl"/>
     <classEntry path="com.ddoeng.display.DuplicationImage"/>
@@ -45,7 +44,7 @@
     <classEntry path="com.ddoeng.utils.MultiPercent"/>
     <classEntry path="com.ddoeng.utils.NetUtil"/>
     <classEntry path="com.ddoeng.utils.RandomText"/>
-    <classEntry path="com.ddoeng.utils.Replace"/>
+    <classEntry path="com.ddoeng.utils.TextUtil"/>
     <classEntry path="com.ddoeng.utils.SystemUtil"/>
     <classEntry path="com.greensock.OverwriteManager"/>
     <classEntry path="com.greensock.TimelineLite"/>

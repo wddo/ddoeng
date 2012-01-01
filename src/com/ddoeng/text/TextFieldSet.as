@@ -2,7 +2,7 @@ package com.ddoeng.text
 {
 	import com.ddoeng.events.FONTLoaderEvent;
 	import com.ddoeng.net.FONTLoader;
-	import com.ddoeng.utils.Replace;
+	import com.ddoeng.utils.TextUtil;
 	
 	import flash.system.ApplicationDomain;
 	import flash.text.TextField;
@@ -29,7 +29,7 @@ package com.ddoeng.text
 	
 	public class TextFieldSet extends TextField
 	{
-		private var replace:Replace = new Replace();	//문자열 변경
+		private var replace:TextUtil = new TextUtil();	//문자열 변경
 		private var fontName:String = "";				//폰트이름
 		
 		/**

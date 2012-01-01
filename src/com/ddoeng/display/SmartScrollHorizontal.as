@@ -121,7 +121,7 @@ package com.ddoeng.display
 			//컨텐츠 높이이며 그라데이션에 가려질 높이도 생각해서 더함
 			var contentHeight:Number = contentSource.height + (gradientHeight * 2);
 			//목표위치값
-			contentTargetY = cal.linearFunction(0, (scrollBg.height - scrollBar.height), 0, (contentMask.height - contentHeight), scrollBar.y);
+			contentTargetY = cal.getLinearFunction(0, (scrollBg.height - scrollBar.height), 0, (contentMask.height - contentHeight), scrollBar.y);
 		}
 		
 		//////////////////////////////////////////////////////////////////////////////////////////////////// 터치
@@ -208,13 +208,13 @@ package com.ddoeng.display
 
 				//drag를 제외한 스크롤바 위치 동기화, 터치힘에 따른 스크롤바 크기 변경
 				if(scrollState != "drag"){
-					var sy:Number = cal.linearFunction(0, (contentMask.height - contentHeight), 0, (scrollBg.height - scrollBar.height), contentSource.y);
+					var sy:Number = cal.getLinearFunction(0, (contentMask.height - contentHeight), 0, (scrollBg.height - scrollBar.height), contentSource.y);
 
 					if(sy < 0){
-						scrollBar.height = cal.linearFunction(0, contentMask.height, barDefaultHeight, 10, contentSource.y);
+						scrollBar.height = cal.getLinearFunction(0, contentMask.height, barDefaultHeight, 10, contentSource.y);
 						scrollBar.y = 0;
 					}else if(sy > scrollBg.height - scrollBar.height){
-						scrollBar.height = cal.linearFunction(contentMask.height - contentHeight, -contentSource.height, barDefaultHeight, 10, contentSource.y);
+						scrollBar.height = cal.getLinearFunction(contentMask.height - contentHeight, -contentSource.height, barDefaultHeight, 10, contentSource.y);
 						scrollBar.y = scrollBg.height - scrollBar.height;
 					}else{
 						scrollBar.height = barDefaultHeight;
@@ -222,7 +222,7 @@ package com.ddoeng.display
 					}
 				}
 			}catch(e:Error){
-				trace(e.message);
+				trace(e);
 				removeEventListener(Event.ENTER_FRAME, onEnter);
 			}
 		}
@@ -320,7 +320,7 @@ package com.ddoeng.display
 		//상단 하단 페이드아웃 되는 그라데이션
 		private function gradientCreate(width:int, height:int, fadeSize:int):Sprite
 		{
-			var graRatios:Number = cal.linearFunction(0, height, 0, 255, fadeSize);
+			var graRatios:Number = cal.getLinearFunction(0, height, 0, 255, fadeSize);
 			
 			var fillType:String = GradientType.LINEAR;
 			var colors:Array = [0xFF0000, 0xFF0000, 0xFF0000, 0xFF0000];
@@ -387,7 +387,7 @@ package com.ddoeng.display
 		 */		
 		public function add($dis:DisplayObject):void
 		{
-			Common.targetClear(contentSource);
+			Common.setTargetClear(contentSource);
 			contentSource.addChild($dis);
 			content.addChild(contentSource);
 			onComplete(null);

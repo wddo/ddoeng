@@ -119,7 +119,7 @@ package com.ddoeng.display
 			//컨텐츠 높이이며 그라데이션에 가려질 높이도 생각해서 더함
 			var contentHeight:Number = contentSource.height + (gradientHeight * 2);
 			//목표위치값
-			contentTargetY = cal.linearFunction(0, (scrollBg.height - scrollBar.height), 0, (contentMask.height - contentHeight), scrollBar.y);
+			contentTargetY = cal.getLinearFunction(0, (scrollBg.height - scrollBar.height), 0, (contentMask.height - contentHeight), scrollBar.y);
 		}
 		
 		//////////////////////////////////////////////////////////////////////////////////////////////////// 터치
@@ -189,7 +189,7 @@ package com.ddoeng.display
 				
 				//drag를 제외한 스크롤바 동기화
 				if(scrollState != "drag"){
-					scrollBar.y = cal.linearFunction(0, (contentMask.height - contentHeight), 0, (scrollBg.height - scrollBar.height), contentSource.y)
+					scrollBar.y = cal.getLinearFunction(0, (contentMask.height - contentHeight), 0, (scrollBg.height - scrollBar.height), contentSource.y)
 				}
 			}catch(e:Error){
 				removeEventListener(Event.ENTER_FRAME, onEnter);
@@ -289,7 +289,7 @@ package com.ddoeng.display
 		//상단 하단 페이드아웃 되는 그라데이션
 		private function gradientCreate(width:int, height:int, fadeSize:int):Sprite
 		{
-			var graRatios:Number = cal.linearFunction(0, height, 0, 255, fadeSize);
+			var graRatios:Number = cal.getLinearFunction(0, height, 0, 255, fadeSize);
 			
 			var fillType:String = GradientType.LINEAR;
 			var colors:Array = [0xFF0000, 0xFF0000, 0xFF0000, 0xFF0000];
@@ -356,7 +356,7 @@ package com.ddoeng.display
 		 */		
 		public function add($dis:DisplayObject):void
 		{
-			Common.targetClear(contentSource);
+			Common.setTargetClear(contentSource);
 			contentSource.addChild($dis);
 			content.addChild(contentSource);
 			onComplete(null);

@@ -53,7 +53,7 @@
 			txt = this.getChildByName("txt") as MovieClip;
 			bg = this.getChildByName("bg") as MovieClip;
 			
-			Common.targetClear(txt);
+			Common.setTargetClear(txt);
 			
 			buttonMode = true;
 			mouseChildren = false;
@@ -81,7 +81,7 @@
 		 */
 		public function on():void
 		{
-			frame.pf(this);
+			frame.setPf(this);
 		}
 		
 		/**
@@ -89,7 +89,7 @@
 		 */		
 		public function off():void
 		{
-			frame.bf(this);
+			frame.setBf(this);
 		}
 		
 		/**

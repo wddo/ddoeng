@@ -92,7 +92,7 @@
 
 			_bitmapDataCopy = _bitmapData.clone();
 			
-			Common.targetClear(source);
+			Common.setTargetClear(source);
 			
 			_bitmap = new Bitmap(_bitmapData);
 			_bitmap.smoothing = $smooth;
@@ -113,8 +113,8 @@
 			var bitmap:Bitmap = new Bitmap($bitmap.bitmapData, PixelSnapping.AUTO, $smooth);
 			
 			var cal:Calculation = new Calculation();
-			var xs:Number = cal.linearFunction(0, bitmap.width, 0, 1, $width);
-			var ys:Number = cal.linearFunction(0, bitmap.height, 0, 1, $height);
+			var xs:Number = cal.getLinearFunction(0, bitmap.width, 0, 1, $width);
+			var ys:Number = cal.getLinearFunction(0, bitmap.height, 0, 1, $height);
 			
 			var matrix:Matrix = new Matrix();
 			matrix.scale(xs, ys);
@@ -154,7 +154,7 @@
 		{
 			var source:DisplayObjectContainer = $source;
 			var bitmap:Bitmap = bitmapPop(source, $smooth, $transparent);
-			Common.targetClear(source);
+			Common.setTargetClear(source);
 			source.addChild(bitmap);
 		}
 	}
