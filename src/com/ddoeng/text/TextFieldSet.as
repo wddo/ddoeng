@@ -22,6 +22,7 @@ package com.ddoeng.text
 	{
 		private var _textUtil:TextUtil = new TextUtil();	//문자열 변경
 		private var _fontName:String = "";				//폰트이름
+		private var _embed:Boolean;
 		
 		/**
 		 * 텍스트 필드 셋
@@ -43,42 +44,43 @@ package com.ddoeng.text
 			
 			this.setTextFormat($txtformat);
 			
+			_embed = $embed;
 			_fontName = $txtformat.font;
 			
 			_fontName = _textUtil.setReplace(_fontName, " ", "");
 			_fontName = _textUtil.setReplace(_fontName, "-", "");
 			_fontName = _textUtil.setReplace(_fontName, "_", "");
 			
-			if($embed){
-				//이미 폰트가 로드되어있다면
-				if(ApplicationDomain.currentDomain.hasDefinition(_fontName)){
-					onEmbed();
-				}
+			//이미 폰트가 로드되어있다면
+			if(isFontLoad()){
+				onEmbed();
 			}
 		}
-		
-		////////////////////////////////////////////////////////////////////////////////////////////////////
-		//내부메소드//////////////////////////////////////////////////////////////////////////////////////////
-		////////////////////////////////////////////////////////////////////////////////////////////////////
-		
-		private function onEmbed(e:FONTLoaderEvent = null):void
-		{
-			this.embedFonts = true;
-		}
-		
-		////////////////////////////////////////////////////////////////////////////////////////////////////
-		//외부메소드//////////////////////////////////////////////////////////////////////////////////////////
-		////////////////////////////////////////////////////////////////////////////////////////////////////
-		
+				
 		/**
 		 * 폰트로드가 완료되면 해당 필드를 이엠베드 필요시 fontloader를 인자값으로 받는다.
 		 * @param $fontloader	:::	런타임 이엠베드 적용할 폰트로더
 		 */
 		public function setRuntimeEmbed($fontloader:FONTLoader):void
 		{
-			if(!ApplicationDomain.currentDomain.hasDefinition(_fontName)){
-				$fontloader.addEventListener(FONTLoaderEvent.FONTLOAD_COMPLETE, onEmbed);
-			}
+			if(!isFontLoad())$fontloader.addEventListener(FONTLoaderEvent.FONTLOAD_COMPLETE, onEmbed);
+		}
+		
+		/**
+		 * 폰트 이엠베드
+		 */		
+		private function onEmbed(e:FONTLoaderEvent = null):void
+		{
+			if(_embed)this.embedFonts = true;
+			this.dispatchEvent(new FONTLoaderEvent(FONTLoaderEvent.FONTLOAD_COMPLETE));
+		}
+		
+		/**
+		 * 폰트가 로드되어 있는지 확인
+		 */		
+		public function isFontLoad():Boolean
+		{
+			return ApplicationDomain.currentDomain.hasDefinition(_fontName);
 		}
 	}
 }

@@ -1,6 +1,7 @@
 package com.ddoeng.navigation
 {
 	import flash.accessibility.AccessibilityProperties;
+	import flash.display.DisplayObject;
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.display.StageScaleMode;
@@ -17,70 +18,46 @@ package com.ddoeng.navigation
 	
 	/**
 	 *
-	 * @author : Cho Yun Gi (ddoeng@naver.com)
+	 * GNB 기본 베이스가 되는 클래스입니다.
+	 * 
+	 * @author : Jo Yun Ki (naver ID - ddoeng)
 	 * @version : 1.0
 	 * @since : Nov 17, 2010
-	 * 
-	 * 1. 클래스 설명
-	 *		GNB 기본 베이스가 되는 클래스입니다.
-	 * 
-	 * 2. 메소드
-	 * - 리스너
-	 * 		onStage()								::: 스테이지가 로드되면 실행되는 리스너
-	 * 		onRemove()								::: 스테이지에서 떨어지면 실행되는 리스너
-	 *		onEnter()								::: 실시간으로 상태를 파악할 엔터프레임 리스너
-	 * 		onMenu()								::: 메인메뉴 기본 리스너
-	 * 		onSubMenu()								::: 서브메뉴 기본 리스너
-	 * - 내부메소드
-	 * 		timer();								::: 타이머셋팅 메인메뉴 오버시에 발생 하는 타이머
-	 * 		timerFun()								::: 타이머내용
-	 * 		timeOut()								::: 타이머종료
-	 * 		entStart()								::: 엔터프레임 시작. 페이지기억 체크
-	 * 		entDel()								::: 엔터프레임 삭제
-	 * 		tabCountPlus()							::: 텝인덱스 증가
-	 * - 외부메소드
-	 * 		addInit()								::: 메인메뉴 생성시 addChild 대신 사용함
-	 * 		addSubInit()							::: 서브메뉴 생성시 addChild 대신 사용함
-	 * 		pageMemory() 							::: 처음 플래시가 실행될때 실행시켜주는 페이지기억 함수, 기본값은 NaN
-	 * 		setPageMemoryTest(1뎁스넘버, 2뎁스넘버) 	::: 페이지기억을 테스트 할수 있는 함수
-	 * - 확장메소드
-	 * 		exInit()								::: 스테이지가 붙은 후 처음으로 시작되는 함수
-	 * 		exRemove()								::: 스테이지가 떨어져 나갈때 발생하는 함수
-	 * 		exEnter() 								::: 엔터프레임에서 계속 돌아갈 기능을 추가한다.
-	 * 		exPageMemory() 							::: 마우스가 아웃되었을때 페이지기억항목에서 돌아갈 기능을 추가한다.
 	 * 
 	 */
 	public class GnbBase extends MovieClip
 	{
-		private var time:int = 20;									//마우스가 아웃시 페이지기억까지 도달할때까지의 시간
-		private var timeGo:Boolean = false;							//엔터프레임중 모두 아웃되었을때를 감지하기위한 스위치변수
-		private var setId:Array = [];								//2뎁스 버튼이 오버되었을때 1뎁스를 유지해줄 Interval 아이디
-		public var active:Number = NaN;								//1뎁스
-		public var subActive:Number = NaN;							//2뎁스
-		protected var over:Number = active;							//내부 1뎁스
-		protected var subOver:Number = subActive;					//내부 2뎁스
+		private var _time:int = 40;									//마우스가 아웃시 페이지기억까지 도달할때까지의 시간
+		private var _timeGo:Boolean = false;						//엔터프레임중 모두 아웃되었을때를 감지하기위한 스위치변수
+		private var _setId:Array = [];								//2뎁스 버튼이 오버되었을때 1뎁스를 유지해줄 Interval 아이디
+		protected var _active:Number = NaN;							//1뎁스
+		protected var _subActive:Number = NaN;						//2뎁스
+		protected var _over:Number = _active;						//내부 1뎁스
+		protected var _subOver:Number = _subActive;					//내부 2뎁스
 		
 		//컨테이너
-		protected var menuContainer:MovieClip = new MovieClip();	//메인메뉴를 담을 컨테이너
-		protected var subContainer:MovieClip = new MovieClip();		//서브메뉴을 담을 컨테이너
+		protected var _menuContainer:MovieClip = new MovieClip();	//메인메뉴를 담을 컨테이너
+		protected var _subContainer:MovieClip = new MovieClip();	//서브메뉴을 담을 컨테이너
 				
 		//이벤트를 가져다 쓴 메뉴들에 대한 배열
-		protected var menuArr:Array = []; 							//메인메뉴
-		protected var subGroupArr:Array = []; 						//서브메뉴모음
-		protected var subMenuArr:Array = []; 						//서브메뉴 2차배열
+		protected var _menuArr:Array = []; 							//메인메뉴
+		protected var _subGroupArr:Array = []; 						//서브메뉴모음
+		protected var _subMenuArr:Array = []; 						//서브메뉴 2차배열
 		
-		private var count:int = 0; 									//메인메뉴 카운트
-		private var subCount:int = 0; 								//서브메뉴 카운트
+		private var _count:int = 0; 								//메인메뉴 카운트
+		private var _subCount:int = 0; 								//서브메뉴 카운트
 		protected var _tabCount:int = NaN; 							//텝 카운트
 		
 		//레이아웃에 관한 변수
 		protected var _menuTotalNum:int = NaN;						//메뉴총갯수
 		protected var _menuXPos:int = 0;							//메뉴 초기 시작 X위치
 		protected var _menuYPos:int = 0;							//메뉴 초기 시작 Y위치
-		protected var _menuOffset:int = 0;							//메뉴 간 간격
+		protected var _menuOffsetX:int = 0;							//메뉴 간 좌우 간격
+		protected var _menuOffsetY:int = 0;							//메뉴 간 상하 간격
 		protected var _subMenuXPos:int = 0;							//서브메뉴 초기X위치	::: xml에서 조정
 		protected var _subMenuYPos:int = 0;							//서브메뉴 초기Y위치
-		protected var _subMenuOffset:int = 0;						//서브메뉴 간 간격
+		protected var _subMenuOffsetX:int = 0;						//서브메뉴 간 좌우 간격
+		protected var _subMenuOffsetY:int = 0;						//서브메뉴 간 상하 간격
 		
 		/**
 		 * 상단 내비게이션에 대한 기본 뼈대이며 상속받아 사용하면 된다.
@@ -96,10 +73,6 @@ package com.ddoeng.navigation
 			else addEventListener(Event.ADDED_TO_STAGE, onStage);
 		}
 		
-		////////////////////////////////////////////////////////////////////////////////////////////////////
-		//리스너/////////////////////////////////////////////////////////////////////////////////////////////
-		////////////////////////////////////////////////////////////////////////////////////////////////////
-		
 		private function onStage(e:Event = null):void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, onStage);
@@ -110,8 +83,8 @@ package com.ddoeng.navigation
 			
 			exInit();
 			
-			addChild(menuContainer);
-			addChild(subContainer);
+			addChild(_menuContainer);
+			addChild(_subContainer);
 		}
 		
 		private function onRemove(e:Event = null):void
@@ -131,20 +104,20 @@ package com.ddoeng.navigation
 				
 				if(e.type == MouseEvent.MOUSE_OVER || e.type == FocusEvent.FOCUS_IN){
 					
-					if(!isNaN(subActive)){ //2뎁스 페이지기억값이 있으면
-						subMenuArr[active][subActive].off() //페이지기억으로 활성화되있는것 오프
+					if(!isNaN(_subActive)){ //2뎁스 페이지기억값이 있으면
+						_subMenuArr[_active][_subActive].off() //페이지기억으로 활성화되있는것 오프
 					}
 					
-					time = 1;
-					timeGo = false;
-					over = mc.id;
+					_time = 1;
+					_timeGo = false;
+					_over = mc.id;
 					
 					timer();
 					entStart();
 					
 				}else if(e.type == MouseEvent.MOUSE_OUT || e.type == FocusEvent.FOCUS_OUT){
 					
-					timeGo = true;
+					_timeGo = true;
 					
 				}else if(e.type == MouseEvent.MOUSE_DOWN || (e.type == KeyboardEvent.KEY_DOWN && e.keyCode == 13)){
 					
@@ -165,24 +138,24 @@ package com.ddoeng.navigation
 			try{
 				if(e.type == MouseEvent.MOUSE_OVER || e.type == FocusEvent.FOCUS_IN){
 					
-					if(mc.id != subActive && !isNaN(subActive)){ //이미 온 되있는것은 적용안됨
-						subMenuArr[active][subActive].off() //페이지기억으로 활성화되있는것 오프
+					if(mc.id != _subActive && !isNaN(_subActive)){ //이미 온 되있는것은 적용안됨
+						_subMenuArr[_active][_subActive].off() //페이지기억으로 활성화되있는것 오프
 					}
 					
-					timeGo = false;
-					subOver = mc.id;
-					subMenuArr[over][subOver].on();
+					_timeGo = false;
+					_subOver = mc.id;
+					_subMenuArr[_over][_subOver].setOn();
 					
 					entStart();
 					
 				}else if(e.type == MouseEvent.MOUSE_OUT || e.type == FocusEvent.FOCUS_OUT){
 					
-					timeGo = true;
-					subMenuArr[over][subOver].off();
+					_timeGo = true;
+					_subMenuArr[_over][_subOver].setOff();
 					
 				}else if(e.type == MouseEvent.MOUSE_DOWN || (e.type == KeyboardEvent.KEY_DOWN && e.keyCode == 13)){
 					
-					trace(over, mc.id);
+					trace(_over, mc.id);
 					
 				}
 			}catch(e:Error){
@@ -190,15 +163,11 @@ package com.ddoeng.navigation
 			}
 		}
 		
-		////////////////////////////////////////////////////////////////////////////////////////////////////
-		//내부메소드//////////////////////////////////////////////////////////////////////////////////////////
-		////////////////////////////////////////////////////////////////////////////////////////////////////
-		
 		//////////////////////////////////////////////////////////////////////////////////////////////////// 타이머
 		private function timer():void{
 			//trace("{Timer}");
-			timeOut(over);
-			setId[over] = setInterval(timerFun, 50);
+			timeOut(_over);
+			_setId[_over] = setInterval(timerFun, 50);
 		}
 		
 		private function timerFun():void{
@@ -206,12 +175,12 @@ package com.ddoeng.navigation
 			
 			for (var i:int = 0; i < _menuTotalNum; i++) {
 				//trace(i , _subOver);
-				if (i == over) { 	//메인메뉴 오버시 동작
-					menuArr[i].on();
-					subGroupArr[i].visible = true;	//서브그룹 보이기
+				if (i == _over) { 	//메인메뉴 오버시 동작
+					_menuArr[i].setOn();
+					_subGroupArr[i].visible = true;	//서브그룹 보이기
 				}else{ 				//메인메뉴 아웃시 동작
-					menuArr[i].off();
-					subGroupArr[i].visible = false;	//서브그룹 숨기기
+					_menuArr[i].setOff();
+					_subGroupArr[i].visible = false;	//서브그룹 숨기기
 				}
 				timeOut(i); //반복삭제
 			}//end for
@@ -219,8 +188,8 @@ package com.ddoeng.navigation
 		
 		private function timeOut(num:Number):void{
 			//trace("{clear id:"+ setId[num]+"}");
-			clearInterval(setId[num]);
-			setId[num] = null;
+			clearInterval(_setId[num]);
+			_setId[num] = null;
 		}
 		
 		//////////////////////////////////////////////////////////////////////////////////////////////////// 엔터프레임
@@ -232,28 +201,28 @@ package com.ddoeng.navigation
 		
 		private function onEnter(e:Event):void {
 			exEnter();
-			if (timeGo) {
-				time++;
-				if (time >= 40) {
+			if (_timeGo) {
+				_time++;
+				if (_time >= 40) {
 					entDel();
 					
 					//현제 오버한것이 페이지기억이 아닐때 버튼사라짐
-					if(over != active && over < _menuTotalNum)menuArr[over].off();
+					if(_over != _active && _over < _menuTotalNum)_menuArr[_over].setOff();
 					
-					if(!isNaN(active) && active < _menuTotalNum){ //페이지기억이 있을때
-						over = active;
-						subOver = subActive;
+					if(!isNaN(_active) && _active < _menuTotalNum){ //페이지기억이 있을때
+						_over = _active;
+						_subOver = _subActive;
 						
-						if(!isNaN(active) && menuArr[over] != undefined)menuArr[over].dispatchEvent(new MouseEvent(MouseEvent.MOUSE_OVER));
-						if(!isNaN(active) && subMenuArr[over][subOver] != undefined)subMenuArr[over][subOver].dispatchEvent(new MouseEvent(MouseEvent.MOUSE_OVER));
+						if(!isNaN(_active) && _menuArr[_over] != undefined)_menuArr[_over].dispatchEvent(new MouseEvent(MouseEvent.MOUSE_OVER));
+						if(!isNaN(_active) && _subMenuArr[_over][_subOver] != undefined)_subMenuArr[_over][_subOver].dispatchEvent(new MouseEvent(MouseEvent.MOUSE_OVER));
 					}else{ //페이지기억 없을때
-						if(subGroupArr[over] != undefined)subGroupArr[over].visible = false;
+						if(_subGroupArr[_over] != undefined)_subGroupArr[_over].visible = false;
 					}
 					
 					exPageMemory();
 					
-					time = 1;
-					timeGo = false;
+					_time = 1;
+					_timeGo = false;
 				}
 			}
 		}
@@ -275,71 +244,94 @@ package com.ddoeng.navigation
 			return _tabCount
 		}
 		
-		////////////////////////////////////////////////////////////////////////////////////////////////////
-		//외부메소드//////////////////////////////////////////////////////////////////////////////////////////
-		////////////////////////////////////////////////////////////////////////////////////////////////////
-		
 		/**
 		 * 메인메뉴 생성시 addChild 대신 사용함
 		 * @param child		::: 메인 Menu 초기화
 		 */		
-		protected function addInit(child:MovieClip):void
+		protected function addInit(child:Menu):void
 		{
-			child.id = count;
-			menuContainer.addChild(child);
-			menuArr.push(child);
+			child.id = _count;
+			_menuContainer.addChild(child);
+			_menuArr.push(child);
 			
 			//액세스 가능성 도구//////////////////////////////////////
 			var accessProps:AccessibilityProperties = new AccessibilityProperties();
-			accessProps.name = child.txt.getChildByName("fid").text;
+			accessProps.name = child.getTextField().text;
 			child.accessibilityProperties = accessProps;
 			child.tabIndex = tabCountPlus();
 			
 			//위치조정/////////////////////////////////////////////
 			child.x = _menuXPos;
 			child.y = _menuYPos;
-			_menuXPos += child.txt.width + _menuOffset;
-			child.bg.alpha = 0;
+			_menuXPos += child.getTextMovieClip().width + _menuOffsetX;
 			
 			//서브 그룹 정의 및 초기화/////////////////////////////////
 			var group:MovieClip = new MovieClip();
 			group.visible = false;
-			subContainer.addChild(group);
-			subGroupArr.push(group);
+			_subContainer.addChild(group);
+			_subGroupArr.push(group);
 			
 			//서브아이디 카운트 초기화
-			subCount = 0;
+			_subCount = 0;
 			
 			//서브메뉴 2차배열 생성
-			subMenuArr[count] = [];
+			_subMenuArr[_count] = [];
 			
-			count++;
+			_count++;
 		}
 		
 		/**
 		 * 서브메뉴 생성시 addChild 대신 사용함
 		 * @param child		:::	서브 Menu 초기화
 		 */		
-		protected function addSubInit(child:MovieClip):void
+		protected function addSubInit(child:Menu):void
 		{
-			child.id = subCount;
+			child.id = _subCount;
 			
 			//액세스 가능성 도구//////////////////////////////////////
 			var accessProps:AccessibilityProperties = new AccessibilityProperties();
-			accessProps.name = child.txt.getChildByName("fid").text;
+			accessProps.name = child.getTextField().text;
 			child.accessibilityProperties = accessProps;
 			child.tabIndex = tabCountPlus();
 			
 			//위치조정/////////////////////////////////////////////
 			child.x = _subMenuXPos;
 			child.y = _subMenuYPos;
-			_subMenuXPos += child.txt.width + _subMenuOffset;
-			child.bg.alpha = 0;
+			_subMenuXPos += child.getTextMovieClip().width + _subMenuOffsetX;
 
-			subGroupArr[count-1].addChild(child);
-			subMenuArr[count-1].push(child);
+			_subGroupArr[_count-1].addChild(child);
+			_subMenuArr[_count-1].push(child);
 			
-			subCount++;
+			_subCount++;
+		}
+		
+		/**
+		 * 외부 재정렬
+		 */		
+		protected function setMenuInitPosition():void
+		{
+			if(_menuArr.length > 0){
+				_menuXPos = _menuArr[0].x;
+				_menuYPos = _menuArr[0].y;
+				
+				for(var i:int=0; i<_menuArr.length; i++){
+					var menu:Menu = _menuArr[i] as Menu;
+					menu.x = _menuXPos;
+					menu.y = _menuYPos;
+					
+					_menuXPos += menu.getTextMovieClip().width + _menuOffsetX;
+					
+					_subMenuXPos = _subMenuArr[i][0].x;
+					_subMenuYPos = _subMenuArr[i][0].y;
+					for(var s:int=0; s<_subMenuArr[i].length; s++){
+						var submenu:Menu = _subMenuArr[i][s] as Menu;
+						submenu.x = _subMenuXPos;
+						submenu.y = _subMenuYPos;
+						
+						_subMenuXPos += submenu.getTextMovieClip().width + _subMenuOffsetX;
+					}
+				}
+			}
 		}
 		
 		/**
@@ -347,8 +339,8 @@ package com.ddoeng.navigation
 		 */		
 		protected function pageMemory():void
 		{
-			if(!isNaN(active) && !isNaN(subActive)){
-				timeGo = true;
+			if(!isNaN(_active) && !isNaN(_subActive)){
+				_timeGo = true;
 				entStart();
 			}
 		}
@@ -358,17 +350,13 @@ package com.ddoeng.navigation
 		 * @param one		::: 원 뎁스
 		 * @param two		::: 투 뎁스
 		 */
-		protected function setPageMemoryTest(one:int, two:int):void
+		protected function pageMemoryTest(one:int, two:int):void
 		{
-			active = one;
-			subActive = two;
-			over = active;
-			subOver = subActive;
+			_active = one;
+			_subActive = two;
+			_over = _active;
+			_subOver = _subActive;
 		}
-		
-		////////////////////////////////////////////////////////////////////////////////////////////////////
-		//확장메소드//////////////////////////////////////////////////////////////////////////////////////////
-		////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		/**
 		 * 스테이지가 붙은 후 처음으로 시작되는 함수

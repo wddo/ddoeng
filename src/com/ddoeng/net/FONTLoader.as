@@ -12,32 +12,20 @@ package com.ddoeng.net
 	import flash.system.ApplicationDomain;
 	import flash.system.LoaderContext;
 	import flash.text.Font;
-		
+			
+	[Event (name="fontloadProgress", type="com.ddoeng.events.FONTLoaderProgressEvent")]
+	[Event (name="fontloadComplete", type="com.ddoeng.events.FONTLoaderEvent")]
+	
 	/**
-	 *
-	 * @author : Cho Yun Gi (ddoeng@naver.com)
+	 * 
+	 * 폰트로더
+	 * 
+	 * @author : Jo Yun Ki (naver ID - ddoeng)
 	 * @version : 1.0
 	 * @since : Nov 17, 2010
-	 * 
-	 * 1. 클래스 설명
-	 *		폰트로더
-	 * 
-	 * 2. 메소드
-	 * - 리스너
-	 * 		onProgress()		::: 로딩중
-	 * 		onComplete()		::: 로드완료
-	 * 		ioError()			:::	io오류
-	 * - 내부메소드
-	 * 
-	 * - 외부메소드
-	 * 		load()				::: 로드
-	 * 		del()				::: 삭제
-	 * 		get name()			::: 폰트명 반환
-	 * - 확장메소드
-	 *		
+	 * 	
 	 */
-	[ Event (name="fontloadProgress", type="com.ddoeng.events.FONTLoaderProgressEvent")]
-	[ Event (name="fontloadComplete", type="com.ddoeng.events.FONTLoaderEvent")]
+	
 	public class FONTLoader extends EventDispatcher
 	{
 		private var _loader:Loader;		//로더
@@ -49,10 +37,6 @@ package com.ddoeng.net
 		{			
 			_loader = new Loader();
 		}
-		
-		////////////////////////////////////////////////////////////////////////////////////////////////////
-		//리스너/////////////////////////////////////////////////////////////////////////////////////////////
-		////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		private function onProgress(e:ProgressEvent):void
 		{
@@ -80,10 +64,6 @@ package com.ddoeng.net
 		{
 			trace(e.text);
 		}
-		
-		////////////////////////////////////////////////////////////////////////////////////////////////////
-		//외부메소드//////////////////////////////////////////////////////////////////////////////////////////
-		////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		/**
 		 * 폰트명의 공백, '-', '_'을 삭제한 이름이 swf 파일이름으로 하여야한다.
@@ -114,14 +94,14 @@ package com.ddoeng.net
 					}
 				}
 			}catch(e:Error){
-				trace(e.message + "::: loader가 del()에 의해 삭제되었을 수 있습니다.");
+				trace(e.message + "::: loader가 dispose()에 의해 삭제되었을 수 있습니다.");
 			}
 		}
 		
 		/**
-		 * 로더 삭제
+		 * 파괴
 		 */
-		public function del():void
+		public function dispose():void
 		{
 			if(_loader != null){
 				if(_loader.content == null)_loader.close(); //로드가 완료되지 않은 상황이면 닫기
@@ -137,7 +117,7 @@ package com.ddoeng.net
 		/**
 		 * 폰트명 반환
 		 */
-		public function get name():String
+		public function getName():String
 		{
 			return _fontName;
 		}

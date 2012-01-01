@@ -19,7 +19,7 @@ package com.ddoeng.display
 	
 	/**
 	 *
-	 * @author : Cho Yun Gi (ddoeng@naver.com)
+	 * @author : Jo Yun Ki (naver ID - ddoeng)
 	 * @version : 1.0
 	 * @since : Mar 1, 2011
 	 * 

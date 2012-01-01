@@ -25,7 +25,6 @@ package com.ddoeng.utils
 		private function onEnter(e:Event):void
 		{
 			var mc:MovieClip = e.currentTarget as MovieClip;
-			
 			if(mc.state == "next"){
 				if(mc.totalFrames != mc.currentFrame){
 					mc.nextFrame();
@@ -54,9 +53,11 @@ package com.ddoeng.utils
 		 */		
 		public function setPf($mc:MovieClip):void
 		{
-			var mc:MovieClip = $mc;
 			
+			var mc:MovieClip = $mc;
+
 			mc.state = "next";
+
 			if(!mc.hasEventListener(Event.ENTER_FRAME)){
 				mc.addEventListener(Event.ENTER_FRAME, onEnter);
 			}

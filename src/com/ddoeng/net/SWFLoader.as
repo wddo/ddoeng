@@ -13,33 +13,20 @@ package com.ddoeng.net
 	import flash.net.URLRequest;
 	import flash.system.ApplicationDomain;
 	import flash.system.LoaderContext;
-
+	
+	[Event (name="loadswfProgress", type="com.ddoeng.events.SWFLoaderProgressEvent")]
+	[Event (name="loadswfComplete", type="com.ddoeng.events.SWFLoaderEvent")]
+	
 	/**
 	 *
-	 * @author : Cho Yun Gi (ddoeng@naver.com)
+	 * SWF로더
+	 * 
+	 * @author : Jo Yun Ki (naver ID - ddoeng)
 	 * @version : 1.0
 	 * @since : Nov 17, 2010
-	 * 
-	 * 1. 클래스 설명
-	 *		SWF로더
-	 * 2. 메소드
-	 * - 리스너
-	 * 		onProgress()		::: 로딩중
-	 * 		onComplete()		::: 로드완료
-	 * 		ioError()			:::	io오류
-	 * - 내부메소드
-	 * 
-	 * - 외부메소드
-	 * 		load()				::: 로드
-	 * 		del()				::: 삭제
-	 * 		setget x()			::: X 좌표 지정,반환
-	 * 		setget y()			::: Y 좌표 지정,반환
-	 * - 확장메소드
-	 *		
+	 * 		
 	 */
 	
-	[ Event (name="loadswfProgress", type="com.ddoeng.events.SWFLoaderProgressEvent")]
-	[ Event (name="loadswfComplete", type="com.ddoeng.events.SWFLoaderEvent")]
 	public class SWFLoader extends EventDispatcher
 	{
 		private var _loader:Loader;						//로더
@@ -55,10 +42,6 @@ package com.ddoeng.net
 			_loaderContext = new LoaderContext();
 			_loaderContext.applicationDomain = ApplicationDomain.currentDomain;
 		}
-		
-		////////////////////////////////////////////////////////////////////////////////////////////////////
-		//리스너/////////////////////////////////////////////////////////////////////////////////////////////
-		////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		//로드 진행중
 		private function onProgress(e:ProgressEvent):void
@@ -92,10 +75,6 @@ package com.ddoeng.net
 			trace(e.text);
 		}
 		
-		////////////////////////////////////////////////////////////////////////////////////////////////////
-		//외부메소드//////////////////////////////////////////////////////////////////////////////////////////
-		////////////////////////////////////////////////////////////////////////////////////////////////////
-		
 		/**
 		 * 로드 시작
 		 * @param $target	::: swf담을 타겟
@@ -104,26 +83,30 @@ package com.ddoeng.net
 		 */
 		public function load($target:DisplayObjectContainer, $url:String, $clear:Boolean=false):void
 		{
-			_target = $target;
-			_url = $url;
-			_clear = $clear;
-			_percent = 0;
-			
-			//중복로딩을 막음
-			//del();
-			
-			//로더생성
-			_loader = new Loader();
-			_loader.contentLoaderInfo.addEventListener(ProgressEvent.PROGRESS, onProgress);
-			_loader.contentLoaderInfo.addEventListener(Event.COMPLETE, onComplete);
-			_loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, ioError);
-			_loader.load(new URLRequest(_url), _loaderContext);
+			try{
+				_target = $target;
+				_url = $url;
+				_clear = $clear;
+				_percent = 0;
+				
+				//중복로딩을 막음
+				//del();
+				
+				//로더생성
+				_loader = new Loader();
+				_loader.contentLoaderInfo.addEventListener(ProgressEvent.PROGRESS, onProgress);
+				_loader.contentLoaderInfo.addEventListener(Event.COMPLETE, onComplete);
+				_loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, ioError);
+				_loader.load(new URLRequest(_url), _loaderContext);
+			}catch(e:Error){
+				trace(e.message + "::: loader가 dispose()에 의해 삭제되었을 수 있습니다.");
+			}
 		}
 		
 		/**
 		 * 로더 삭제
 		 */
-		public function del():void
+		public function dispose():void
 		{
 			if(_loader != null){
 				if(_loader.content == null && _loader.contentLoaderInfo.bytesLoaded > 0)_loader.close();//로드가 완료되지 않은 상황이면 닫기
@@ -137,27 +120,11 @@ package com.ddoeng.net
 		}
 		
 		/**
-		 * X 좌표 지정,반환
+		 * @return 로더반환 
 		 */		
-		public function set x(n:Number):void
+		public function getLoader():Loader
 		{
-			_loader.x = n;
-		}
-		public function get x():Number
-		{
-			return _loader.x;
-		}
-		
-		/**
-		 * Y 좌표 지정,반환
-		 */		
-		public function set y(n:Number):void
-		{
-			_loader.y = n;
-		}
-		public function get y():Number
-		{
-			return _loader.y;
+			return _loader
 		}
 	}
 }

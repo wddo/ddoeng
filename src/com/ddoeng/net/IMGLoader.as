@@ -16,32 +16,20 @@ package com.ddoeng.net
 	import flash.net.URLRequest;
 	import flash.system.ApplicationDomain;
 	import flash.system.LoaderContext;
+	
+	[Event (name="imageloadProgress", type="com.ddoeng.events.IMGLoaderProgressEvent")]
+	[Event (name="imageloadComplete", type="com.ddoeng.events.IMGLoaderEvent")]
 
 	/**
 	 *
-	 * @author : Cho Yun Gi (ddoeng@naver.com)
+	 * 이미지 로더
+	 * 
+	 * @author : Jo Yun Ki (naver ID - ddoeng)
 	 * @version : 1.0
 	 * @since : Nov 17, 2010
 	 * 
-	 * 1. 클래스 설명
-	 *		이미지 로더
-	 * 2. 메소드
-	 * - 리스너
-	 * 		onProgress()		::: 로딩중
-	 * 		onComplete()		::: 로드완료
-	 * 		ioError()			:::	io오류
-	 * - 내부메소드
-	 * 
-	 * - 외부메소드
-	 * 		load()				::: 로드
-	 * 		del()				::: 삭제
-	 * 		getLoaderArr()		:::	로더배열
-	 * - 확장메소드
-	 *		
 	 */
 	
-	[ Event (name="imageloadProgress", type="com.ddoeng.events.IMGLoaderProgressEvent")]
-	[ Event (name="imageloadComplete", type="com.ddoeng.events.IMGLoaderEvent")]
 	public class IMGLoader extends EventDispatcher
 	{
 		private var _loader:Loader;					//로더
@@ -79,11 +67,7 @@ package com.ddoeng.net
 			_loaderContext = new LoaderContext();
 			_loaderContext.applicationDomain = ApplicationDomain.currentDomain;
 		}
-		
-		////////////////////////////////////////////////////////////////////////////////////////////////////
-		//리스너/////////////////////////////////////////////////////////////////////////////////////////////
-		////////////////////////////////////////////////////////////////////////////////////////////////////
-		
+
 		private function onProgress(e:ProgressEvent):void
 		{
 			_percent = Math.floor((e.bytesLoaded / e.bytesTotal) * 100);
@@ -98,7 +82,7 @@ package com.ddoeng.net
 			
 			//타겟이 여러개이면
 			if(_target.length > 1){
-				id = loader.id;
+				id = loader.getId();
 			}else{//타겟이 하나이면
 				id = 0;
 			}
@@ -143,11 +127,7 @@ package com.ddoeng.net
 		{
 			trace(e.text);
 		}
-		
-		////////////////////////////////////////////////////////////////////////////////////////////////////
-		//외부메소드//////////////////////////////////////////////////////////////////////////////////////////
-		////////////////////////////////////////////////////////////////////////////////////////////////////
-		
+
 		/**
 		 * 로드 시작
 		 * @param $target	::: 이미지를 포함시킬 배열
@@ -158,29 +138,33 @@ package com.ddoeng.net
 		 */		
 		public function load($target:Array, $url:Array, $width:Number=0, $height:Number=0, $smooth:Boolean=false):void
 		{
-			_target = $target;
-			_url = $url;
-
-			_width = $width;
-			_height = $height;
-			_smooth = $smooth;
-			
-			_loaderArr = new Array();
-			
-			//아무것도 안들어오면 자동을 들어온 url 갯수를 참조
-			if(_maxNum == 0){
-				_maxNum = _url.length;
-			}
-			
-			for(var i:int = 0; i < _maxNum; i++){
-				var loader:DynamicLoader = new DynamicLoader();
-				loader.contentLoaderInfo.addEventListener(ProgressEvent.PROGRESS, onProgress);
-				loader.contentLoaderInfo.addEventListener(Event.COMPLETE, onComplete);
-				loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, ioError);
-				loader.load(new URLRequest(_url[i]), _loaderContext);
-				loader.id = i;
+			try{
+				_target = $target;
+				_url = $url;
+	
+				_width = $width;
+				_height = $height;
+				_smooth = $smooth;
 				
-				_loaderArr.push(loader);
+				_loaderArr = new Array();
+				
+				//아무것도 안들어오면 자동을 들어온 url 갯수를 참조
+				if(_maxNum == 0){
+					_maxNum = _url.length;
+				}
+				
+				for(var i:int = 0; i < _maxNum; i++){
+					var loader:DynamicLoader = new DynamicLoader();
+					loader.contentLoaderInfo.addEventListener(ProgressEvent.PROGRESS, onProgress);
+					loader.contentLoaderInfo.addEventListener(Event.COMPLETE, onComplete);
+					loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, ioError);
+					loader.load(new URLRequest(_url[i]), _loaderContext);
+					loader.setId(i);
+					
+					_loaderArr.push(loader);
+				}
+			}catch(e:Error){
+				trace(e.message + "::: loader가 dispose()에 의해 삭제되었을 수 있습니다.");
 			}
 		}
 		

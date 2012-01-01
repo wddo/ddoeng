@@ -12,7 +12,7 @@ package com.ddoeng.display.player
 	
 	/**
 	 *
-	 * @author : Cho Yun Gi (ddoeng@naver.com)
+	 * @author : Jo Yun Ki (naver ID - ddoeng)
 	 * @version : 1.0
 	 * @since : Mar 3, 2011
 	 * 

@@ -41,7 +41,7 @@ package com.ddoeng.utils
 		 * @param args		::: 메계변수
 		 * @return 			::: 반환값
 		 */		
-		public static function setCall($jsFun:String, ... args):* {
+		public static function call($jsFun:String, ... args):* {
 			var isReturn:*;
 			
 			if(SystemUtil.isBrowser()){
@@ -58,7 +58,7 @@ package com.ddoeng.utils
 		 * @param $jsFun	::: 자바스크립트에서 플래시로 호출한 함수명
 		 * @param $asFun	::: 실행할 액션스크립트 함수
 		 */		
-		public static function setCallBack($jsFun:String, $asFun:Function):void {
+		public static function callBack($jsFun:String, $asFun:Function):void {
 			if(ExternalInterface.available) ExternalInterface.addCallback($jsFun, $asFun);
 		}
 		
