@@ -7,12 +7,13 @@ package com.ddoeng.utils
 	import flash.system.Security;
 	
 	/**
-	 *
-	 * @author : Cho Yun Gi (ddoeng@naver.com)
+	 * 
+	 * 위치값에 대한 유틸 클래스	
+	 * 
+	 * @author : Jo Yun Ki (naver ID - ddoeng)
 	 * @version : 1.0
 	 * @since : Mar 7, 2011
 	 * 
-	 * 위치값에 대한 유틸 클래스	
 	 */
 	
 	public class LocationUtil

@@ -5,11 +5,12 @@ package com.ddoeng.utils
 	
 	/**
 	 *
-	 * @author : Cho Yun Gi (ddoeng@naver.com)
+	 * 프레임 조절 클래스	
+	 * 
+	 * @author : Jo Yun Ki (naver ID - ddoeng)
 	 * @version : 1.0
 	 * @since : Nov 17, 2010
 	 * 
-	 * 프레임 조절 클래스	
 	 */
 	
 	public class Frame

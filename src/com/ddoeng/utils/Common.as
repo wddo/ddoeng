@@ -6,22 +6,12 @@ package com.ddoeng.utils
 	
 	/**
 	 *
-	 * @author : Cho Yun Gi (ddoeng@naver.com)
+	 * 공용으로 쓸만한 메소드 모음 클래스
+	 * 
+	 * @author : Jo Yun Ki (naver ID - ddoeng)
 	 * @version : 1.0
 	 * @since : Nov 17, 2010
-	 * 
-	 * 1. 클래스 설명
-	 *		공용으로 쓸만한 메소드 모음 클래스
-	 * 2. 메소드
-	 * - 리스너
-	 * 
-	 * - 내부메소드
-	 * 
-	 * - 외부메소드
-	 * 		targetClear()		:::	타겟 비우기
-	 * 		addListeners()		::: 다중 이벤트리스너
-	 * - 확장메소드
-	 *		
+	 * 	
 	 */
 	
 	public class Common

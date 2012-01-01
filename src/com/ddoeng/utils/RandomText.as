@@ -9,13 +9,13 @@ package com.ddoeng.utils
 	import flash.utils.Timer;
 	
 	/**
-	 *
-	 * @author : Cho Yun Gi (ddoeng@naver.com)
-	 * @version : 1.0
-	 * @since : Nov 17, 2010
 	 * 
 	 * 랜덤한 텍스트를 반환하여 텍스트 완성
 	 * 
+	 * @author : Jo Yun Ki (naver ID - ddoeng)
+	 * @version : 1.0
+	 * @since : Nov 17, 2010
+	 *
 	 */
 	
 	public class RandomText extends EventDispatcher

@@ -1,31 +1,20 @@
 ﻿package com.ddoeng.utils
 {	
+	
 	/**
 	 *
-	 * @author : Cho Yun Gi (ddoeng@naver.com)
+	 * 텍스트 유틸
+	 * 
+	 * @author : Jo Yun Ki (naver ID - ddoeng)
 	 * @version : 1.0
 	 * @since : Nov 17, 2010
 	 * 
-	 * 텍스트 유틸
-	 * 
 	 */
-
+	
 	public class TextUtil
-	{		
+	{
 		public function TextUtil () {	
 
-		}
-
-		/**
-		 * 문자열 앞쪽 한글자씩 반환하는 메소드
-		 * @param $str	::: 문자열
-		 * @return		:::	맨앞문자반환 	
-		 */		
-		private function firstCharacter($str:String):String {
-			if ($str.length == 1) {
-				return $str;
-			}
-			return $str.slice(0, 1);
 		}
 		
 		/**
@@ -36,7 +25,7 @@
 		 * @return 				::: 새로운 문자열
 		 * 
 		 */
-		public function replace($str:String, $oldSubStr:String, $newSubStr:String):String {
+		public function setReplace($str:String, $oldSubStr:String, $newSubStr:String):String {
 			return $str.split($oldSubStr).join($newSubStr);
 		}
 		
@@ -46,8 +35,8 @@
 		 * @param $char		::: 변경할 문자
 		 * @return 			::: 새로운 문자열
 		 */		
-		public function trim($str:String, $char:String):String {
-			return trimBack(trimFront($str, $char), $char);
+		public function setTrim($str:String, $char:String):String {
+			return setTrimBack(setTrimFront($str, $char), $char);
 		}
 		
 		/**
@@ -56,10 +45,10 @@
 		 * @param $char		::: 변경할 문자
 		 * @return 			::: 새로운 문자열
 		 */			
-		public function trimFront($str:String, $char:String):String {
+		public function setTrimFront($str:String, $char:String):String {
 			$char = firstCharacter($char);
 			if ($str.charAt(0) == $char) {
-				$str = trimFront($str.substring(1), $char);
+				$str = setTrimFront($str.substring(1), $char);
 			}
 			return $str;
 		}
@@ -70,12 +59,24 @@
 		 * @param $char		::: 변경할 문자
 		 * @return 			::: 새로운 문자열
 		 */	
-		public function trimBack($str:String, $char:String):String {
+		public function setTrimBack($str:String, $char:String):String {
 			$char = firstCharacter($char);
 			if ($str.charAt($str.length - 1) == $char) {
-				$str = trimBack($str.substring(0, $str.length - 1), $char);
+				$str = setTrimBack($str.substring(0, $str.length - 1), $char);
 			}
 			return $str;
+		}
+		
+		/**
+		 * 문자열 앞쪽 한글자씩 반환하는 메소드
+		 * @param $str	::: 문자열
+		 * @return		:::	맨앞문자반환 	
+		 */		
+		private function firstCharacter($str:String):String {
+			if ($str.length == 1) {
+				return $str;
+			}
+			return $str.slice(0, 1);
 		}
 	}
 	

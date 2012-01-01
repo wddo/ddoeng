@@ -2,13 +2,14 @@ package com.ddoeng.utils
 {
 	/**
 	 *
-	 * @author : Cho Yun Gi (ddoeng@naver.com)
+	 * 여러 로딩퍼센트를 모아서 합산하여 0~100%로 반환하는 클래스	
+	 * 
+	 * @author : Jo Yun Ki (naver ID - ddoeng)
 	 * @version : 1.0
 	 * @since : Nov 17, 2010
 	 * 
-	 * 여러 로딩퍼센트를 모아서 합산하여 0~100%로 반환하는 클래스	
 	 */
-
+	
 	public class MultiPercent
 	{
 		private var _percent:Number = 0; //로딩 퍼센트 

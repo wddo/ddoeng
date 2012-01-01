@@ -2,11 +2,12 @@ package com.ddoeng.utils
 {
 	/**
 	 *
-	 * @author : Cho Yun Gi (ddoeng@naver.com)
+	 * 어려운 계산식 모음 클래스	
+	 * 
+	 * @author : Jo Yun Ki (naver ID - ddoeng)
 	 * @version : 1.0
 	 * @since : Nov 17, 2010
 	 * 
-	 * 어려운 계산식 모음 클래스	
 	 */
 	
 	public class Calculation

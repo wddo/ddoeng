@@ -9,11 +9,12 @@ package com.ddoeng.utils
 	
 	/**
 	 *
-	 * @author : Cho Yun Gi (ddoeng@naver.com)
+	 * 통신에 대한 클래스
+	 * 
+	 * @author : Jo Yun Ki (naver ID - ddoeng)
 	 * @version : 1.0
 	 * @since : Mar 7, 2011
 	 * 
-	 * 통신에 대한 클래스	
 	 */
 	
 	public class NetUtil

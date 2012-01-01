@@ -54,9 +54,9 @@ package com.ddoeng.text
 			
 			fontName = $txtformat.font;
 			
-			fontName = replace.replace(fontName, " ", "");
-			fontName = replace.replace(fontName, "-", "");
-			fontName = replace.replace(fontName, "_", "");
+			fontName = replace.setReplace(fontName, " ", "");
+			fontName = replace.setReplace(fontName, "-", "");
+			fontName = replace.setReplace(fontName, "_", "");
 			
 			if($embed){
 				//이미 폰트가 로드되어있다면
