@@ -294,7 +294,7 @@ package com.ddoeng.navigation
 		 * 메인메뉴 생성시 addChild 대신 사용함
 		 * @param child		::: 메인 Menu 초기화
 		 */	
-		protected function addInit(child:Menu):void
+		protected function addInit(child:MainMenu):void
 		{
 			child.id = _count;
 			_menuContainer.addChild(child);
@@ -341,7 +341,7 @@ package com.ddoeng.navigation
 		 * 서브메뉴 생성시 addChild 대신 사용함
 		 * @param child		:::	서브 Menu 초기화
 		 */
-		protected function addSubInit(child:Menu):void
+		protected function addSubInit(child:SubMenu):void
 		{
 			child.id = _subCount;
 			
@@ -372,7 +372,7 @@ package com.ddoeng.navigation
 				_menuYPos = _menuArr[0].y;
 				
 				for(var i:int=0; i<_menuArr.length; i++){
-					var menu:Menu = _menuArr[i] as Menu;
+					var menu:MainMenu = _menuArr[i] as MainMenu;
 					menu.x = _menuXPos;
 					menu.y = _menuYPos;
 					
@@ -381,7 +381,7 @@ package com.ddoeng.navigation
 					_subMenuXPos = _subMenuArr[i][0].x;
 					_subMenuYPos = _subMenuArr[i][0].y;
 					for(var s:int=0; s<_subMenuArr[i].length; s++){
-						var submenu:Menu = _subMenuArr[i][s] as Menu;
+						var submenu:SubMenu = _subMenuArr[i][s] as SubMenu;
 						submenu.x = _subMenuXPos;
 						submenu.y = _subMenuYPos;
 						

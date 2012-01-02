@@ -26,7 +26,7 @@
     <classEntry path="com.ddoeng.navigation.FrameButtons"/>
     <classEntry path="com.ddoeng.navigation.GnbBase"/>
     <classEntry path="com.ddoeng.navigation.LnbBase"/>
-    <classEntry path="com.ddoeng.navigation.Menu"/>
+    <classEntry path="com.ddoeng.navigation.MenuBase"/>
     <classEntry path="com.ddoeng.navigation.XMLLinkLoader"/>
     <classEntry path="com.ddoeng.net.DynamicLoader"/>
     <classEntry path="com.ddoeng.net.FONTLoader"/>
@@ -145,6 +145,7 @@
     <classEntry path="com.greensock.plugins.VisiblePlugin"/>
     <classEntry path="com.greensock.plugins.VolumePlugin"/>
     <classEntry path="net.hires.debug.Stats"/>
+    <classEntry path="com.ddoeng.navigation.MainMenu"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

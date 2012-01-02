@@ -12,7 +12,7 @@
 	
 	/**
 	 *
-	 * 메뉴 아이템 생성
+	 * 메뉴 아이템 베이스
 	 * 
 	 * @author : Jo Yun Ki (naver ID - ddoeng)
 	 * @version : 1.0
@@ -20,7 +20,7 @@
 	 * 
 	 */
 	
-	public dynamic class Menu extends MovieClip
+	public dynamic class MenuBase extends MovieClip
 	{
 		private var _clip:MovieClip;					//그래픽요소
 		private var _fid:TextFieldSet;					//텍스트필드를 담을 변수
@@ -38,7 +38,7 @@
 		 * @param $clip		::: 버튼화 하기 위한 clip
 		 * 
 		 */		
-		public function Menu($clip:MovieClip){
+		public function MenuBase($clip:MovieClip){
 			_clip = $clip as MovieClip;
 			_clip.gotoAndStop(1);
 			addChild(_clip);
@@ -105,7 +105,7 @@
 		 */
 		public function setOn():void
 		{
-			_frame.setPf(_clip);
+
 		}
 		
 		/**
@@ -113,7 +113,7 @@
 		 */		
 		public function setOff():void
 		{
-			_frame.setBf(_clip);
+
 		}
 		
 		/**
@@ -138,6 +138,14 @@
 		public function getBackgoundMovieClip():MovieClip
 		{
 			return _bg;
+		}
+		
+		/**
+		 * @return	::: 그래픽요소 반환 
+		 */		
+		public function getClip():MovieClip
+		{
+			return _clip;
 		}
 	}
 	
