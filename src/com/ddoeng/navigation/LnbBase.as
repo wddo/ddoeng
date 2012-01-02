@@ -17,6 +17,11 @@ package com.ddoeng.navigation
 	/**
 	 *
 	 * LNB 기본 베이스가 되는 클래스입니다.
+	 *  - 좌측 내비게이션에 대한 기본 뼈대이며 상속받아 사용하면 된다.
+	 *  - 외부에서 addChild 대신 addInit, addSubInit를 해주면 자동적으로 메뉴에 대한 기본 속성이 적용이 된다.
+	 * 	- 메뉴의 간격은 텍스트필드의 사이즈와 오프셋값에 의해 결정된다.
+	 *  - 예를들어 _menuOffsetY = 10 이면 메인메뉴 상하 각각 5px 벌려진다.
+	 * 	- 외부에서 메뉴이벤트에서 super.onMenu(e)로 호출해주고 다른 효과는 추가 정의해주면 된다.
 	 * 
 	 * @author : Jo Yun Ki (naver ID - ddoeng)
 	 * @version : 1.0
@@ -61,12 +66,6 @@ package com.ddoeng.navigation
 		protected var _subGroupTopMargin:int = 0;					//서브메뉴 묶음과 메뉴의 상단거리
 		protected var _subGroupBottomMargin:int = 0;				//서브메뉴 묶음과 메뉴의 하단거리
 		
-		/**
-		 * 좌측 내비게이션에 대한 기본 뼈대이며 상속받아 사용하면 된다.
-		 * 외부에서 addChild 대신 addInit, addSubInit를 해주면 자동적으로 메뉴에 대한 기본 속성이 적용이 된다.
-		 * 메뉴의 간격은 텍스트필드의 사이즈와 오프셋값에 의해 결정된다.
-		 * 외부에서 메뉴이벤트에서 super.onMenu(e)로 호출해주고 다른 효과는 추가 정의해주면 된다.
-		 */		
 		public function LnbBase()
 		{
 			super();
@@ -107,7 +106,7 @@ package com.ddoeng.navigation
 				if(e.type == MouseEvent.MOUSE_OVER || e.type == FocusEvent.FOCUS_IN){
 					
 					if(!isNaN(_subActive)){ //2뎁스 페이지기억값이 있으면
-						_subMenuArr[_active][_subActive].off() //페이지기억으로 활성화되있는것 오프
+						_subMenuArr[_active][_subActive].setOff() //페이지기억으로 활성화되있는것 오프
 					}
 					
 					_time = 1;
@@ -141,7 +140,7 @@ package com.ddoeng.navigation
 				if(e.type == MouseEvent.MOUSE_OVER || e.type == FocusEvent.FOCUS_IN){
 					
 					if(mc.id != _subActive && !isNaN(_subActive)){ //이미 온 되있는것은 적용안됨
-						_subMenuArr[_active][_subActive].off() //페이지기억으로 활성화되있는것 오프
+						_subMenuArr[_active][_subActive].setOff() //페이지기억으로 활성화되있는것 오프
 					}
 					
 					_timeGo = false;
@@ -250,44 +249,49 @@ package com.ddoeng.navigation
 			var subGroupHeight:int = (!isNaN(_over))?_subGroupArr[_over].height:0; //서브모음 높이.. 페이지기억 없으면 0
 			var offset:int = 0;
 			
+			var mainMenu:MainMenu;
+			var subMenuGroup:Sprite;
+			var subMenuMask:Sprite;
+			var mainMenuNext:MainMenu;
+			
 			//메인메뉴에 대한 움직임
 			for(var i:int = 0; i < _menuTotalNum; i++){
+				mainMenu = _menuArr[i];
+				subMenuGroup = _subGroupArr[i];
+				subMenuMask = _subMaskArr[i];
+				mainMenuNext = _menuArr[i+1];
+				
 				if(i > _over){ //활성화된 메뉴 아래쪽 메뉴들에 대한
 					if(subGroupHeight > 0){ //서브메뉴가 한개라도 있으면
-						offset = _menuArr[i].defaultY + subGroupHeight + _subGroupTopMargin + _subGroupBottomMargin;
+						offset = mainMenu.defaultY + subGroupHeight + _subGroupTopMargin + _subGroupBottomMargin;
 					}else{
-						offset = _menuArr[i].defaultY;
+						offset = mainMenu.defaultY;
 					}
 				}else{ //활성화와 그의 위쪽 메뉴들에 대한
-					offset = _menuArr[i].defaultY;
+					offset = mainMenu.defaultY;
 				}
 				
-				//변하는 객체들의 모션
-				_menuArr[i].y += (offset - _menuArr[i].y) * 0.2;
-			}
-			
-			//서브그룹에 대한 움직임
-			for(i = 0; i < _menuTotalNum; i++){
-				//해당 메인메뉴 아래 붙인다.
-				_subGroupArr[i].y = _menuArr[i].y + _menuArr[i].getTextMovieClip().height + _subGroupTopMargin;
-			}
-			
-			//마스크에 대한 움직임
-			for(i = 0; i < _menuTotalNum; i++){
-				_subMaskArr[i].y = _subGroupArr[i].y - _subGroupTopMargin; //마스크y 값은 항상 서브그룹y 값을 따라다닌다.
+				//메인메뉴에 대한 움직임
+				mainMenu.y += (offset - mainMenu.y) * 0.2;
 				
-				if(_menuArr[i+1] != undefined){ //아래메뉴와의 거리를 계산하기위해 +1 인 메뉴(아래메뉴)를 찾았을때
-					_subMaskArr[i].height = Math.abs(_menuArr[i].y - _menuArr[i+1].y) - _menuArr[i].getTextField().height;
+				//서브그룹에 대한 움직임
+				subMenuGroup.y = Math.floor(mainMenu.y) + mainMenu.getBackgoundMovieClip().height + _subGroupTopMargin;
+				
+				//마스크에 대한 움직임
+				subMenuMask.y = subMenuGroup.y - _subGroupTopMargin; //마스크y 값은 항상 서브그룹y 값을 따라다닌다.
+				
+				if(mainMenuNext != null){ //아래메뉴와의 거리를 계산하기위해 +1 인 메뉴(아래메뉴)를 찾았을때
+					subMenuMask.height = Math.abs(mainMenu.y - mainMenuNext.y) - mainMenu.getBackgoundMovieClip().height;
 				}else{ //찾지 못했을때(가장 아래 메뉴에 해당되겟다)
 					if(_over == i){ //가장 아래메뉴는 타깃 값이 없기때문에 직접 계산한다.
 						//열림
-						_subMaskArr[i].height += (_subGroupArr[i].height - _subMaskArr[i].height + _subGroupBottomMargin) * 0.2;
+						subMenuMask.height += ((subMenuGroup.height + _subGroupTopMargin + _subGroupBottomMargin) - subMenuMask.height) * 0.2;
 					}else{
 						//닫힘
-						_subMaskArr[i].height += (0 - _subMaskArr[i].height) * 0.2;
+						subMenuMask.height += (0 - subMenuMask.height) * 0.2;
 					}
 				}
-			}
+			}//end for
 		}
 		
 		/**

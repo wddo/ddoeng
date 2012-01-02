@@ -8,7 +8,7 @@ package com.ddoeng.navigation
 	
 	/**
 	 *
-	 * 메인메뉴
+	 * 메인메뉴 커스터 마이징 클래스
 	 *
 	 * @author : Jo Yun Ki (naver ID - ddoeng)
 	 * @version : 1.0

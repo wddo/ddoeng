@@ -19,6 +19,11 @@ package com.ddoeng.navigation
 	/**
 	 *
 	 * GNB 기본 베이스가 되는 클래스입니다.
+	 *  - 상단 내비게이션에 대한 기본 뼈대이며 상속받아 사용하면 된다.
+	 *  - 외부에서 addChild 대신 addInit, addSubInit를 해주면 자동적으로 메뉴에 대한 기본 속성이 적용이 된다.
+	 * 	- 메뉴의 간격은 텍스트필드의 사이즈와 오프셋값에 의해 결정된다.
+	 *  - 예를들어 _menuOffsetX = 10 이면 메인메뉴 좌우 각각 5px 벌려진다.
+	 * 	- 외부에서 메뉴이벤트에서 super.onMenu(e)로 호출해주고 다른 효과는 추가 정의해주면 된다.
 	 * 
 	 * @author : Jo Yun Ki (naver ID - ddoeng)
 	 * @version : 1.0
@@ -58,13 +63,7 @@ package com.ddoeng.navigation
 		protected var _subMenuYPos:int = 0;							//서브메뉴 초기Y위치
 		protected var _subMenuOffsetX:int = 0;						//서브메뉴 간 좌우 간격
 		protected var _subMenuOffsetY:int = 0;						//서브메뉴 간 상하 간격
-		
-		/**
-		 * 상단 내비게이션에 대한 기본 뼈대이며 상속받아 사용하면 된다.
-		 * 외부에서 addChild 대신 addInit, addSubInit를 해주면 자동적으로 메뉴에 대한 기본 속성이 적용이 된다.
-		 * 메뉴의 간격은 텍스트필드의 사이즈와 오프셋값에 의해 결정된다.
-		 * 외부에서 메뉴이벤트에서 super.onMenu(e)로 호출해주고 다른 효과는 추가 정의해주면 된다.
-		 */		
+	
 		public function GnbBase()
 		{
 			super();

@@ -6,13 +6,17 @@
 	import com.ddoeng.utils.Frame;
 	
 	import flash.display.MovieClip;
+	import flash.display.Shape;
 	import flash.events.Event;
 	import flash.text.TextField;
 	import flash.text.TextFormat;
 	
 	/**
 	 *
-	 * 메뉴 아이템 베이스
+	 * GNB & LNB 에 사용되는 메뉴의 베이스 클래스
+	 *  - 기본 인스턴트명은 "bg", "txt" 이다.
+	 *  - clip에 "txt" 무비클립이 위치가 어디에 있던지 0,0 으로 셋팅 됩니다.
+	 * 	- bg영역을 고정시키고 싶으면 clip에 투명한 sp 무비클립을 넣어 놓으면 됩니다.
 	 * 
 	 * @author : Jo Yun Ki (naver ID - ddoeng)
 	 * @version : 1.0
@@ -34,21 +38,27 @@
 		private var _frame:Frame = new Frame();			//프레임 클래스
 		
 		/**
-		 * 
 		 * @param $clip		::: 버튼화 하기 위한 clip
-		 * 
 		 */		
 		public function MenuBase($clip:MovieClip){
 			_clip = $clip as MovieClip;
-			_clip.gotoAndStop(1);
 			addChild(_clip);
-						
-			_txt = _clip.getChildByName("txt") as MovieClip;
+			
+			//bg가 없을때 사용할 rect
+			var rect:MovieClip = new MovieClip();
+			rect.graphics.beginFill(0x00FFFF);
+			rect.graphics.drawRect(0, 0, 10, 10);
+			rect.graphics.endFill();
+			
+			_txt = (_clip.getChildByName("txt") == null)?new MovieClip():_clip.getChildByName("txt") as MovieClip;	
 			_txt.x = _offsetX;
 			_txt.y = _offsetY;
+						
+			_bg = (_clip.getChildByName("bg") == null)?rect:_clip.getChildByName("bg") as MovieClip;
+			_bg.alpha = 0;
 			
-			_bg = _clip.getChildByName("bg") as MovieClip;
-			_bg.alpha = 0.4;
+			if(_clip.getChildByName("bg") == null)_clip.addChild(_bg);
+			if(_clip.getChildByName("txt") == null)_clip.addChild(_txt);
 			
 			Common.setTargetClear(_txt);
 			
@@ -64,7 +74,7 @@
 		{
 			_fid = $fid;
 			_txt.addChild($fid);
-			_fid.border = true;
+			
 			_offsetX = $offsetX;
 			_offsetY = $offsetY;
 			
