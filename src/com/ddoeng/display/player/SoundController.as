@@ -9,29 +9,14 @@ package com.ddoeng.display.player
 	import flash.media.SoundTransform;
 	import flash.net.NetStream;
 	
-	
 	/**
 	 *
+	 * 사운드 컨트롤 클래스
+	 * 
 	 * @author : Jo Yun Ki (naver ID - ddoeng)
 	 * @version : 1.0
-	 * @since : Mar 3, 2011
+	 * @since : Mar 3, 2011	
 	 * 
-	 * 1. 클래스 설명
-	 *		사운드 컨트롤 클래스
-	 * 2. 메소드
-	 * - 리스너
-	 * 		barDown()				::: 바 클릭
-	 * 		stageUp()				::: 사운드 release outside 와 release대체
-	 * 		muteDown()				::: 음소거 온오프
-	 * 		loop()
-	 * - 내부메소드
-	 * 		init()					::: 초기화
-	 * - 외부메소드
-	 * 		SoundController()		::: 사운트 컨트롤러 초기화 
-	 * 		dispose()				::: 파괴
-	 * 		setget netStream()		::: 넷스트림 전달
-	 * - 확장메소드
-	 *		
 	 */
 	
 	public class SoundController extends Sprite
@@ -171,7 +156,7 @@ package com.ddoeng.display.player
 			}
 		}
 		
-		public function set stream(value:NetStream):void
+		public function setStream(value:NetStream):void
 		{
 			_netSteam = value;
 		}

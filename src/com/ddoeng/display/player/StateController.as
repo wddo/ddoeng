@@ -14,39 +14,18 @@ package com.ddoeng.display.player
 	import flash.net.NetStream;
 	import flash.utils.Timer;
 	
+	[Event (name="statePlaying", type="com.ddoeng.events.player.StateControllerEvent")]
 	
 	/**
-	 *
+	 * 
+	 * 상태표시 컨트롤 클래스
+	 * 
 	 * @author : Jo Yun Ki (naver ID - ddoeng)
 	 * @version : 1.0
-	 * @since : Mar 3, 2011
+	 * @since : Mar 3, 2011	
 	 * 
-	 * 1. 클래스 설명
-	 *		상태표시 컨트롤 클래스
-	 * 2. 메소드
-	 * - 리스너
-	 * 		playDown()				::: 재생&일시정지 버튼
-	 * 		stopDown()				::: 정지버튼
-	 * 		hitbarDown()			::: 진행바 클릭
-	 * 		barDown()				::: 바 클릭
-	 * 		stageUp()				::: release outside 와 release대체
-	 * 		stageMove()				::: 바 클릭후 이동시
-	 * 		timer()					::: FLV 파일이 재생될 때 플레이어 제어하기
-	 * - 내부메소드
-	 * 		init()					::: 초기화
-	 * 		addZero()				::: 한자리 숫자에 앞에 0 붙이기
-	 * - 외부메소드
-	 * 		StateController()		:::	상태표시 컨트롤러 초기화 
-	 * 		dispose()				::: 파괴
-	 * 		play()					::: FLV 파일 재생
-	 * 		pause()					::: FLV 파일 일시정지
-	 * 		stop()					::: FLV 파일 정지
-	 * 		setget meta()			::: 메타데이터 전달
-	 * 		setget netSteam()		::: 넷스트림 전달
-	 * - 확장메소드
-	 *		
 	 */
-	[Event (name="statePlaying", type="com.ddoeng.events.player.StateControllerEvent")]
+	
 	public class StateController extends Sprite
 	{
 		private var _clip:Sprite;					//그래픽요소
@@ -292,23 +271,19 @@ package com.ddoeng.display.player
 			}
 		}
 		
-		public function set meta(value:Object):void
+		public function setMeta(value:Object):void
 		{
 			_meta = value;
 		}
 		
-		public function set stream(value:NetStream):void
+		public function setStream(value:NetStream):void
 		{
 			_stream = value;
 		}
 
-		public function get fpsTimer():Timer
+		public function getFpsTimer():Timer
 		{
 			return _fpsTimer;
 		}
-
-		////////////////////////////////////////////////////////////////////////////////////////////////////
-		//확장메소드//////////////////////////////////////////////////////////////////////////////////////////
-		////////////////////////////////////////////////////////////////////////////////////////////////////
 	}
 }

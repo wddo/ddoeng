@@ -16,30 +16,18 @@ package com.ddoeng.display
 	import flash.net.NetStream;
 	import flash.utils.Timer;
 	
+	[Event (name="onNetStatus", type="com.ddoeng.events.FLVPlayerEvent")]
 	
 	/**
-	 *
+	 * 
+	 * FLV플레이어 클래스
+	 * 
 	 * @author : Jo Yun Ki (naver ID - ddoeng)
 	 * @version : 1.0
 	 * @since : Mar 1, 2011
-	 * 
-	 * 1. 클래스 설명
-	 *		FLV플레이어 클래스
-	 * 2. 메소드
-	 * - 리스너
-	 * 		onMetaDataHandler()		::: 메타데이터 정보
-	 * 		onNetStatus()			::: NetStream 상태
-	 * - 내부메소드
-	 * 		init()					::: 초기화
-	 * - 외부메소드
-	 * 		load()					::: 비디오 로드
-	 * 		dispose()				::: 파괴
-	 * 		set 	stateControl()	::: 상태표시 컨트롤 적용
-	 * 		set 	soundControl()	::: 사운드 컨트롤 적용
-	 * - 확장메소드
-	 *		
+	 * 	
 	 */
-	[Event (name="onNetStatus", type="com.ddoeng.events.FLVPlayerEvent")]
+	
 	public class FLVPlayer extends Sprite
 	{
 		private var _connection:NetConnection;			//커넥션
@@ -87,7 +75,7 @@ package com.ddoeng.display
 				case "NetConnection.Connect.Success":							//연결이 완료되면 자동으로 재생 (최초재생시에만)
 					connectStream();											//연결이 완료되면 stream 생성 초기화
 					_stream.play(_videoURL); 									//재생
-					if(_stateControl != null)_stateControl.fpsTimer.start();	//enterframe 대신 사용하는 timer 실행
+					if(_stateControl != null)_stateControl.getFpsTimer().start();	//enterframe 대신 사용하는 timer 실행
 					break;
 				case "NetStream.Play.StreamNotFound":
 					trace("Stream not found: " + _videoURL);
@@ -107,14 +95,14 @@ package com.ddoeng.display
 			
 			_video.attachNetStream(_stream); // 비디오보이기와 파일제어연결 객체 연결
 			
-			if(_stateControl != null)_stateControl.stream = _stream;
-			if(_soundControl != null)_soundControl.stream = _stream;
+			if(_stateControl != null)_stateControl.setStream(_stream);
+			if(_soundControl != null)_soundControl.setStream(_stream);
 		}
 		
 		private function onMetaDataHandler(info:Object):void
 		{
 			trace("metadata: duration=" + info.duration + " width=" + info.width + " height=" + info.height + " framerate=" + info.framerate);
-			if(_stateControl != null)_stateControl.meta = info;
+			if(_stateControl != null)_stateControl.setMeta(info);
 			_meta = info;
 		}
 		
@@ -155,12 +143,12 @@ package com.ddoeng.display
 			}
 		}
 
-		public function get stream():NetStream
+		public function getStream():NetStream
 		{
 			return _stream;
 		}
 
-		public function get meta():Object
+		public function getMeta():Object
 		{
 			return _meta;
 		}
