@@ -1,7 +1,5 @@
 package com.ddoeng.net
 {
-	import com.ddoeng.events.IMGLoaderEvent;
-	import com.ddoeng.events.IMGLoaderProgressEvent;
 	import com.ddoeng.utils.Calculation;
 	import com.ddoeng.utils.Common;
 	
@@ -16,9 +14,11 @@ package com.ddoeng.net
 	import flash.net.URLRequest;
 	import flash.system.ApplicationDomain;
 	import flash.system.LoaderContext;
+	import com.ddoeng.events.net.IMGLoaderEvent;
+	import com.ddoeng.events.net.IMGLoaderProgressEvent;
 	
-	[Event (name="imageloadProgress", type="com.ddoeng.events.IMGLoaderProgressEvent")]
-	[Event (name="imageloadComplete", type="com.ddoeng.events.IMGLoaderEvent")]
+	[Event (name="imageloadProgress", type="com.ddoeng.events.net.IMGLoaderProgressEvent")]
+	[Event (name="imageloadComplete", type="com.ddoeng.events.net.IMGLoaderEvent")]
 
 	/**
 	 *

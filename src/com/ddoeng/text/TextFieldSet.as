@@ -1,6 +1,6 @@
 package com.ddoeng.text
 {
-	import com.ddoeng.events.FONTLoaderEvent;
+	import com.ddoeng.events.net.FONTLoaderEvent;
 	import com.ddoeng.net.FONTLoader;
 	import com.ddoeng.utils.TextUtil;
 	
@@ -23,6 +23,7 @@ package com.ddoeng.text
 		private var _textUtil:TextUtil = new TextUtil();	//문자열 변경
 		private var _fontName:String = "";				//폰트이름
 		private var _embed:Boolean;
+		private var _fontloader:FONTLoader;
 		
 		/**
 		 * 텍스트 필드 셋
@@ -63,7 +64,8 @@ package com.ddoeng.text
 		 */
 		public function setRuntimeEmbed($fontloader:FONTLoader):void
 		{
-			if(!isFontLoad())$fontloader.addEventListener(FONTLoaderEvent.FONTLOAD_COMPLETE, onEmbed);
+			_fontloader = $fontloader;
+			if(!isFontLoad())_fontloader.addEventListener(FONTLoaderEvent.FONTLOAD_COMPLETE, onEmbed);
 		}
 		
 		/**
@@ -81,6 +83,22 @@ package com.ddoeng.text
 		public function isFontLoad():Boolean
 		{
 			return ApplicationDomain.currentDomain.hasDefinition(_fontName);
+		}
+		
+		/**
+		 * 폰트셋의 이엠베드 유무
+		 */		
+		public function isEmbed():Boolean
+		{
+			return _embed;
+		}
+		
+		/**
+		 * 폰트로더 반환
+		 */		
+		public function getFontLoader():FONTLoader
+		{
+			return _fontloader;
 		}
 	}
 }

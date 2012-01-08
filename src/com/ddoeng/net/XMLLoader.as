@@ -1,7 +1,5 @@
 package com.ddoeng.net
 {
-	import com.ddoeng.events.XMLLoaderEvent;
-	import com.ddoeng.events.XMLLoaderProgressEvent;
 	
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
@@ -9,8 +7,10 @@ package com.ddoeng.net
 	import flash.events.ProgressEvent;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
+	import com.ddoeng.events.net.XMLLoaderEvent;
+	import com.ddoeng.events.net.XMLLoaderProgressEvent;
 	
-	[Event (name="loadxmlComplete", type="com.ddoeng.events.XMLLoaderEvent")]
+	[Event (name="loadxmlComplete", type="com.ddoeng.events.net.XMLLoaderEvent")]
 	
 	/**
 	 *

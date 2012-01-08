@@ -1,9 +1,9 @@
-package com.ddoeng.events
+package com.ddoeng.events.net
 {
-	import com.ddoeng.net.DynamicLoader;
 	
 	import flash.display.DisplayObjectContainer;
 	import flash.events.Event;
+	import com.ddoeng.net.DynamicLoader;
 
 	public class IMGLoaderEvent extends Event
 	{

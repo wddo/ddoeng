@@ -1,6 +1,6 @@
 package com.ddoeng.display
 {
-	import com.ddoeng.events.SWFLoaderEvent;
+	import com.ddoeng.events.net.SWFLoaderEvent;
 	import com.ddoeng.net.SWFLoader;
 	import com.ddoeng.utils.Calculation;
 	import com.ddoeng.utils.Common;

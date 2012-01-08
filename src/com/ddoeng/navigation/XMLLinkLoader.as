@@ -1,6 +1,6 @@
 package com.ddoeng.navigation
 {	
-	import com.ddoeng.events.XMLLoaderEvent;
+	import com.ddoeng.events.net.XMLLoaderEvent;
 	
 	import flash.display.Sprite;
 	import flash.events.Event;
@@ -10,7 +10,7 @@ package com.ddoeng.navigation
 	import flash.net.URLLoaderDataFormat;
 	import flash.net.URLRequest;
 		
-	[Event ( name="loadxmlComplete", type="com.ddoeng.events.XMLLoaderEvent")]
+	[Event ( name="loadxmlComplete", type="com.ddoeng.events.net.XMLLoaderEvent")]
 	
 	/**
 	 *

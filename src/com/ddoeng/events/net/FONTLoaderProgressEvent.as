@@ -1,4 +1,4 @@
-package com.ddoeng.events
+package com.ddoeng.events.net
 {
 	import flash.events.ProgressEvent;
 

@@ -1,6 +1,6 @@
 ﻿package com.ddoeng.navigation
 {	
-	import com.ddoeng.events.FONTLoaderEvent;
+	import com.ddoeng.events.net.FONTLoaderEvent;
 	import com.ddoeng.text.TextFieldSet;
 	import com.ddoeng.utils.Common;
 	import com.ddoeng.utils.Frame;

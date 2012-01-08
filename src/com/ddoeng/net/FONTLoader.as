@@ -1,7 +1,5 @@
 package com.ddoeng.net
 {
-	import com.ddoeng.events.FONTLoaderEvent;
-	import com.ddoeng.events.FONTLoaderProgressEvent;
 	
 	import flash.display.Loader;
 	import flash.events.Event;
@@ -12,9 +10,11 @@ package com.ddoeng.net
 	import flash.system.ApplicationDomain;
 	import flash.system.LoaderContext;
 	import flash.text.Font;
+	import com.ddoeng.events.net.FONTLoaderEvent;
+	import com.ddoeng.events.net.FONTLoaderProgressEvent;
 			
-	[Event (name="fontloadProgress", type="com.ddoeng.events.FONTLoaderProgressEvent")]
-	[Event (name="fontloadComplete", type="com.ddoeng.events.FONTLoaderEvent")]
+	[Event (name="fontloadProgress", type="com.ddoeng.events.net.FONTLoaderProgressEvent")]
+	[Event (name="fontloadComplete", type="com.ddoeng.events.net.FONTLoaderEvent")]
 	
 	/**
 	 * 

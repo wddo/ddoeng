@@ -1,7 +1,5 @@
 package com.ddoeng.net
 {
-	import com.ddoeng.events.SWFLoaderEvent;
-	import com.ddoeng.events.SWFLoaderProgressEvent;
 	import com.ddoeng.utils.Common;
 	
 	import flash.display.DisplayObjectContainer;
@@ -13,9 +11,11 @@ package com.ddoeng.net
 	import flash.net.URLRequest;
 	import flash.system.ApplicationDomain;
 	import flash.system.LoaderContext;
+	import com.ddoeng.events.net.SWFLoaderEvent;
+	import com.ddoeng.events.net.SWFLoaderProgressEvent;
 	
-	[Event (name="loadswfProgress", type="com.ddoeng.events.SWFLoaderProgressEvent")]
-	[Event (name="loadswfComplete", type="com.ddoeng.events.SWFLoaderEvent")]
+	[Event (name="loadswfProgress", type="com.ddoeng.events.net.SWFLoaderProgressEvent")]
+	[Event (name="loadswfComplete", type="com.ddoeng.events.net.SWFLoaderEvent")]
 	
 	/**
 	 *
