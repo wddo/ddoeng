@@ -93,7 +93,7 @@ package com.ddoeng.navigation
 						if(txt.currentFrame > 1)txt.gotoAndStop(i+1);
 					}else{
 						Common.setTargetClear(txt);
-						
+
 						var fid:TextFieldSet = new TextFieldSet(_txtfid.getTextFormat(), _txtfid.isEmbed(), _txtArr[i], _txtfid.scaleX, _txtfid.autoSize, _txtfid.selectable);
 						if(_txtfid.isEmbed())fid.setRuntimeEmbed(_txtfid.getFontLoader());
 						txt.addChild(fid);
