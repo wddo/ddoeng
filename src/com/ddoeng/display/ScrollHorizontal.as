@@ -356,7 +356,7 @@ package com.ddoeng.display
 		 */		
 		public function add($dis:DisplayObject):void
 		{
-			Common.setTargetClear(contentSource);
+			Common.targetClear(contentSource);
 			contentSource.addChild($dis);
 			content.addChild(contentSource);
 			onComplete(null);

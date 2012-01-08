@@ -11,22 +11,11 @@ package com.ddoeng.display
 	
 	/**
 	 *
+	 * 많은 그래픽요소를 스크린샷한듯 찍어 비트맵으로 변환하고 다시 그래픽요소들로 만들수 있는 클래스 
+	 * 
 	 * @author : Jo Yun Ki (naver ID - ddoeng)
 	 * @version : 1.0
 	 * @since : Nov 17, 2010
-	 * 
-	 * 1. 클래스 설명
-	 *		많은 그래픽요소를 스크린샷한듯 찍어 비트맵으로 변환하고 다시 그래픽요소들로 만들수 있는 클래스 
-	 * 2. 메소드
-	 * - 리스너
-	 * 
-	 * - 내부메소드
-	 * 		visibleOff()	:::	소스의 모든 요소들 숨김
-	 * 		visibleOn()		::: 소스의 모든 요소들 보임
-	 * - 외부메소드
-	 * 		draw()			:::	그래픽요소를 비트맵으로
-	 * 		clear()			:::	 비트맵을 다시 그래픽요소로
-	 * - 확장메소드
 	 *		
 	 */
 
@@ -40,10 +29,6 @@ package com.ddoeng.display
 		{
 			
 		}
-		
-		////////////////////////////////////////////////////////////////////////////////////////////////////
-		//내부메소드//////////////////////////////////////////////////////////////////////////////////////////
-		////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		private function visibleOff():void
 		{
@@ -63,10 +48,6 @@ package com.ddoeng.display
 			}
 		}
 		
-		////////////////////////////////////////////////////////////////////////////////////////////////////
-		//외부메소드//////////////////////////////////////////////////////////////////////////////////////////
-		////////////////////////////////////////////////////////////////////////////////////////////////////
-		
 		/**
 		 * 그래픽요소를 비트맵으로
 		 * @param $source	::: 복사할 DisplayObjectContainer
@@ -74,7 +55,7 @@ package com.ddoeng.display
 		 * @param $smooth	::: 스무스
 		 * @return 			::: 생성된 비트맵
 		 */	
-		public function draw($source:DisplayObjectContainer, $smooth:Boolean = true, $transparent:Boolean = true):Bitmap
+		public function setDraw($source:DisplayObjectContainer, $smooth:Boolean = true, $transparent:Boolean = true):Bitmap
 		{
 			_source = $source;
 			
@@ -124,7 +105,7 @@ package com.ddoeng.display
 		 * 비트맵을 다시 그래픽요소로
 		 * @param $source	::: 변환할 DisplayObjectContainer
 		 */		
-		public function clear($source:DisplayObjectContainer):void
+		public function setClear($source:DisplayObjectContainer):void
 		{
 			_source = $source;
 			

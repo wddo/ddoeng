@@ -24,7 +24,7 @@ package com.ddoeng.utils
 		 * @return 			::: 스테이지
 		 * 
 		 */		
-		public static function getStageSearch($scope:Object):Stage
+		public static function stageSearch($scope:Object):Stage
 		{
 			var obj:Object = $scope;
 			
@@ -52,7 +52,7 @@ package com.ddoeng.utils
 		 * @param $domain		::: 도메인
 		 * @return 				::: 대응하는 경로
 		 */		
-		public static function setFilePath($localPath:String, $serverPath:String):String
+		public static function filePath($localPath:String, $serverPath:String):String
 		{
 			var filePath:String;
 			

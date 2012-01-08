@@ -104,7 +104,7 @@ package com.ddoeng.net
 			
 			//타겟 모두비움
 			if(_clear){
-				Common.setTargetClear(_target[id]);		
+				Common.targetClear(_target[id]);		
 			}
 			
 			//로더add

@@ -25,7 +25,7 @@ package com.ddoeng.utils
 		 * 타겟 비우기 
 		 * @param $source	::: 비울 타겟
 		 */		
-		public static function setTargetClear($source:DisplayObjectContainer):void
+		public static function targetClear($source:DisplayObjectContainer):void
 		{
 			try{
 				while(true){
@@ -46,7 +46,7 @@ package com.ddoeng.utils
 		 * @param $func		::: 이벤트에 따른 함수
 		 * 
 		 */		
-		public static function setListeners($objects:Array, $type:String, $func:Function):void {
+		public static function listeners($objects:Array, $type:String, $func:Function):void {
 			var i:int = $objects.length;
 			while (i--) {
 				$objects[i].addEventListener($type, $func);

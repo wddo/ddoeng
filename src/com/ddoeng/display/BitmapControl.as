@@ -14,24 +14,12 @@
 
 	/**
 	 *
+	 * 비트맵을 컨트롤하는 클래스
+	 * 
 	 * @author : Jo Yun Ki (naver ID - ddoeng)
 	 * @version : 1.0
 	 * @since : Nov 17, 2010
 	 * 
-	 * 1. 클래스 설명
-	 *		비트맵을 컨트롤하는 클래스
-	 * 2. 메소드
-	 * - 리스너
-	 * 		onEnter()		::: 엔터프레임 리스너
-	 * - 내부메소드
-	 * 
-	 * - 외부메소드
-	 * 		slide()			:::	이미지를 좌우로 속도에 맞혀 무한 슬라이드 합니다. 1, -1, 2, -2..
-	 * 		reSize()		::: 비트맵 이미지를 리사이징 한다.
-	 * 		bitmapPop()		::: 무비클립을 비트맵하여 반환
-	 * 		bitmapPush()	::: 움직이는 화면을 비우고 정지샷으로 저장
-	 * - 확장메소드
-	 *		
 	 */
 
 	public class BitmapControl
@@ -45,12 +33,7 @@
 		
 		public function BitmapControl()
 		{
-		
 		}
-		
-		////////////////////////////////////////////////////////////////////////////////////////////////////
-		//리스너/////////////////////////////////////////////////////////////////////////////////////////////
-		////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		private function onEnter(e:Event):void
 		{
@@ -71,10 +54,6 @@
 			_sw = !_sw;
 		}
 		
-		////////////////////////////////////////////////////////////////////////////////////////////////////
-		//외부메소드//////////////////////////////////////////////////////////////////////////////////////////
-		////////////////////////////////////////////////////////////////////////////////////////////////////
-		
 		/**
 		 * 이미지를 좌우로 속도에 맞혀 무한 슬라이드 합니다. 1, -1, 2, -2..
 		 * @param $source 		::: 슬라이드할 소스
@@ -82,7 +61,7 @@
 		 * @param $smooth		::: 부드럽게
 		 * @param $transparent	::: 투명도
 		 */
-		public function slide($source:DisplayObjectContainer, $speed:int, $smooth:Boolean = true, $transparent:Boolean = true):void
+		public function setSlide($source:DisplayObjectContainer, $speed:int, $smooth:Boolean = true, $transparent:Boolean = true):void
 		{
 			var source:DisplayObjectContainer = $source;
 			_speed = $speed;
@@ -92,7 +71,7 @@
 
 			_bitmapDataCopy = _bitmapData.clone();
 			
-			Common.setTargetClear(source);
+			Common.targetClear(source);
 			
 			_bitmap = new Bitmap(_bitmapData);
 			_bitmap.smoothing = $smooth;
@@ -131,7 +110,7 @@
 		 * @param $transparent	::: 투명도
 		 * @return 				:::	비트맵 반환
 		 */		
-		public static function bitmapPop($source:DisplayObjectContainer, $smooth:Boolean = true, $transparent:Boolean = true):Bitmap
+		public static function BitmapPop($source:DisplayObjectContainer, $smooth:Boolean = true, $transparent:Boolean = true):Bitmap
 		{
 			var source:DisplayObjectContainer = $source;
 			
@@ -150,11 +129,11 @@
 		 * @param $smooth 		::: 부드럽게
 		 * @param $transparent	::: 투명도
 		 */		
-		public static function bitmapPush($source:DisplayObjectContainer, $smooth:Boolean = true, $transparent:Boolean = true):void
+		public static function BitmapPush($source:DisplayObjectContainer, $smooth:Boolean = true, $transparent:Boolean = true):void
 		{
 			var source:DisplayObjectContainer = $source;
-			var bitmap:Bitmap = bitmapPop(source, $smooth, $transparent);
-			Common.setTargetClear(source);
+			var bitmap:Bitmap = BitmapPop(source, $smooth, $transparent);
+			Common.targetClear(source);
 			source.addChild(bitmap);
 		}
 	}

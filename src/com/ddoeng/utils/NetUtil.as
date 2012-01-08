@@ -66,7 +66,7 @@ package com.ddoeng.utils
 		 * 경고창 호출 
 		 * @param $str	:::	경고메세지
 		 */		
-		public static function setAlert($str:String):void {
+		public static function alert($str:String):void {
 			if(SystemUtil.isBrowser()) ExternalInterface.call( "alert", $str );
 			else trace($str);
 		}
@@ -87,7 +87,7 @@ package com.ddoeng.utils
 		 * @param $isNeed	::: 반드시 실행
 		 * @return 			::: 변경된 경로
 		 */		
-		public static function setCache($value:String, $isNeed:Boolean = false):String
+		public static function cache($value:String, $isNeed:Boolean = false):String
 		{
 			var result:String = "";
 			
@@ -113,7 +113,7 @@ package com.ddoeng.utils
 		 * @param $stage	::: 스테이지
 		 * @return 			::: 값을 포함하고 있는 오브젝트
 		 */		
-		public static function getParameters($stage:Object):Object
+		public static function parameters($stage:Object):Object
 		{
 			var keyStr:String;
 			var valueStr:String;
@@ -135,7 +135,7 @@ package com.ddoeng.utils
 		 * @param $str	::: 트레킹 url
 		 * 
 		 */
-		public static function setTracking($str:String):void
+		public static function tracking($str:String):void
 		{
 			if(SystemUtil.isWeb()){
 				var loader:URLLoader = new URLLoader();

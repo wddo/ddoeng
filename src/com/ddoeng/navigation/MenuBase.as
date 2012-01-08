@@ -60,7 +60,7 @@
 			if(_clip.getChildByName("bg") == null)_clip.addChild(_bg);
 			if(_clip.getChildByName("txt") == null)_clip.addChild(_txt);
 			
-			Common.setTargetClear(_txt);
+			Common.targetClear(_txt);
 			
 			this.buttonMode = true;
 			this.mouseChildren = false;

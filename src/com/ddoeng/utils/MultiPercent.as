@@ -17,7 +17,7 @@ package com.ddoeng.utils
 		
 		public function MultiPercent($totalcount:int)
 		{	
-			this._totalCount = $totalcount;
+			_totalCount = $totalcount;
 		}
 		
 		/**
