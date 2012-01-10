@@ -52,5 +52,17 @@ package com.ddoeng.utils
 				$objects[i].addEventListener($type, $func);
 			}
 		}
+		
+		/**
+		 * 값이 비어있느냐
+		 * @param $value	::: 값이 비어있는지 체크할 변수
+		 */		
+		public static function isEmpty($value:*):Boolean
+		{
+			var value:String = String($value);
+	
+			//null(객체), NaN(Number), *(undefined), ""
+			return (value != "null" && value != "NaN" && value != "undefined" && value != "")?false:true;
+		}
 	}
 }
