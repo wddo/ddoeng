@@ -113,7 +113,7 @@ package com.ddoeng.utils
 		 * @param $stage	::: 스테이지
 		 * @return 			::: 값을 포함하고 있는 오브젝트
 		 */		
-		public static function parameters($stage:Object):Object
+		public static function getParameters($stage:Object):Object
 		{
 			var keyStr:String;
 			var valueStr:String;
@@ -135,7 +135,7 @@ package com.ddoeng.utils
 		 * @param $str	::: 트레킹 url
 		 * 
 		 */
-		public static function tracking($str:String):void
+		public static function setTracking($str:String):void
 		{
 			if(SystemUtil.isWeb()){
 				var loader:URLLoader = new URLLoader();
