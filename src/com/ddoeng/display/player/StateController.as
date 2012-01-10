@@ -16,9 +16,9 @@ package com.ddoeng.display.player
 	import flash.utils.Timer;
 	
 	[Event (name="statePlaying", type="com.ddoeng.events.player.StateControllerEvent")]
-	[Event (name="playPlayer", type="com.ddoeng.events.player.StateControllerEvent")]
-	[Event (name="pausePlayer", type="com.ddoeng.events.player.StateControllerEvent")]
-	[Event (name="stopPlayer", type="com.ddoeng.events.player.StateControllerEvent")]
+	[Event (name="playClick", type="com.ddoeng.events.player.StateControllerEvent")]
+	[Event (name="pauseClick", type="com.ddoeng.events.player.StateControllerEvent")]
+	[Event (name="stopClick", type="com.ddoeng.events.player.StateControllerEvent")]
 	
 	/**
 	 * 
@@ -223,7 +223,7 @@ package com.ddoeng.display.player
 			
 			_stream.resume();
 			
-			dispatchEvent(new StateControllerEvent(StateControllerEvent.PLAY_PLAYER));
+			dispatchEvent(new StateControllerEvent(StateControllerEvent.PLAY_CLICK));
 		}
 		
 		/**
@@ -239,7 +239,7 @@ package com.ddoeng.display.player
 			
 			_stream.pause();
 			
-			dispatchEvent(new StateControllerEvent(StateControllerEvent.PAUSE_PLAYER));
+			dispatchEvent(new StateControllerEvent(StateControllerEvent.PAUSE_CLICK));
 		}
 		
 		/**
@@ -260,7 +260,7 @@ package com.ddoeng.display.player
 			_bar.x = _bg.x;
 			_mask.width = 0;
 			
-			dispatchEvent(new StateControllerEvent(StateControllerEvent.STOP_PLAYER));
+			dispatchEvent(new StateControllerEvent(StateControllerEvent.STOP_CLICK));
 		}
 
 		/**

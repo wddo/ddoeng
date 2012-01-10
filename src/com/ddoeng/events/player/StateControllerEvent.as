@@ -5,9 +5,9 @@ package com.ddoeng.events.player
 	public class StateControllerEvent extends Event
 	{
 		public static const STATE_PLAYING:String = "statePlaying";
-		public static const PLAY_PLAYER:String = "playPlayer";
-		public static const PAUSE_PLAYER:String = "pausePlayer";
-		public static const STOP_PLAYER:String = "stopPlayer";
+		public static const PLAY_CLICK:String = "playClick";
+		public static const PAUSE_CLICK:String = "pauseClick";
+		public static const STOP_CLICK:String = "stopClick";
 		
 		public var playTimed:Object;
 		public var playTime:Object;
