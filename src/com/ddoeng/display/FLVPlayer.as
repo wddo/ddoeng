@@ -46,8 +46,12 @@ package com.ddoeng.display
 		 * var url:String = "fileName.flv";
 		 * flvPlayer = new FLVPlayer(_clip.video, url, stateControl, soundControl);
 		 *  
-		 * flvPlayer.stream.addEventListener(StateControllerEvent.STATE_PLAYING, playing);
-		 * flvPlayer.stream.addEventListener(NetStatusEvent.NET_STATUS, netStatus);
+		 * flvPlayer.getStream().addEventListener(StateControllerEvent.STATE_PLAYING, playing);
+		 * flvPlayer.getStream().addEventListener(NetStatusEvent.NET_STATUS, netStatus);
+		 * 
+		 * stateControl.addEventListener(StateControllerEvent.PLAY_PLAYER, handler);
+		 * stateControl.addEventListener(StateControllerEvent.PAUSE_PLAYER, handler);
+		 * stateControl.addEventListener(StateControllerEvent.STOP_PLAYER, handler);
 		 */
 		public function FLVPlayer($video:Video, $url:String = null, $stateControl:StateController = null, $soundControl:SoundController = null)
 		{

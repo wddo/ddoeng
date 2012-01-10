@@ -6,6 +6,7 @@ package com.ddoeng.display.player
 	
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
+	import flash.display.Stage;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.events.NetStatusEvent;
@@ -15,6 +16,9 @@ package com.ddoeng.display.player
 	import flash.utils.Timer;
 	
 	[Event (name="statePlaying", type="com.ddoeng.events.player.StateControllerEvent")]
+	[Event (name="playPlayer", type="com.ddoeng.events.player.StateControllerEvent")]
+	[Event (name="pausePlayer", type="com.ddoeng.events.player.StateControllerEvent")]
+	[Event (name="stopPlayer", type="com.ddoeng.events.player.StateControllerEvent")]
 	
 	/**
 	 * 
@@ -218,6 +222,8 @@ package com.ddoeng.display.player
 			}
 			
 			_stream.resume();
+			
+			dispatchEvent(new StateControllerEvent(StateControllerEvent.PLAY_PLAYER));
 		}
 		
 		/**
@@ -232,6 +238,8 @@ package com.ddoeng.display.player
 			_fpsTimer.stop();
 			
 			_stream.pause();
+			
+			dispatchEvent(new StateControllerEvent(StateControllerEvent.PAUSE_PLAYER));
 		}
 		
 		/**
@@ -251,6 +259,8 @@ package com.ddoeng.display.player
 			//진행바 초기화
 			_bar.x = _bg.x;
 			_mask.width = 0;
+			
+			dispatchEvent(new StateControllerEvent(StateControllerEvent.STOP_PLAYER));
 		}
 
 		/**
