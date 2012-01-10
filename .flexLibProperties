@@ -12,10 +12,10 @@
     <classEntry path="com.ddoeng.display.SmartScrollVertical"/>
     <classEntry path="com.ddoeng.display.player.SoundController"/>
     <classEntry path="com.ddoeng.display.player.StateController"/>
-    <classEntry path="com.ddoeng.events.FONTLoaderEvent"/>
-    <classEntry path="com.ddoeng.events.FONTLoaderProgressEvent"/>
-    <classEntry path="com.ddoeng.events.IMGLoaderEvent"/>
-    <classEntry path="com.ddoeng.events.XMLLoaderEvent"/>
+    <classEntry path="com.ddoeng.events.net.FONTLoaderEvent"/>
+    <classEntry path="com.ddoeng.events.net.FONTLoaderProgressEvent"/>
+    <classEntry path="com.ddoeng.events.net.IMGLoaderEvent"/>
+    <classEntry path="com.ddoeng.events.net.XMLLoaderEvent"/>
     <classEntry path="com.ddoeng.events.player.StateControllerEvent"/>
     <classEntry path="com.ddoeng.navigation.FrameButton"/>
     <classEntry path="com.ddoeng.navigation.FrameButtonAlign"/>
