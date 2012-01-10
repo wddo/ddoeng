@@ -135,7 +135,7 @@ package com.ddoeng.utils
 		 * @param $str	::: 트레킹 url
 		 * 
 		 */
-		public static function setTracking($str:String):void
+		public static function callTracking($str:String):void
 		{
 			if(SystemUtil.isWeb()){
 				var loader:URLLoader = new URLLoader();
