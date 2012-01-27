@@ -72,7 +72,7 @@ package com.ddoeng.utils
 		}
 		
 		/**
-		 * 경로를 나타내는 것인가 
+		 * http://나 javascript: 로시작하는 문자열인가 
 		 * @param $url	::: 주소
 		 * @return 		::: 블린
 		 */		
