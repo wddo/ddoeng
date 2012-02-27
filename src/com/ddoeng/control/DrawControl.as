@@ -1,10 +1,14 @@
 package com.ddoeng.control
 {
+	import com.ddoeng.utils.Calculation;
+	
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
+	import flash.display.GradientType;
 	import flash.display.PixelSnapping;
+	import flash.display.SpreadMethod;
 	import flash.display.Sprite;
 	import flash.geom.Matrix;
 	import flash.geom.Rectangle;
@@ -116,7 +120,7 @@ package com.ddoeng.control
 		}
 		
 		/**
-		 * 100x100 기본으로하는 Sprite 반환
+		 * 100x100 기본으로하는 Rect Sprite 반환
 		 *  
 		 * @param $width	::: 넓이 크기
 		 * @param $height	::: 높이 크기
@@ -134,6 +138,40 @@ package com.ddoeng.control
 			rect.graphics.endFill();
 			
 			return rect;
+		}
+		
+		/**
+		 *
+		 * 가로 그라디안 Rect Sprite 반환
+		 *  
+		 * @param $width	::: 넓이 크기
+		 * @param $height	::: 높이 크기
+		 * @param $fadeSize	::: 페이드 사이즈
+		 * @return 
+		 * 
+		 */		
+		public static function createGradientRect($width:int, $height:int, $fadeSize:int, $direct:String = "vertical"):Sprite
+		{
+			var cal:Calculation = new Calculation();
+			var graRatios:Number = ($direct == "vertical")?cal.getLinearFunction(0, $width, 0, 255, $fadeSize):cal.getLinearFunction(0, $height, 0, 255, $fadeSize);
+			
+			var fillType:String = GradientType.LINEAR;
+			var colors:Array = [0xFF0000, 0xFF0000, 0xFF0000, 0xFF0000];
+			var alphas:Array = [0, 1, 1, 0];
+			var ratios:Array = [0, graRatios, 255-graRatios, 255];
+			var matr:Matrix = new Matrix();
+			matr.createGradientBox($width, $height, ($direct == "vertical")?0:(Math.PI/180)*90);
+			var spreadMethod:String = SpreadMethod.PAD;
+			
+			var sp:Sprite = new Sprite();			
+			if($fadeSize != 0){
+				sp.graphics.beginGradientFill(fillType, colors, alphas, ratios, matr, spreadMethod); 
+			}else{
+				sp.graphics.beginFill(colors[0]);
+			}
+			sp.graphics.drawRect(0, 0, $width, $height);
+			
+			return sp;
 		}
 	}
 }
