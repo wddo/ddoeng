@@ -126,7 +126,7 @@ package com.ddoeng.control
 		 * @return 
 		 * 
 		 */		
-		public function createRect($width:int = 100, $height:int = 100, $x:int = 0, $y:int = 0, $color:uint = 0x000000):Sprite
+		public static function createRect($width:int = 100, $height:int = 100, $x:int = 0, $y:int = 0, $color:uint = 0x000000):Sprite
 		{
 			var rect:Sprite = new Sprite();
 			rect.graphics.beginFill($color);
