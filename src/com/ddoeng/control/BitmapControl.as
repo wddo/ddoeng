@@ -1,4 +1,4 @@
-﻿package com.ddoeng.display
+﻿package com.ddoeng.control
 {
 	import com.ddoeng.utils.Calculation;
 	import com.ddoeng.utils.Common;

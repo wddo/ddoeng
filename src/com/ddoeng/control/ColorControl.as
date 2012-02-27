@@ -1,11 +1,11 @@
-package com.ddoeng.display
+package com.ddoeng.control
 {
 	import flash.display.DisplayObject;
 	import flash.filters.ColorMatrixFilter;
 	
 	/**
 	 *
-	 * 글로벌 클래스
+	 * 컬러컨트롤 클래스
 	 * 
 	 * @author : Jo Yun Ki (naver ID - ddoeng)
 	 * @version : 1.0

@@ -1,4 +1,4 @@
-package com.ddoeng.display
+package com.ddoeng.control
 {
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
@@ -11,43 +11,24 @@ package com.ddoeng.display
 	
 	/**
 	 *
-	 * 많은 그래픽요소를 스크린샷한듯 찍어 비트맵으로 변환하고 다시 그래픽요소들로 만들수 있는 클래스 
-	 * 
+	 * 드로우컨트롤 설명
+	 *
 	 * @author : Jo Yun Ki (naver ID - ddoeng)
 	 * @version : 1.0
-	 * @since : Nov 17, 2010
-	 *		
+	 * @since : Feb 27, 2012
+	 *
 	 */
-
-	public class DuplicationImage
+	
+	public class DrawControl
 	{
 		private var _source:DisplayObjectContainer;
 		private var _x:Number = 0;
 		private var _y:Number = 0;
 		
-		public function DuplicationImage()
+		public function DrawControl()
 		{
-			
 		}
-		
-		private function visibleOff():void
-		{
-			var children:int = _source.numChildren;
-			
-			for(var i:int = 0; i < children; i++){
-				_source.getChildAt(i).visible = false;
-			}
-		}
-		
-		private function visibleOn():void
-		{
-			var children:int = _source.numChildren;
-			
-			for(var i:int = 0; i < children; i++){
-				_source.getChildAt(i).visible = true;
-			}
-		}
-		
+				
 		/**
 		 * 그래픽요소를 비트맵으로
 		 * @param $source	::: 복사할 DisplayObjectContainer
@@ -73,7 +54,7 @@ package com.ddoeng.display
 			for(var i:int=0; i<_source.numChildren; i++){
 				dis = _source.getChildAt(i) as DisplayObject;
 				rec = dis.getBounds(_source);
-
+				
 				cont.graphics.drawRect( rec.x, rec.y, rec.width, rec.height );
 			}
 			_source.addChild(cont);
@@ -82,7 +63,7 @@ package com.ddoeng.display
 			rec = cont.getBounds(_source);
 			_source.removeChild(cont);
 			cont = null;
-
+			
 			matrix.tx = rec.x * -1;
 			matrix.ty = rec.y * -1;
 			
@@ -114,6 +95,45 @@ package com.ddoeng.display
 				
 				visibleOn();
 			}
+		}
+		
+		private function visibleOff():void
+		{
+			var children:int = _source.numChildren;
+			
+			for(var i:int = 0; i < children; i++){
+				_source.getChildAt(i).visible = false;
+			}
+		}
+		
+		private function visibleOn():void
+		{
+			var children:int = _source.numChildren;
+			
+			for(var i:int = 0; i < children; i++){
+				_source.getChildAt(i).visible = true;
+			}
+		}
+		
+		/**
+		 * 100x100 기본으로하는 Sprite 반환
+		 *  
+		 * @param $width	::: 넓이 크기
+		 * @param $height	::: 높이 크기
+		 * @param $x		:::	X위치
+		 * @param $y		::: Y위치
+		 * @param $color	::: 색상
+		 * @return 
+		 * 
+		 */		
+		public function createRect($width:int = 100, $height:int = 100, $x:int = 0, $y:int = 0, $color:uint = 0x000000):Sprite
+		{
+			var rect:Sprite = new Sprite();
+			rect.graphics.beginFill($color);
+			rect.graphics.drawRect($x, $y, $width, $height);
+			rect.graphics.endFill();
+			
+			return rect;
 		}
 	}
 }

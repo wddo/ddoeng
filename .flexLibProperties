@@ -2,9 +2,8 @@
 <flexLibProperties includeAllClasses="false" useMultiPlatformConfig="false" version="1">
   <includeClasses>
     <classEntry path="com.adqua.ui.AdquaContext"/>
-    <classEntry path="com.ddoeng.display.BitmapControl"/>
-    <classEntry path="com.ddoeng.display.ColorControl"/>
-    <classEntry path="com.ddoeng.display.DuplicationImage"/>
+    <classEntry path="com.ddoeng.control.BitmapControl"/>
+    <classEntry path="com.ddoeng.control.ColorControl"/>
     <classEntry path="com.ddoeng.display.FLVPlayer"/>
     <classEntry path="com.ddoeng.display.ScrollHorizontal"/>
     <classEntry path="com.ddoeng.display.ScrollVertical"/>
@@ -49,6 +48,7 @@
     <classEntry path="com.ddoeng.utils.SystemUtil"/>
     <classEntry path="com.ddoeng.utils.TextUtil"/>
     <classEntry path="net.hires.debug.Stats"/>
+    <classEntry path="com.ddoeng.control.DrawControl"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>
