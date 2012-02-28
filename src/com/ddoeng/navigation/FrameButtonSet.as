@@ -46,15 +46,17 @@ package com.ddoeng.navigation
 		 * 	frameButtonSet.addEventListener(FrameButtonsEvent.BUTTONSET_DOWN, onClick);
 		 * 
 		 * @param $className	::: clip클래스 생성자
-		 * @param $txt        	::: 각각 버튼의 레이블명이나 버튼에 맞는 갯수의 배열
+		 * @param $txt        	::: 각각 버튼의 레이블명이나 갯수에 맞는 빈배열 
 		 * @param $txtfid		::: 텍스트 필드 셋
 		 * @param $direct   	::: 방향은 가로로 할것인가 세로로 할것인가
+		 * 
+		 * ($txt 나 $txtfid 둘중 하나라도 null 이면 인스명 txt를 gotoAndStop으로 레이블명 정함, 그렇지 않으면 두 인자값을 토대로 textfieldset 구현)
 		 */
-		public function FrameButtonSet($className:Object, $txt:Array = null, $txtfid:TextFieldSet = null, $direct:String = "horizontal")
+		public function FrameButtonSet($clip:Object, $txt:Array = null, $txtfid:TextFieldSet = null, $direct:String = "horizontal")
 		{
 			super();
 			
-			ClipClass  = getDefinitionByName(getQualifiedClassName($className)) as Class;
+			ClipClass  = getDefinitionByName(getQualifiedClassName($clip)) as Class;
 			_txtArr    	= $txt;
 			_txtfid		= $txtfid;
 			_direct	 	= $direct;
@@ -89,8 +91,10 @@ package com.ddoeng.navigation
 				if(clip.getChildByName("txt") != null){
 					txt = clip.getChildByName("txt") as MovieClip;
 					
+					//frame 레이블 구현
 					if(_txtArr == null || _txtfid == null){
 						if(txt.currentFrame > 1)txt.gotoAndStop(i+1);
+					//TextFieldSet 레이블 구현
 					}else{
 						Common.targetClear(txt);
 
