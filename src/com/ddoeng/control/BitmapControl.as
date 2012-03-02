@@ -110,7 +110,7 @@
 		 * @param $transparent	::: 투명도
 		 * @return 				:::	비트맵 반환
 		 */		
-		public static function BitmapPop($source:DisplayObjectContainer, $smooth:Boolean = true, $transparent:Boolean = true):Bitmap
+		public static function bitmapPop($source:DisplayObjectContainer, $smooth:Boolean = true, $transparent:Boolean = true):Bitmap
 		{
 			var source:DisplayObjectContainer = $source;
 			
@@ -129,10 +129,10 @@
 		 * @param $smooth 		::: 부드럽게
 		 * @param $transparent	::: 투명도
 		 */		
-		public static function BitmapPush($source:DisplayObjectContainer, $smooth:Boolean = true, $transparent:Boolean = true):void
+		public static function bitmapPush($source:DisplayObjectContainer, $smooth:Boolean = true, $transparent:Boolean = true):void
 		{
 			var source:DisplayObjectContainer = $source;
-			var bitmap:Bitmap = BitmapPop(source, $smooth, $transparent);
+			var bitmap:Bitmap = bitmapPop(source, $smooth, $transparent);
 			Common.targetClear(source);
 			source.addChild(bitmap);
 		}
