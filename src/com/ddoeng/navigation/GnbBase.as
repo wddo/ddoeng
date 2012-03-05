@@ -104,7 +104,7 @@ package com.ddoeng.navigation
 				if(e.type == MouseEvent.MOUSE_OVER || e.type == FocusEvent.FOCUS_IN){
 					
 					if(!isNaN(_subActive)){ //2뎁스 페이지기억값이 있으면
-						_subMenuArr[_active][_subActive].off() //페이지기억으로 활성화되있는것 오프
+						_subMenuArr[_active][_subActive].setOff() //페이지기억으로 활성화되있는것 오프
 					}
 					
 					_time = 1;
@@ -138,7 +138,7 @@ package com.ddoeng.navigation
 				if(e.type == MouseEvent.MOUSE_OVER || e.type == FocusEvent.FOCUS_IN){
 					
 					if(mc.id != _subActive && !isNaN(_subActive)){ //이미 온 되있는것은 적용안됨
-						_subMenuArr[_active][_subActive].off() //페이지기억으로 활성화되있는것 오프
+						_subMenuArr[_active][_subActive].setOff() //페이지기억으로 활성화되있는것 오프
 					}
 					
 					_timeGo = false;
