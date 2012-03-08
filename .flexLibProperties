@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<flexLibProperties includeAllClasses="false" useMultiPlatformConfig="false" version="1">
+<flexLibProperties includeAllClasses="true" useMultiPlatformConfig="false" version="1">
   <includeClasses>
     <classEntry path="com.adqua.ui.AdquaContext"/>
-    <classEntry path="com.ddoeng.control.BitmapControl"/>
-    <classEntry path="com.ddoeng.control.ColorControl"/>
     <classEntry path="com.ddoeng.component.FLVPlayer"/>
     <classEntry path="com.ddoeng.component.ScrollHorizontal"/>
     <classEntry path="com.ddoeng.component.ScrollVertical"/>
@@ -11,6 +9,9 @@
     <classEntry path="com.ddoeng.component.SmartScrollVertical"/>
     <classEntry path="com.ddoeng.component.player.SoundController"/>
     <classEntry path="com.ddoeng.component.player.StateController"/>
+    <classEntry path="com.ddoeng.control.BitmapControl"/>
+    <classEntry path="com.ddoeng.control.ColorControl"/>
+    <classEntry path="com.ddoeng.control.DrawControl"/>
     <classEntry path="com.ddoeng.events.navigation.FrameButtonsEvent"/>
     <classEntry path="com.ddoeng.events.net.FONTLoaderEvent"/>
     <classEntry path="com.ddoeng.events.net.FONTLoaderProgressEvent"/>
@@ -48,7 +49,6 @@
     <classEntry path="com.ddoeng.utils.SystemUtil"/>
     <classEntry path="com.ddoeng.utils.TextUtil"/>
     <classEntry path="net.hires.debug.Stats"/>
-    <classEntry path="com.ddoeng.control.DrawControl"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>
