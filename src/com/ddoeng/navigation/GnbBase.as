@@ -320,8 +320,8 @@ package com.ddoeng.navigation
 					
 					_menuXPos += menu.getTextMovieClip().width + _menuOffsetX;
 					
-					_subMenuXPos = _subMenuArr[i][0].x;
-					_subMenuYPos = _subMenuArr[i][0].y;
+					if(_subMenuArr[i][0] != null)_subMenuXPos = _subMenuArr[i][0].x;
+					if(_subMenuArr[i][0] != null)_subMenuYPos = _subMenuArr[i][0].y;
 					for(var s:int=0; s<_subMenuArr[i].length; s++){
 						var submenu:SubMenu = _subMenuArr[i][s] as SubMenu;
 						submenu.x = _subMenuXPos;
