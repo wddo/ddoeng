@@ -25,13 +25,13 @@ package com.ddoeng.utils
 		 * 타겟 비우기 
 		 * @param $source	::: 비울 타겟
 		 */		
-		public static function targetClear($source:DisplayObjectContainer):void
+		public static function targetClear($scope:DisplayObjectContainer):void
 		{
 			try{
 				while(true){
-					var dis:DisplayObject = $source.getChildAt(0);
+					var dis:DisplayObject = $scope.getChildAt(0);
 
-					$source.removeChild( dis );
+					$scope.removeChild( dis );
 					dis = null;
 				}
 			}catch(e:Error){

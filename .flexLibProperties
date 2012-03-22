@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<flexLibProperties includeAllClasses="true" useMultiPlatformConfig="false" version="1">
+<flexLibProperties includeAllClasses="false" useMultiPlatformConfig="false" version="1">
   <includeClasses>
-    <classEntry path="com.adqua.ui.AdquaContext"/>
     <classEntry path="com.ddoeng.component.FLVPlayer"/>
     <classEntry path="com.ddoeng.component.ScrollHorizontal"/>
     <classEntry path="com.ddoeng.component.ScrollVertical"/>
@@ -49,6 +48,7 @@
     <classEntry path="com.ddoeng.utils.SystemUtil"/>
     <classEntry path="com.ddoeng.utils.TextUtil"/>
     <classEntry path="net.hires.debug.Stats"/>
+    <classEntry path="com.ddoeng.ui.Context"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>
