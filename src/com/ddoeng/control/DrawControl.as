@@ -174,5 +174,29 @@ package com.ddoeng.control
 			
 			return sp;
 		}
+		
+		/**
+		 *
+		 * 중앙 라인이 있는 Sprite 반환
+		 *  
+		 * @param $width	::: 넓이 크기
+		 * @param $height	::: 높이 크기
+		 * @param $color	::: 색상
+		 * @return 
+		 * 
+		 */		
+		public static function createCenterLine($width:int = 100, $height:int = 100, $color:uint = 0xff0000):Sprite
+		{
+			var plus:Sprite = new Sprite();
+			plus.graphics.lineStyle(1, $color);
+			plus.graphics.moveTo(0, -$height/2);
+			plus.graphics.lineTo(0, $height/2);
+			plus.graphics.moveTo(-$width/2, 0);
+			plus.graphics.lineTo($width/2, 0);
+			plus.x = plus.width / 2;
+			plus.y = plus.height / 2;
+			
+			return plus;
+		}
 	}
 }
