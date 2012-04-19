@@ -193,8 +193,6 @@ package com.ddoeng.control
 			plus.graphics.lineTo(0, $height/2);
 			plus.graphics.moveTo(-$width/2, 0);
 			plus.graphics.lineTo($width/2, 0);
-			plus.x = plus.width / 2;
-			plus.y = plus.height / 2;
 			
 			return plus;
 		}
