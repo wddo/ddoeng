@@ -82,7 +82,7 @@ package com.ddoeng.navigation
 				btn = new FrameButton(new ClipClass());
 				addChild(btn);
 				
-				btn.setId(i);
+				btn.setIdx(i);
 				btn.addEventListener(MouseEvent.MOUSE_DOWN, onDown);
 				
 				var clip:MovieClip = btn.getClip() as MovieClip;
@@ -125,7 +125,7 @@ package com.ddoeng.navigation
 				//저장
 				_selectedFrameButton = e.currentTarget as FrameButton;
 
-				var idx:int = _selectedFrameButton.getId();
+				var idx:int = _selectedFrameButton.getIdx();
 				this.dispatchEvent(new FrameButtonsEvent(FrameButtonsEvent.BUTTONSET_DOWN, _selectedFrameButton, idx));
 			}
 			
@@ -146,6 +146,38 @@ package com.ddoeng.navigation
 			
 			frameButton.getClip().dispatchEvent(new MouseEvent(MouseEvent.MOUSE_OVER));
 			frameButton.dispatchEvent(new MouseEvent(MouseEvent.MOUSE_DOWN));
+		}
+		
+		/**
+		 * 외부에서 모두 아웃 시키는 메소드
+		 */
+		public function setClear():void
+		{
+			var frameButton:FrameButton;
+			for(var i:int = 0; i<_btnArr.length; i++){
+				frameButton = _btnArr[i] as FrameButton;
+				frameButton.setSelected(null);
+				
+				frameButton.setBf();
+			}
+			
+			_selectedFrameButton = null;
+		}
+		
+		/**
+		 * 활성화 버튼Clip 반환
+		 */
+		public function getSelected():FrameButton
+		{
+			return _selectedFrameButton;
+		}
+		
+		/**
+		 * 활성화 버튼idx 반환
+		 */
+		public function getSelectedIdx():int
+		{
+			return _selectedFrameButton.getIdx();
 		}
 		
 		/**
