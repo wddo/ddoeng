@@ -18,7 +18,7 @@ package com.ddoeng.navigation
 	{
 		private var _clip:MovieClip;				//타임라인이 존재하는 버튼소스
 		private var _selectedButton:FrameButton;	//선택되있는 버튼인지 체크
-		private var _id:int;						//id값
+		private var _idx:int;						//id값
 		
 		/**
 		 * 기본적으로 오버.아웃.다운 및 페이지기억 적용되어 있으며 외부에서 다시 오버.아웃.다운을 적용시켜 확장한다.
@@ -138,17 +138,17 @@ package com.ddoeng.navigation
 		/**
 		 * 아이디값 지정
 		 */		
-		public function setId($idx:int):void
+		public function setIdx($idx:int):void
 		{
-			_id = $idx;
+			_idx = $idx;
 		}
 		
 		/**
 		 * 아이디값 반환
 		 */		
-		public function getId():int
+		public function getIdx():int
 		{
-			return _id;
+			return _idx;
 		}
 	}
 }
