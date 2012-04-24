@@ -52,7 +52,7 @@ package com.ddoeng.navigation
 		 * 
 		 * ($txt 나 $txtfid 둘중 하나라도 null 이면 인스명 txt를 gotoAndStop으로 레이블명 정함, 그렇지 않으면 두 인자값을 토대로 textfieldset 구현)
 		 */
-		public function FrameButtonSet($clip:Object, $txt:Array = null, $txtfid:TextFieldSet = null, $direct:String = "horizontal")
+		public function FrameButtonSet($clip:Object, $txt:Array, $txtfid:TextFieldSet = null, $direct:String = "horizontal")
 		{
 			super();
 			
@@ -92,8 +92,8 @@ package com.ddoeng.navigation
 					txt = clip.getChildByName("txt") as MovieClip;
 					
 					//frame 레이블 구현
-					if(_txtArr == null || _txtfid == null){
-						if(txt.currentFrame > 1)txt.gotoAndStop(i+1);
+					if(_txtfid == null){
+						txt.gotoAndStop(i+1);
 					//TextFieldSet 레이블 구현
 					}else{
 						Common.targetClear(txt);
