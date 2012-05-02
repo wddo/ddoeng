@@ -108,13 +108,17 @@
 		 * @param $source		::: 변환할 디스플레이
 		 * @param $smooth 		::: 부드럽게
 		 * @param $transparent	::: 투명도
+		 * @param $width		::: 넓이
+		 * @param $height		::: 높이
 		 * @return 				:::	비트맵 반환
 		 */		
-		public static function bitmapPop($source:DisplayObjectContainer, $smooth:Boolean = true, $transparent:Boolean = true):Bitmap
+		public static function bitmapPop($source:DisplayObjectContainer, $smooth:Boolean = true, $transparent:Boolean = true, $width:int = 0, $height:int = 0):Bitmap
 		{
 			var source:DisplayObjectContainer = $source;
+			var width:int = ($width == 0)?$source.width:$width;
+			var height:int = ($height == 0)?$source.height:$height;
 			
-			var bitmapData:BitmapData = new BitmapData(source.width, source.height, $transparent, 0x00FFFFFF);
+			var bitmapData:BitmapData = new BitmapData(width, height, $transparent, 0x00FFFFFF);
 			bitmapData.draw(source);
 			
 			var bitmap:Bitmap = new Bitmap(bitmapData, PixelSnapping.AUTO, $smooth);
