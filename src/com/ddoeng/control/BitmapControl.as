@@ -110,18 +110,27 @@
 		 * @param $transparent	::: 투명도
 		 * @param $width		::: 넓이
 		 * @param $height		::: 높이
+		 * @param $x			::: X
+		 * @param $y			::: Y
 		 * @return 				:::	비트맵 반환
 		 */		
-		public static function bitmapPop($source:DisplayObjectContainer, $smooth:Boolean = true, $transparent:Boolean = true, $width:int = 0, $height:int = 0):Bitmap
+		public static function bitmapPop($source:DisplayObjectContainer, $smooth:Boolean = true, $transparent:Boolean = true, $width:int = 0, $height:int = 0, $x:int = 0, $y:int = 0):Bitmap
 		{
 			var source:DisplayObjectContainer = $source;
 			var width:int = ($width == 0)?$source.width:$width;
 			var height:int = ($height == 0)?$source.height:$height;
+			var x:int = $x;
+			var y:int = $y;
 			
-			var bitmapData:BitmapData = new BitmapData(width, height, $transparent, 0x00FFFFFF);
+			//xpos 와 ypos 를 위해 크기를 더하여 비트맵데이터화 시킨다.
+			var bitmapData:BitmapData = new BitmapData(width + x, height + y, $transparent, 0x00FFFFFF);
 			bitmapData.draw(source);
 			
-			var bitmap:Bitmap = new Bitmap(bitmapData, PixelSnapping.AUTO, $smooth);
+			//다시 원하는 크기의 비트맵데이터를 만들고 copy 한다.
+			var copyBitmapData:BitmapData = new BitmapData(width, height, $transparent, 0x00FFFFFF);
+			copyBitmapData.copyPixels(bitmapData, new Rectangle(x, y, width, height), new Point());
+			
+			var bitmap:Bitmap = new Bitmap(copyBitmapData, PixelSnapping.AUTO, $smooth);
 			
 			return bitmap;
 		}
