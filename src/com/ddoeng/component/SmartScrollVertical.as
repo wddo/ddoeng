@@ -357,6 +357,7 @@ package com.ddoeng.component
 		public function setTargetX($value:Number):void
 		{
 			contentTargetX = $value;
+			touchContentTargetX = $value;
 		}
 		
 		/**
