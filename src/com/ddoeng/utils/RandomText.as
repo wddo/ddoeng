@@ -34,6 +34,8 @@ package com.ddoeng.utils
 		private var _completeStr:String = "";
 		private var _type:int;
 		private var _code:Number;
+
+		private var timer:Timer;
 		
 		/**
 		 * 	_type = 1 문자가 하나하나 완성됨 (맞는 글짜 찾을때 까지), _type = 2 전체문자크기대로 랜덤하게 찍어놓고 시간되면 순서대로 일치시킴
@@ -48,8 +50,11 @@ package com.ddoeng.utils
 		 * @param $delay	:::	딜레이
 		 * @param $type		::: 타입 1~5
 		 */		
-		public function RandomText($fid:TextField, $str:String, $min:int = 33, $max:int = 122, $speed:int = 30, $delay:int = 0, $type:int = 1)
+		public function RandomText()
 		{
+		}
+		
+		public function setText($fid:TextField, $str:String, $min:int = 33, $max:int = 122, $speed:int = 30, $delay:int = 0, $type:int = 1):void {
 			_fid 			= $fid;
 			_str 			= $str;
 			_minCodeNumber 	= $min;
@@ -72,30 +77,52 @@ package com.ddoeng.utils
 			//trace("_tempTextArr : "+_tempTextArr); //임시 텍스트
 			//trace("_tempNumberArr : "+_tempNumberArr); //텍스트 순서
 			
-			var timer:Timer = new Timer($delay, 1);
+			timer = new Timer($delay, 1);
 			timer.start();
 			timer.addEventListener(TimerEvent.TIMER, onTimer);
 		}
 		
+		public function dispose():void
+		{
+			if (_fid !== null) _fid.removeEventListener(Event.ENTER_FRAME, onEnter);
+			
+			if (timer !== null) {
+				timer.stop();
+				timer.removeEventListener(TimerEvent.TIMER, onTimer);
+				timer = null;
+			}
+		}
+		
+		private function complete():void
+		{
+			var evt:Event = new Event("randomTextComple");
+			this.dispatchEvent(evt);
+		}
+		
 		private function onTimer(e:TimerEvent):void
 		{
+			_fid.addEventListener(Event.ENTER_FRAME, onEnter);
+		}
+		
+		private function onEnter(e:Event):void
+		{
 			if(_type == 1){
-				_fid.addEventListener(Event.ENTER_FRAME, onEnter1);
+				loop1();
 			}else if(_type == 2){
-				_fid.addEventListener(Event.ENTER_FRAME, onEnter2);
+				loop2();
 			}else if(_type == 3){
 				_tempNumberArr = randomArray(_tempNumberArr); //순서랜덤
-				_fid.addEventListener(Event.ENTER_FRAME, onEnter2);
+				loop2();
 			}else if(_type == 4){
-				_fid.addEventListener(Event.ENTER_FRAME, onEnter4);
+				loop4();
 			}else if(_type == 5){
-				_fid.addEventListener(Event.ENTER_FRAME, onEnter5);
+				loop5();
 			}else{
 				
 			}
 		}
 
-		private function onEnter1(e:Event):void
+		private function loop1():void
 		{
 			if(_startNum == _changeTime){
 				//trace("시간되었다.");
@@ -116,16 +143,15 @@ package com.ddoeng.utils
 					_completeStr += _tempTextArr[_completeStr.length];
 					_startNum = 0;
 				}else{
-					_fid.removeEventListener(Event.ENTER_FRAME, onEnter1);
-					var evt:Event = new Event("randomTextComple");
-					this.dispatchEvent(evt);
+					dispose();
+					complete();
 				}
 			}
 			
 			_fid.text = _completeStr + _tempTextArr[_completeStr.length];
 		}
 		
-		private function onEnter2(e:Event):void
+		private function loop2():void
 		{			
 			for(var i:Number = 0 ; i<_textLength ; ++i){
 				if(_tempTextArr[i] != _str.charAt(i)){
@@ -142,9 +168,8 @@ package com.ddoeng.utils
 				//_tempNumberArr 를 참조한 이유는 랜덤하게 완성되기위함 (현제는 순서대로);
 				_checkLength++; // changeTime만큼 딜레이 후 +1
 				if(_checkLength == _textLength){
-					_fid.removeEventListener(Event.ENTER_FRAME, onEnter2);
-					var evt:Event = new Event("randomTextComple");
-					this.dispatchEvent(evt);
+					dispose();
+					complete();
 				}
 			}else{
 				_startNum++;
@@ -153,7 +178,7 @@ package com.ddoeng.utils
 			_fid.text = _tempTextArr.join("");
 		}
 		
-		private function onEnter4(e:Event):void
+		private function loop4():void
 		{
 			if(_code == _maxCodeNumber){
 				//마지막 코드까지가면 강제 삽입
@@ -181,16 +206,15 @@ package com.ddoeng.utils
 					_code = _minCodeNumber;
 					_startNum = 0;
 				}else{
-					_fid.removeEventListener(Event.ENTER_FRAME, onEnter1);
-					var evt:Event = new Event("randomTextComple");
-					this.dispatchEvent(evt);
+					dispose();
+					complete();
 				}
 			}
 			
 			_fid.text = _completeStr + _tempTextArr[_completeStr.length];
 		}
 		
-		private function onEnter5(e:Event):void
+		private function loop5():void
 		{
 			if(_code == _maxCodeNumber){
 				//마지막 코드까지가면 강제 삽입
@@ -218,9 +242,8 @@ package com.ddoeng.utils
 					_code = _minCodeNumber;
 					_startNum = 0;
 				}else{
-					_fid.removeEventListener(Event.ENTER_FRAME, onEnter5);
-					var evt:Event = new Event("randomTextComple");
-					this.dispatchEvent(evt);
+					dispose();
+					complete();
 				}
 			}
 			
