@@ -36,8 +36,9 @@ package com.ddoeng.utils
 		private var _code:Number;
 		
 		/**
-		 * 	_type = 1 문자가 하나하나 완성됨, _type = 2 전체문자크기대로 랜덤하게 찍어놓고 순서대로 일치시킴
-		 * 	_type = 3 전체문자크기대로 랜덤하게 찍어놓고 랜덤하게 일치시킴, _type = 4 문자가 하나하나 완성됨
+		 * 	_type = 1 문자가 하나하나 완성됨 (맞는 글짜 찾을때 까지), _type = 2 전체문자크기대로 랜덤하게 찍어놓고 시간되면 순서대로 일치시킴
+		 * 	_type = 3 전체문자크기대로 랜덤하게 찍어놓고 시간되면 랜덤하게 일치시킴, _type = 4 문자가 하나하나 완성됨 (max에 차면 자동완성)
+		 *  _type = 5 전체문자크기대로 랜덤하게 찍어놓고 글자당 시간되면 순서대로 일치시킴
 		 * 
 		 * @param $fid		:::	적용할 텍스트필드
 		 * @param $str		:::	완성된 문자열
@@ -45,9 +46,9 @@ package com.ddoeng.utils
 		 * @param $max		:::	최고 문자코드 넘버
 		 * @param $speed	:::	속도
 		 * @param $delay	:::	딜레이
-		 * @param $type		::: 타입 1~4
+		 * @param $type		::: 타입 1~5
 		 */		
-		public function RandomText($fid:TextField, $str:String, $min:int, $max:int, $speed:int = 30, $delay:int = 0, $type:int = 1)
+		public function RandomText($fid:TextField, $str:String, $min:int = 33, $max:int = 122, $speed:int = 30, $delay:int = 0, $type:int = 1)
 		{
 			_fid 			= $fid;
 			_str 			= $str;
@@ -58,8 +59,8 @@ package com.ddoeng.utils
 			_code 			= _minCodeNumber;
 			
 			_fid.text = "";
-			_fid.restrict = "A-Z 0-9";
-			_fid.autoSize = TextFieldAutoSize.LEFT;
+			//_fid.restrict = "A-Z 0-9";
+			//_fid.autoSize = TextFieldAutoSize.LEFT;
 			
 			_textLength = _str.length;
 			
@@ -87,6 +88,8 @@ package com.ddoeng.utils
 				_fid.addEventListener(Event.ENTER_FRAME, onEnter2);
 			}else if(_type == 4){
 				_fid.addEventListener(Event.ENTER_FRAME, onEnter4);
+			}else if(_type == 5){
+				_fid.addEventListener(Event.ENTER_FRAME, onEnter5);
 			}else{
 				
 			}
@@ -123,7 +126,7 @@ package com.ddoeng.utils
 		}
 		
 		private function onEnter2(e:Event):void
-		{
+		{			
 			for(var i:Number = 0 ; i<_textLength ; ++i){
 				if(_tempTextArr[i] != _str.charAt(i)){
 					_tempTextArr[i] = String.fromCharCode(Math.floor(Math.random() * (_maxCodeNumber-_minCodeNumber+1)) + _minCodeNumber );
@@ -185,6 +188,53 @@ package com.ddoeng.utils
 			}
 			
 			_fid.text = _completeStr + _tempTextArr[_completeStr.length];
+		}
+		
+		private function onEnter5(e:Event):void
+		{
+			if(_code == _maxCodeNumber){
+				//마지막 코드까지가면 강제 삽입
+				_tempTextArr[_completeStr.length] = _str.charAt(_completeStr.length);
+			}
+			
+			if(_startNum == _changeTime){
+				//trace("시간되었다.");
+				_startNum = 0;
+				//시간되면 강제 삽입
+				_tempTextArr[_completeStr.length] = _str.charAt(_completeStr.length);
+			}else{
+				_startNum++;
+			}
+			
+			if(_tempTextArr[_completeStr.length] != _str.charAt(_completeStr.length)){
+				_tempTextArr[_completeStr.length] = String.fromCharCode(_code);
+				_code++;
+				//랜덤하게 문자를 넣는다
+			}else{ // 문자가 같아지면
+				//trace("문자가 일치하였다.");
+				//해당 문자를 배열에 넣는다
+				if(_completeStr.length < _str.length - 1){	
+					_completeStr += _tempTextArr[_completeStr.length];
+					_code = _minCodeNumber;
+					_startNum = 0;
+				}else{
+					_fid.removeEventListener(Event.ENTER_FRAME, onEnter5);
+					var evt:Event = new Event("randomTextComple");
+					this.dispatchEvent(evt);
+				}
+			}
+			
+			for(var i:Number = 0 ; i<_textLength ; ++i){
+				if(_tempTextArr[i] != _str.charAt(i)){
+					_tempTextArr[i] = String.fromCharCode(Math.floor(Math.random() * (_maxCodeNumber-_minCodeNumber+1)) + _minCodeNumber );
+					//랜덤하게 문자를 넣는다
+				}else{ // 문자가 같아지면
+					_tempTextArr[i] = _str.charAt(i);
+					//해당 문자를 배열에 넣는다
+				}
+			}
+			
+			_fid.text = _tempTextArr.join("");
 		}
 		
 		private function randomArray(array:Array):Array{
