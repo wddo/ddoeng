@@ -47,7 +47,7 @@ package com.ddoeng.utils
 		 * @return 		::: 잘라낸 값
 		 */		
 		public function setCut($arr:Array, $idx:int):Object{
-			return $arr.splice($idx, 1);
+			return $arr.splice($idx, 1)[0];
 		}
 		
 		/**
