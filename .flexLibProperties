@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<flexLibProperties includeAllClasses="false" useMultiPlatformConfig="false" version="1">
+<flexLibProperties includeAllClasses="true" useMultiPlatformConfig="false" version="1">
   <includeClasses>
     <classEntry path="com.ddoeng.component.FLVPlayer"/>
     <classEntry path="com.ddoeng.component.ScrollHorizontal"/>
@@ -37,6 +37,7 @@
     <classEntry path="com.ddoeng.net.XMLLoader"/>
     <classEntry path="com.ddoeng.text.TextFieldSet"/>
     <classEntry path="com.ddoeng.text.TextFormatSet"/>
+    <classEntry path="com.ddoeng.ui.Context"/>
     <classEntry path="com.ddoeng.utils.ArrayUtil"/>
     <classEntry path="com.ddoeng.utils.Calculation"/>
     <classEntry path="com.ddoeng.utils.Common"/>
@@ -48,7 +49,6 @@
     <classEntry path="com.ddoeng.utils.SystemUtil"/>
     <classEntry path="com.ddoeng.utils.TextUtil"/>
     <classEntry path="net.hires.debug.Stats"/>
-    <classEntry path="com.ddoeng.ui.Context"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>
