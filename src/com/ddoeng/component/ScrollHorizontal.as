@@ -1,5 +1,6 @@
 package com.ddoeng.component
 {
+	import com.ddoeng.events.component.ScrollEvent;
 	import com.ddoeng.events.net.SWFLoaderEvent;
 	import com.ddoeng.net.SWFLoader;
 	import com.ddoeng.utils.Calculation;
@@ -18,7 +19,7 @@ package com.ddoeng.component
 	import flash.geom.Rectangle;
 	import flash.ui.Mouse;
 	
-	
+	[Event (name="moveScroll", type="com.ddoeng.events.component.ScrollEvent")]
 	/**
 	 *
 	 * 세로 스크롤 클래스
@@ -156,7 +157,11 @@ package com.ddoeng.component
 				if(scrollState != "drag"){
 					scrollBar.y = cal.getLinearFunction(0, (contentMask.height - contentHeight), 0, (scrollBg.height - scrollBar.height), contentSource.y)
 				}
-			}catch(e:Error){
+				
+				//이동 이벤트 발생
+				this.dispatchEvent(new ScrollEvent(ScrollEvent.MOVE_SCROLL, contentTargetY));
+				
+			}catch(e:Error){ 
 				removeEventListener(Event.ENTER_FRAME, onEnter);
 			}
 		}

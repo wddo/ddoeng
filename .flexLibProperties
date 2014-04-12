@@ -49,6 +49,7 @@
     <classEntry path="com.ddoeng.utils.SystemUtil"/>
     <classEntry path="com.ddoeng.utils.TextUtil"/>
     <classEntry path="net.hires.debug.Stats"/>
+    <classEntry path="com.ddoeng.events.component.ScrollEvent"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>
