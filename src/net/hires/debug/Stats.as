@@ -8,7 +8,7 @@
  *
  *      addChild( new Stats() );
  *
- *      or
+ *      or 
  *
  *      addChild( new Stats( { bg: 0xffffff } );
  *
