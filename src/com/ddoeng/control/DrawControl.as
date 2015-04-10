@@ -141,6 +141,27 @@ package com.ddoeng.control
 		}
 		
 		/**
+		 * 100x100 기본으로하는 Circle Sprite 반환
+		 *  
+		 * @param radius	::: 반지름
+		 * @param $center	::: 센터정렬 유무
+		 * @param $x		:::	X위치
+		 * @param $y		::: Y위치
+		 * @param $color	::: 색상
+		 * @return 
+		 * 
+		 */		
+		public static function createCircle($radius:int = 100, $center:Boolean = true, $x:int = 0, $y:int = 0, $color:uint = 0x000000):Sprite
+		{
+			var rect:Sprite = new Sprite();
+			rect.graphics.beginFill($color);
+			rect.graphics.drawCircle($x + ($center ? 0 : $radius), $y + ($center ? 0 : $radius), $radius);
+			rect.graphics.endFill();
+			
+			return rect;
+		}
+		
+		/**
 		 *
 		 * 가로 그라디안 Rect Sprite 반환
 		 *  
@@ -150,7 +171,7 @@ package com.ddoeng.control
 		 * @return 
 		 * 
 		 */		
-		public static function createGradientRect($width:int = 100, $height:int = 100, $x:int = 0, $y:int = 0, $fadeSize:int = 10, $direct:String = "vertical"):Sprite
+		public static function createSideGradientRect($width:int = 100, $height:int = 100, $x:int = 0, $y:int = 0, $fadeSize:int = 10, $direct:String = "vertical"):Sprite
 		{
 			var cal:Calculation = new Calculation();
 			var graRatios:Number = ($direct == "vertical")?cal.getLinearFunction(0, $width, 0, 255, $fadeSize):cal.getLinearFunction(0, $height, 0, 255, $fadeSize);
