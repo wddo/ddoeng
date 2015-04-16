@@ -171,17 +171,17 @@ package com.ddoeng.control
 		 * @return 
 		 * 
 		 */		
-		public static function createSideGradientRect($width:int = 100, $height:int = 100, $x:int = 0, $y:int = 0, $fadeSize:int = 10, $direct:String = "vertical"):Sprite
+		public static function createSideGradientRect($width:int = 100, $height:int = 100, $x:int = 0, $y:int = 0, $fadeSize:int = 10, $direct:String = "horizontal"):Sprite
 		{
 			var cal:Calculation = new Calculation();
-			var graRatios:Number = ($direct == "vertical")?cal.getLinearFunction(0, $width, 0, 255, $fadeSize):cal.getLinearFunction(0, $height, 0, 255, $fadeSize);
+			var graRatios:Number = ($direct == "horizontal")?cal.getLinearFunction(0, $width, 0, 255, $fadeSize):cal.getLinearFunction(0, $height, 0, 255, $fadeSize);
 			
 			var fillType:String = GradientType.LINEAR;
 			var colors:Array = [0xFF0000, 0xFF0000, 0xFF0000, 0xFF0000];
 			var alphas:Array = [0, 1, 1, 0];
 			var ratios:Array = [0, graRatios, 255-graRatios, 255];
 			var matr:Matrix = new Matrix();
-			matr.createGradientBox($width, $height, ($direct == "vertical")?0:(Math.PI/180)*90, $x, $y);
+			matr.createGradientBox($width, $height, ($direct == "horizontal")?0:(Math.PI/180)*90, $x, $y);
 			var spreadMethod:String = SpreadMethod.PAD;
 			
 			var sp:Sprite = new Sprite();			
