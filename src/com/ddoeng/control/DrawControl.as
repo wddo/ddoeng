@@ -171,13 +171,13 @@ package com.ddoeng.control
 		 * @return 
 		 * 
 		 */		
-		public static function createSideGradientRect($width:int = 100, $height:int = 100, $x:int = 0, $y:int = 0, $fadeSize:int = 10, $isHor:Boolean = true):Sprite
+		public static function createSideGradientRect($width:int = 100, $height:int = 100, $x:int = 0, $y:int = 0, $fadeSize:int = 10, $isHor:Boolean = true, $color:uint = 0x000000):Sprite
 		{
 			var cal:Calculation = new Calculation();
 			var graRatios:Number = (!$isHor)?cal.getLinearFunction(0, $width, 0, 255, $fadeSize):cal.getLinearFunction(0, $height, 0, 255, $fadeSize);
 			
 			var fillType:String = GradientType.LINEAR;
-			var colors:Array = [0xFF0000, 0xFF0000, 0xFF0000, 0xFF0000];
+			var colors:Array = [$color, $color, $color, $color];
 			var alphas:Array = [0, 1, 1, 0];
 			var ratios:Array = [0, graRatios, 255-graRatios, 255];
 			var matr:Matrix = new Matrix();
