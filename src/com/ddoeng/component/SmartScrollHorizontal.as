@@ -57,12 +57,15 @@ package com.ddoeng.component
 		private var unlockCenterY:int = 0;					//터치후 드래그시 소스중앙과 마우스포인트의 차이
 		private var touchContentTargetY:int = 0;			//터치 목표위치값 저장
 		
+		private var mContentMargin:int = 0;					//컨텐츠 마진
+		
 		/**
 		 * 	var scrollHorizontal:SmartScrollHorizontal = new SmartScrollHorizontal();
 		 *	scrollHorizontal.init(content_mc, scroll_mc, "bg_mc", "bar_mc");
 		 *	scrollHorizontal.gradient = 0;
 		 *	scrollHorizontal.barResize = false;
 		 *	scrollHorizontal.contentHeight = 200;
+		 *  scrollHorizontal.contentMargin = 0;
 		 *	scrollHorizontal.type = 0;
 		 *	scrollHorizontal.load("assets/cont.swf"); //scrollHorizontal.add(DisplayObject);
 		 */	
@@ -85,7 +88,7 @@ package com.ddoeng.component
 		private function onMove(e:MouseEvent):void
 		{
 			//컨텐츠 높이이며 그라데이션에 가려질 높이도 생각해서 더함
-			var contentHeight:Number = contentSource.height + (gradientHeight * 2);
+			var contentHeight:Number = contentSource.height + (gradientHeight * 2) + mContentMargin;
 			//목표위치값
 			contentTargetY = cal.getLinearFunction(0, (scrollBg.height - scrollBar.height), 0, (contentMask.height - contentHeight), scrollBar.y);
 		}
@@ -108,7 +111,7 @@ package com.ddoeng.component
 			scrollState = "wheel";
 			
 			//컨텐츠 높이이며 그라데이션에 가려질 높이도 생각해서 더함
-			var contentHeight:Number = contentSource.height + (gradientHeight * 2);
+			var contentHeight:Number = contentSource.height + (gradientHeight * 2) + mContentMargin;
 			//목표위치값
 			if(contentTargetY <= 0 && contentTargetY >= contentMask.height - contentHeight){
 				contentTargetY += (e.delta / 3) * whellSpeed;
@@ -134,7 +137,7 @@ package com.ddoeng.component
 			
 			try{
 				//컨텐츠 높이이며 그라데이션에 가려질 높이도 생각해서 더함
-				var contentHeight:Number = contentSource.height + (gradientHeight * 2);
+				var contentHeight:Number = contentSource.height + (gradientHeight * 2) + mContentMargin;
 				
 				//컨텐츠 부드러운 모션
 				if(scrollState != "touch"){
@@ -217,11 +220,11 @@ package com.ddoeng.component
 			content.addChild(contentMask);
 			//contentMask.alpha = 0.5;
 			
-			contentSource.cacheAsBitmap = true;
-			contentMask.cacheAsBitmap = true;
+			contentSource.cacheAsBitmap = (gradientHeight !== 0);
+			contentMask.cacheAsBitmap = (gradientHeight !== 0);
 			contentSource.mask = contentMask; //마스킹
 			
-			var contentHeight:Number = contentSource.height + (gradientHeight * 2);
+			var contentHeight:Number = contentSource.height + (gradientHeight * 2) + mContentMargin;
 			barDefaultHeight = scrollBar.height;
 			var barHeight:Number = scrollBg.height - Math.abs(contentMask.height - contentHeight);
 			
@@ -359,8 +362,10 @@ package com.ddoeng.component
 		 * 타깃이동
 		 * @param $n	::: 컨텐츠 y값
 		 */		
-		public function setTargetY($value:Number):void
+		public function setTargetY($value:Number, isJump:Boolean = false):void
 		{
+			if (isJump) contentSource.y = $value;
+			scrollState = "wheel";
 			contentTargetY = $value;
 			touchContentTargetY = $value;
 		}
@@ -428,6 +433,19 @@ package com.ddoeng.component
 		public function get speed():Number
 		{
 			return mSpeed;
+		}
+		
+		/**
+		 * 컨텐츠의 크기를 외부에서 조정
+		 */		
+		public function get contentMargin():int
+		{
+			return mContentMargin;
+		}
+		
+		public function set contentMargin(value:int):void
+		{
+			mContentMargin = value;
 		}
 		
 		/**

@@ -55,12 +55,15 @@ package com.ddoeng.component
 		private var scrollState:String = "drag";			//스크롤하는 장치
 		private var cal:Calculation = new Calculation();	//1차원함수계산
 		
+		private var mContentMargin:int = 0;					//컨텐츠 마진
+		
 		/**
 		 * 	var scrollVertical:ScrollVertical = new ScrollVertical();
 		 *	scrollVertical.init(content_mc, scroll_mc, "bg_mc", "bar_mc");
 		 *	scrollVertical.gradient = 0;
 		 *	scrollVertical.barResize = false;
 		 *	scrollVertical.contentWidth = 200;
+		 *  scrollVertical.contentMargin = 0;
 		 *	scrollVertical.type = 0;
 		 *	scrollVertical.load("assets/cont.swf"); //scrollVertical.add(DisplayObject);
 		 */
@@ -83,7 +86,7 @@ package com.ddoeng.component
 		private function onMove(e:MouseEvent):void
 		{
 			//컨텐츠 높이이며 그라데이션에 가려질 높이도 생각해서 더함
-			var contentWidth:Number = contentSource.width + (gradientWidth * 2);
+			var contentWidth:Number = contentSource.width + (gradientWidth * 2) + mContentMargin;
 			//목표위치값
 			contentTargetX = cal.getLinearFunction(0, (scrollBg.width - scrollBar.width), 0, (contentMask.width - contentWidth), scrollBar.x);
 		}
@@ -114,7 +117,7 @@ package com.ddoeng.component
 			scrollState = "wheel";
 			
 			//컨텐츠 높이이며 그라데이션에 가려질 높이도 생각해서 더함
-			var contentWidth:Number = contentSource.width + (gradientWidth * 2);
+			var contentWidth:Number = contentSource.width + (gradientWidth * 2) + mContentMargin;
 			//목표위치값
 			if(contentTargetX <= 0 && contentTargetX >= contentMask.width - contentWidth){
 				contentTargetX += (e.delta / 3) * whellSpeed;
@@ -139,7 +142,7 @@ package com.ddoeng.component
 			
 			try{
 				//컨텐츠 높이이며 그라데이션에 가려질 높이도 생각해서 더함
-				var contentWidth:Number = contentSource.width + (gradientWidth * 2);
+				var contentWidth:Number = contentSource.width + (gradientWidth * 2) + mContentMargin;
 				
 				//한계점 제한
 				//if(scrollState != "touch"){
@@ -186,11 +189,11 @@ package com.ddoeng.component
 			content.addChild(contentMask);
 			//contentMask.alpha = 0.5;
 			
-			contentSource.cacheAsBitmap = true;
-			contentMask.cacheAsBitmap = true;
+			contentSource.cacheAsBitmap = (gradientWidth !== 0);
+			contentMask.cacheAsBitmap = (gradientWidth !== 0);
 			contentSource.mask = contentMask; //마스킹
 			
-			var contentWidth:Number = contentSource.width + (gradientWidth * 2);
+			var contentWidth:Number = contentSource.width + (gradientWidth * 2) + mContentMargin;
 			barDefaultWidth = scrollBar.width;
 			var barWidth:Number = scrollBg.width - Math.abs(contentMask.width - contentWidth);
 			
@@ -329,8 +332,10 @@ package com.ddoeng.component
 		 * 타깃이동
 		 * @param $n	::: 컨텐츠 x값
 		 */		
-		public function setTargetX($value:Number):void
+		public function setTargetX($value:Number, isJump:Boolean = false):void
 		{
+			if (isJump) contentSource.x = $value;
+			scrollState = "wheel";
 			contentTargetX = $value;
 		}
 		
@@ -397,6 +402,19 @@ package com.ddoeng.component
 		public function get speed():Number
 		{
 			return mSpeed;
+		}
+		
+		/**
+		 * 컨텐츠의 크기를 외부에서 조정
+		 */		
+		public function get contentMargin():int
+		{
+			return mContentMargin;
+		}
+		
+		public function set contentMargin(value:int):void
+		{
+			mContentMargin = value;
 		}
 		
 		/**
