@@ -340,6 +340,14 @@ package com.ddoeng.component
 		}
 		
 		/**
+		 * 컨텐츠소스 반환
+		 */	
+		public function getContentSource():MovieClip
+		{
+			return contentSource;
+		}
+		
+		/**
 		 * 그라데이션 높이 
 		 */		
 		public function set gradient($value:int):void
