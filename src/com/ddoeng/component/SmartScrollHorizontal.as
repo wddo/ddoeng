@@ -44,6 +44,7 @@ package com.ddoeng.component
 		private var contHeight:int = 200; 					//컨텐츠가 실제로 보여질 높이
 		private var contentTargetY:int = 0; 				//목표위치값 저장
 		private var barDefaultHeight:int = 0;				//바 기본 높이
+		private var contSourceHeight:Number = 0;			//컨텐츠 높이(컨텐츠 내부 모션에 따라 .height가 변경되면 스크롤이 움직이기때문에 초기에 셋팅)
 		private var whellSpeed:int = 10; 					//휠 속도
 		private var mSpeed:Number = .16;					//가속공식 속도
 		
@@ -88,7 +89,7 @@ package com.ddoeng.component
 		private function onMove(e:MouseEvent):void
 		{
 			//컨텐츠 높이이며 그라데이션에 가려질 높이도 생각해서 더함
-			var contentHeight:Number = contentSource.height + (gradientHeight * 2) + mContentMargin;
+			var contentHeight:Number = contSourceHeight + (gradientHeight * 2) + mContentMargin;
 			//목표위치값
 			contentTargetY = cal.getLinearFunction(0, (scrollBg.height - scrollBar.height), 0, (contentMask.height - contentHeight), scrollBar.y);
 		}
@@ -111,7 +112,7 @@ package com.ddoeng.component
 			scrollState = "wheel";
 			
 			//컨텐츠 높이이며 그라데이션에 가려질 높이도 생각해서 더함
-			var contentHeight:Number = contentSource.height + (gradientHeight * 2) + mContentMargin;
+			var contentHeight:Number = contSourceHeight + (gradientHeight * 2) + mContentMargin;
 			//목표위치값
 			if(contentTargetY <= 0 && contentTargetY >= contentMask.height - contentHeight){
 				contentTargetY += (e.delta / 3) * whellSpeed;
@@ -137,7 +138,7 @@ package com.ddoeng.component
 			
 			try{
 				//컨텐츠 높이이며 그라데이션에 가려질 높이도 생각해서 더함
-				var contentHeight:Number = contentSource.height + (gradientHeight * 2) + mContentMargin;
+				var contentHeight:Number = contSourceHeight + (gradientHeight * 2) + mContentMargin;
 				
 				//컨텐츠 부드러운 모션
 				if(scrollState != "touch"){
@@ -183,7 +184,7 @@ package com.ddoeng.component
 						scrollBar.height = cal.getLinearFunction(0, contentMask.height, barDefaultHeight, 10, contentSource.y);
 						scrollBar.y = 0;
 					}else if(sy > scrollBg.height - scrollBar.height){
-						scrollBar.height = cal.getLinearFunction(contentMask.height - contentHeight, -contentSource.height, barDefaultHeight, 10, contentSource.y);
+						scrollBar.height = cal.getLinearFunction(contentMask.height - contentHeight, -contSourceHeight, barDefaultHeight, 10, contentSource.y);
 						scrollBar.y = scrollBg.height - scrollBar.height;
 					}else{
 						scrollBar.height = barDefaultHeight;
@@ -214,6 +215,7 @@ package com.ddoeng.component
 			scrollBg.y = 0;
 			scrollBar.y = 0;
 			contentTargetY = 0;
+			contSourceHeight = contentSource.height;
 			if(content.contains(contentMask))content.removeChild(contentMask);
 
 			contentMask = gradientMaskCreate(); //마스크생성
@@ -224,7 +226,7 @@ package com.ddoeng.component
 			contentMask.cacheAsBitmap = (gradientHeight !== 0);
 			contentSource.mask = contentMask; //마스킹
 			
-			var contentHeight:Number = contentSource.height + (gradientHeight * 2) + mContentMargin;
+			var contentHeight:Number = contSourceHeight + (gradientHeight * 2) + mContentMargin;
 			barDefaultHeight = scrollBar.height;
 			var barHeight:Number = scrollBg.height - Math.abs(contentMask.height - contentHeight);
 			
@@ -244,7 +246,7 @@ package com.ddoeng.component
 		//이벤트
 		private function addEvent():void
 		{
-			if (contentSource.height > contentMask.height){
+			if (contSourceHeight > contentMask.height){
 				scroll.visible = true;
 				scrollBar.buttonMode = true;
 				content.buttonMode = true;

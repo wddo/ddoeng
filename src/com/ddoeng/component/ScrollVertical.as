@@ -48,6 +48,7 @@ package com.ddoeng.component
 		private var touchContentX:Number = 0;				//최초 터치시 컨텐츠 위치값 저장
 		private var touchMouseDefaultX:Number = 0;			//최초 터치시 마우스 위치값 저장
 		private var barDefaultWidth:Number = 0;				//바 기본 넓이
+		private var contSourceWidth:Number = 0;				//컨텐츠 넓이(컨텐츠 내부 모션에 따라 .width가 변경되면 스크롤이 움직이기때문에 초기에 셋팅)
 		
 		private var isBarResize:Boolean = false;			//스클롤바 리사이징 유무
 		private var mType:int = 0;							//컨트롤 타입
@@ -86,7 +87,7 @@ package com.ddoeng.component
 		private function onMove(e:MouseEvent):void
 		{
 			//컨텐츠 높이이며 그라데이션에 가려질 높이도 생각해서 더함
-			var contentWidth:Number = contentSource.width + (gradientWidth * 2) + mContentMargin;
+			var contentWidth:Number = contSourceWidth + (gradientWidth * 2) + mContentMargin;
 			//목표위치값
 			contentTargetX = cal.getLinearFunction(0, (scrollBg.width - scrollBar.width), 0, (contentMask.width - contentWidth), scrollBar.x);
 		}
@@ -117,7 +118,7 @@ package com.ddoeng.component
 			scrollState = "wheel";
 			
 			//컨텐츠 높이이며 그라데이션에 가려질 높이도 생각해서 더함
-			var contentWidth:Number = contentSource.width + (gradientWidth * 2) + mContentMargin;
+			var contentWidth:Number = contSourceWidth + (gradientWidth * 2) + mContentMargin;
 			//목표위치값
 			if(contentTargetX <= 0 && contentTargetX >= contentMask.width - contentWidth){
 				contentTargetX += (e.delta / 3) * whellSpeed;
@@ -142,7 +143,7 @@ package com.ddoeng.component
 			
 			try{
 				//컨텐츠 높이이며 그라데이션에 가려질 높이도 생각해서 더함
-				var contentWidth:Number = contentSource.width + (gradientWidth * 2) + mContentMargin;
+				var contentWidth:Number = contSourceWidth + (gradientWidth * 2) + mContentMargin;
 				
 				//한계점 제한
 				//if(scrollState != "touch"){
@@ -183,6 +184,7 @@ package com.ddoeng.component
 			scrollBg.x = 0;
 			scrollBar.x = 0;
 			contentTargetX = 0;
+			contSourceWidth = contentSource.width;
 			if(content.contains(contentMask))content.removeChild(contentMask);
 			
 			contentMask = gradientMaskCreate(); //마스크생성
@@ -193,7 +195,7 @@ package com.ddoeng.component
 			contentMask.cacheAsBitmap = (gradientWidth !== 0);
 			contentSource.mask = contentMask; //마스킹
 			
-			var contentWidth:Number = contentSource.width + (gradientWidth * 2) + mContentMargin;
+			var contentWidth:Number = contSourceWidth + (gradientWidth * 2) + mContentMargin;
 			barDefaultWidth = scrollBar.width;
 			var barWidth:Number = scrollBg.width - Math.abs(contentMask.width - contentWidth);
 			
@@ -213,7 +215,7 @@ package com.ddoeng.component
 		//이벤트
 		private function addEvent():void
 		{
-			if (contentSource.width > contentMask.width){
+			if (contSourceWidth > contentMask.width){
 				scroll.visible = true;
 				scrollBar.buttonMode = true;
 				content.buttonMode = true;
