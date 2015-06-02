@@ -160,7 +160,6 @@ package com.ddoeng.component
 				
 				//drag를 제외한 스크롤바 동기화
 				if(scrollState != "drag"){
-					trace(contentHeight);
 					scrollBar.y = cal.getLinearFunction(0, (contentMask.height - contentHeight), 0, (scrollBg.height - scrollBar.height), contentSource.y)
 				}
 				
