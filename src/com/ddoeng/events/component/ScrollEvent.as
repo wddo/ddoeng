@@ -4,7 +4,9 @@ package com.ddoeng.events.component
 
 	public class ScrollEvent extends Event
 	{
+		public static const START_SCROLL:String = "startScroll";
 		public static const MOVE_SCROLL:String = "moveScroll";
+		public static const STOP_SCROLL:String = "stopScroll";
 		
 		public var pos:Number;
 		public var playTime:Object;

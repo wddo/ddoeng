@@ -110,6 +110,8 @@ package com.ddoeng.component
 			
 			if(mStage == null)mStage = content.stage;
 			mStage.addEventListener(MouseEvent.MOUSE_UP, stageUp);
+			
+			this.dispatchEvent(new ScrollEvent(ScrollEvent.START_SCROLL, contentTargetY));
 		}
 		
 		//////////////////////////////////////////////////////////////////////////////////////////////////// 휠
@@ -135,6 +137,8 @@ package com.ddoeng.component
 			if(mStage == null)mStage = content.stage;
 			mStage.removeEventListener(MouseEvent.MOUSE_UP, stageUp);
 			mStage.removeEventListener(MouseEvent.MOUSE_MOVE, onMove);
+			
+			this.dispatchEvent(new ScrollEvent(ScrollEvent.STOP_SCROLL, contentTargetY));
 		}
 		
 		
