@@ -19,7 +19,9 @@ package com.ddoeng.component
 	import flash.geom.Rectangle;
 	import flash.ui.Mouse;
 	
+	[Event (name="startScroll", type="com.ddoeng.events.component.ScrollEvent")]
 	[Event (name="moveScroll", type="com.ddoeng.events.component.ScrollEvent")]
+	[Event (name="stopScroll", type="com.ddoeng.events.component.ScrollEvent")]
 	/**
 	 *
 	 * 가로 스크롤 클래스
