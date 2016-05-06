@@ -45,7 +45,7 @@ package com.ddoeng.component
 		private var contentTargetX:int = 0; 				//목표위치값 저장
 		private var barDefaultWidth:int = 0;				//바 기본 넓이
 		private var contSourceWidth:Number = 0;				//컨텐츠 넓이(컨텐츠 내부 모션에 따라 .width가 변경되면 스크롤이 움직이기때문에 초기에 셋팅)
-		private var whellSpeed:int = 10; 					//휠 속도
+		private var wheelSpeed:int = 10; 					//휠 속도
 		private var mSpeed:Number = .16;					//가속공식 속도
 
 		private var isBarResize:Boolean = false;			//스클롤바 리사이징 유무
@@ -59,6 +59,9 @@ package com.ddoeng.component
 		private var touchContentTargetX:int = 0;			//터치 목표위치값 저장
 
 		private var mContentMargin:int = 0;					//컨텐츠 마진
+		
+		private var clickX:Number = 0;						//컨텐츠 내부 컨텐츠 클릭 구분을 위한 변수
+		private var isContentClick:Boolean = false;			//컨텐츠 클릭 유무
 		
 		/**
 		 * 	var scrollVertical:SmartScrollVertical = new SmartScrollVertical();
@@ -98,6 +101,9 @@ package com.ddoeng.component
 		
 		private function onContentDown(e:MouseEvent):void
 		{
+			isContentClick = false;
+			clickX = contentSource.x;
+			
 			scrollState = "touch";
 			isTouchDown = true;
 			unlockCenterX = contentSource.x - content.mouseX;
@@ -115,13 +121,15 @@ package com.ddoeng.component
 			var contentWidth:Number = contSourceWidth + (gradientWidth * 2) + mContentMargin;
 			//목표위치값
 			if(contentTargetX <= 0 && contentTargetX >= contentMask.width - contentWidth){
-				contentTargetX += (e.delta / 3) * whellSpeed;
+				contentTargetX += (e.delta / 3) * wheelSpeed;
 			}
 		}
 		
 		//release outside 와 release대체
 		private function stageUp(e:MouseEvent):void
 		{
+			isContentClick = !Math.abs(clickX - contentSource.x) > 0;
+			
 			isTouchDown = false;
 			scrollBar.stopDrag();
 			if(mStage == null)mStage = content.stage;
@@ -240,7 +248,7 @@ package com.ddoeng.component
 			}
 			
 			//컨텐츠 양에 따라 휠속도 조절
-			whellSpeed = contentWidth * .1;
+			wheelSpeed = contentWidth * .1;
 		}
 		
 		//이벤트
@@ -456,6 +464,14 @@ package com.ddoeng.component
 		public function set contentMargin(value:int):void
 		{
 			mContentMargin = value;
+		}
+		
+		/**
+		 * 컨텐츠 내부 클릭 유무
+		 */	
+		public function getClick():Boolean
+		{
+			return isContentClick;
 		}
 		
 		/**
