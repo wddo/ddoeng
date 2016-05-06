@@ -274,6 +274,7 @@ package com.ddoeng.component
 				if(!hasEventListener(Event.ENTER_FRAME))
 					addEventListener(Event.ENTER_FRAME, onEnter);
 			}else {
+				isContentClick = true;
 				scroll.visible = false;
 				scrollBar.removeEventListener(MouseEvent.MOUSE_DOWN, onDown);
 				content.parent.removeEventListener(MouseEvent.MOUSE_WHEEL, onMouseWheel);
