@@ -369,6 +369,7 @@ package com.ddoeng.component
 		 */		
 		public function add($dis:DisplayObject):void
 		{
+			scrollBar.width = barDefaultWidth;
 			Common.targetClear(contentSource);
 			contentSource.addChild($dis);
 			content.addChild(contentSource);
